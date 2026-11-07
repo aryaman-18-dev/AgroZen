@@ -1,0 +1,25 @@
+{
+  "version": "v1.1.0",
+  "model_type": "sklearn",
+  "created_at": "2026-10-24T17:54:07.900210",
+  "description": "Retrained from the bundled crop recommendation dataset",
+  "performance_metrics": {},
+  "training_date": "2026-10-24T17:54:07.878763+00:00",
+  "training_samples": 2200,
+  "validation_samples": 440,
+  "features_used": [
+    "N",
+    "P",
+    "K",
+    "temperature",
+    "humidity",
+    "ph",
+    "rainfall"
+  ],
+  "metrics": {
+    "accuracy": 0.9954545454545455,
+    "f1_score_weighted": 0.9954517027687759
+  },
+  "scikit_learn_version": "1.9.1",
+  "source_dataset": "crop_recommendation\\Crop_recommendation.csv"
+}

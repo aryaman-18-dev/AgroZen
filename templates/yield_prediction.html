@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crop Yield Prediction | AgriTech</title>
+  <style>
+    :root { color-scheme: light; font-family: "Segoe UI", Arial, sans-serif; color: #17251a; background: #f3f7f2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 2rem 1rem; }
+    main { width: min(760px, 100%); margin: 0 auto; }
+    .card { background: #fff; border: 1px solid #dce8dc; border-radius: 18px; padding: clamp(1.25rem, 4vw, 2.25rem); box-shadow: 0 12px 34px #17391b12; }
+    a { color: #176b36; }
+    h1 { margin: 0 0 .5rem; font-size: clamp(1.7rem, 4vw, 2.35rem); color: #176b36; }
+    .intro { color: #59675b; line-height: 1.6; margin: 0 0 1.5rem; }
+    .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    label { display: grid; gap: .4rem; color: #2f4032; font-weight: 650; }
+    input, select { width: 100%; min-height: 44px; border: 1px solid #c9d7ca; border-radius: 9px; padding: .6rem .7rem; background: #fff; color: #17251a; font: inherit; }
+    input:focus, select:focus { outline: 3px solid #9bd7a966; border-color: #318349; }
+    .wide { grid-column: 1 / -1; }
+    button { margin-top: 1.25rem; width: 100%; min-height: 48px; border: 0; border-radius: 10px; color: #fff; background: #247d3d; font: inherit; font-weight: 700; cursor: pointer; }
+    button:hover { background: #176b36; }
+    .notice { margin: 1rem 0; padding: .85rem 1rem; border-radius: 9px; line-height: 1.45; }
+    .error { color: #8c2020; background: #fff0f0; border: 1px solid #f3c7c7; }
+    .result { color: #14532d; background: #eaf7ed; border: 1px solid #b8dfc0; }
+    .caution { color: #754c00; background: #fff8e6; border: 1px solid #f0d58a; }
+    .result strong { font-size: 1.25rem; }
+    .back { display: inline-block; margin-bottom: 1rem; text-decoration: none; font-weight: 650; }
+    @media (max-width: 560px) { .fields { grid-template-columns: 1fr; } .wide { grid-column: auto; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/main.html">← Back to AgriTech</a>
+    <section class="card">
+      <h1>Crop Yield Prediction</h1>
+      <p class="intro">Estimate yield using the model trained from this project’s crop-yield notebook. Choose crop, season, and state from the supported lists. Yield units follow the source dataset and can vary by crop.</p>
+
+      {% if error %}<div class="notice error" role="alert">{{ error }}</div>{% endif %}
+      {% if result %}
+        <div class="notice result" role="status">
+          Estimated yield for {{ result.crop }}: <strong>{{ result.yield_value }} {{ result.yield_unit }}</strong><br>
+          {{ result.season }} · {{ result.state }} · {{ result.year }}
+        </div>
+        {% if result.is_extrapolation %}<div class="notice caution" role="note">The model was trained on data through {{ choices.training_year_max }}. This {{ result.year }} estimate extrapolates beyond its training years and may be less reliable.</div>{% endif %}
+      {% endif %}
+
+      <form action="/yield/predict" method="post">
+        <div class="fields">
+          <label>Crop
+            <select name="crop" required>
+              <option value="">Select crop</option>
+              {% for crop in choices.crops %}<option value="{{ crop }}" {% if values.get('crop') == crop %}selected{% endif %}>{{ crop }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>Year
+            <input type="number" name="year" min="{{ choices.year_min }}" max="{{ choices.year_max }}" value="{{ values.get('year', choices.year_max) }}" required>
+          </label>
+          <p class="intro wide">Year range: {{ choices.year_min }}–{{ choices.year_max }}. The model’s training data ends in {{ choices.training_year_max }}; later years are extrapolations.</p>
+          <label>Season
+            <select name="season" required>
+              <option value="">Select season</option>
+              {% for season in choices.seasons %}<option value="{{ season }}" {% if values.get('season') == season %}selected{% endif %}>{{ season }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>State
+            <select name="state" required>
+              <option value="">Select state</option>
+              {% for state in choices.states %}<option value="{{ state }}" {% if values.get('state') == state %}selected{% endif %}>{{ state }}</option>{% endfor %}
+            </select>
+          </label>
+          <label>Area (hectares)
+            <input type="number" name="area" min="0.0001" step="any" value="{{ values.get('area', '') }}" required>
+          </label>
+          <label>Annual rainfall (mm)
+            <input type="number" name="rainfall" min="0" step="any" value="{{ values.get('rainfall', '') }}" required>
+          </label>
+          <label>Fertilizer used (dataset units)
+            <input type="number" name="fertilizer" min="0" step="any" value="{{ values.get('fertilizer', '') }}" required>
+          </label>
+          <label>Pesticide used (dataset units)
+            <input type="number" name="pesticide" min="0" step="any" value="{{ values.get('pesticide', '') }}" required>
+          </label>
+          <p class="intro wide">Use figures on the same scale as the training data. Production is not requested because it would reveal the yield target rather than predict it.</p>
+        </div>
+        <button type="submit">Estimate crop yield</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
+

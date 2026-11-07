@@ -1,0 +1,45 @@
+{
+  "best_model": "CatBoost",
+  "test_r2": 0.9730721929191656,
+  "test_rmse": 146.88646128122656,
+  "test_mae": 15.00849127989014,
+  "test_mape": 1.5907740734609632e+17,
+  "num_features": 19,
+  "categorical_features": [
+    "Crop",
+    "Season",
+    "State"
+  ],
+  "training_date": "2026-11-05T20:11:34.429533",
+  "config": {
+    "project_root": "c:\\Users\\KIIT0001\\OneDrive\\Desktop\\AgriTech",
+    "data_path": "c:\\Users\\KIIT0001\\OneDrive\\Desktop\\AgriTech\\Crop Yield Prediction\\Datasets\\crop_yield.csv",
+    "model_dir": "c:\\Users\\KIIT0001\\OneDrive\\Desktop\\AgriTech\\Crop Yield Prediction\\crop_yield_app\\models",
+    "output_dir": "c:\\Users\\KIIT0001\\OneDrive\\Desktop\\AgriTech\\Crop Yield Prediction\\outputs",
+    "test_size": 0.2,
+    "val_size": 0.1,
+    "random_state": 42,
+    "create_poly_features": true,
+    "poly_degree": 2,
+    "create_interactions": true,
+    "create_ratios": true,
+    "use_ensemble": true,
+    "ensemble_type": "stacking",
+    "models_to_use": [
+      "xgboost",
+      "catboost",
+      "lightgbm",
+      "rf",
+      "extra_trees"
+    ],
+    "tune_hyperparameters": true,
+    "tuning_method": "optuna",
+    "n_trials": 100,
+    "cv_folds": 5,
+    "use_cross_validation": true,
+    "cv_scoring": "r2",
+    "save_models": true,
+    "save_predictions": true,
+    "generate_shap": false
+  }
+}
