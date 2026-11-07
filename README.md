@@ -2,10 +2,6 @@
 
 ![AgriTech Banner](images/plant.png)
 
-[![SWoC 2026](https://img.shields.io/badge/SWoC-2026-blue?style=for-the-badge)](https://swoc.tech)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
-
 ---
 
 ## 📚 Table of Contents
@@ -21,14 +17,8 @@
 - [Security & Reliability](#-security--reliability)
 - [Environment Variables](#️-environment-variables)
 - [Roadmap](#-roadmap)
-- [Contribution Flow](#-contribution-flow)
-- [Team](#-team)
-- [Contributing & Support](#-contributing--support)
-- [Contributors](#-contributors)
 - [Production Deployment](#-production-deployment)
 - [API Keys Guide](#-api-keys-guide)
-- [Reporting Issues](#-reporting-issues)
-- [License](#-license)
 - [FAQ](#-faq)
 
 ---
@@ -58,7 +48,7 @@ recommendations, yield prediction, plant disease detection, and community-driven
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/omroy07/AgriTech.git
+git clone https://github.com/aryaman-18-dev/AgriTech.git
 cd AgriTech
 ```
 
@@ -325,48 +315,6 @@ endpoint behavior.
 
 ---
 
-## 🤝 Contribution Flow
-
-```bash
-Fork → Clone → Branch → Commit → Push → Pull Request → Review → Merge
-```
-
-Read **[CONTRIBUTING.md](CONTRIBUTING.md)** for SWoC 2026 guidelines.
-
----
-
-## 👥 Team
-
-| Name          | Role                    |
-| ------------- | ----------------------- |
-| Om Roy        | Project Lead · Web · ML |
-| Shubhangi Roy | ML · Backend            |
-
----
-
-## 🤝 Contributing & Support
-
-We love contributions! Please read our **[CONTRIBUTING.md](./CONTRIBUTING.md)** to get started with **SWoC 2026** tasks. Whether it's fixing bugs, adding features, or improving documentation, your help is always welcome!
-
----
-
-## ✨ Contributors
-
-#### Thanks to all the wonderful people contributing to this project! 💖
-
-![Contributors](https://contrib.rocks/image?repo=omroy07/AgriTech)
-
-[View full contribution graph](https://github.com/omroy07/AgriTech/graphs/contributors)
-
----
-
-For production use, run the backend with a WSGI server like [gunicorn](https://gunicorn.org/):
-
-```bash
-pip install gunicorn
-gunicorn app:app
-```
-
 ---
 
 ## 🔑 API Keys Guide
@@ -374,18 +322,6 @@ gunicorn app:app
 - **Gemini API Key:** [Google AI Studio](https://aistudio.google.com/) se generate karein.
 - **Firebase Keys:** [Firebase Console](https://console.firebase.google.com/) se apne project ke liye keys lein.
 - API keys ko `.env` file me store karein (kabhi bhi repo me commit na karein).
-
----
-
-## 🐞 Reporting Issues
-
-Found a bug or want a new feature? [Open an issue](https://github.com/omroy07/AgriTech/issues).
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
@@ -422,4 +358,4 @@ A: Ensure the backend server is running correctly and that the /health route is 
 
 ---
 
-**Made with ❤️ by the AgriTech Community — Nexus Spring Of Code 2026**
+**Made with ❤️ by the AgriTech Community — 2026**
