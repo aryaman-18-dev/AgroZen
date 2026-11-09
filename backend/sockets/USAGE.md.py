@@ -2,7 +2,7 @@
 WebSocket Client Usage Example
 ==============================
 
-This file demonstrates how to connect to the AgriTech WebSocket server
+This file demonstrates how to connect to the AgroZen WebSocket server
 and receive real-time task updates.
 
 JavaScript Example:

@@ -1,13 +1,13 @@
 /**
- * AgriTech API - JavaScript Fetch Examples
+ * AgroZen API - JavaScript Fetch Examples
  * =========================================
- * Demonstrates how to call all AgriTech API endpoints
+ * Demonstrates how to call all AgroZen API endpoints
  * from a browser or Node.js frontend.
  *
  * Usage (Browser): Copy any function below into your JS file
  * Usage (Node.js): Run with `node fetch_example.js`
  *
- * GitHub: https://github.com/omroy07/AgriTech
+ * GitHub: https://github.com/omroy07/AgroZen
  */
 
 const BASE_URL = "http://localhost:5000";
@@ -15,15 +15,16 @@ const BASE_URL = "http://localhost:5000";
 // ─────────────────────────────────────────────────────────────
 //  UTILITY: Generic API call wrapper with error handling
 // ─────────────────────────────────────────────────────────────
-async function callAPI(endpoint, method = "POST", body = null, isFormData = false) {
+async function callAPI(
+  endpoint,
+  method = "POST",
+  body = null,
+  isFormData = false,
+) {
   const options = {
     method,
     headers: isFormData ? {} : { "Content-Type": "application/json" },
-    body: body
-      ? isFormData
-        ? body
-        : JSON.stringify(body)
-      : null,
+    body: body ? (isFormData ? body : JSON.stringify(body)) : null,
   };
 
   try {
@@ -36,12 +37,14 @@ async function callAPI(endpoint, method = "POST", body = null, isFormData = fals
     return { success: true, data };
   } catch (error) {
     if (error.name === "TypeError" && error.message.includes("fetch")) {
-      return { success: false, error: "Server not running. Start with: python app.py" };
+      return {
+        success: false,
+        error: "Server not running. Start with: python app.py",
+      };
     }
     return { success: false, error: error.message };
   }
 }
-
 
 // ─────────────────────────────────────────────────────────────
 //  1. CROP RECOMMENDATION
@@ -65,7 +68,13 @@ async function callAPI(endpoint, method = "POST", body = null, isFormData = fals
 async function predictCrop(N, P, K, temperature, humidity, ph, rainfall) {
   console.log("🌾 Calling Crop Recommendation API...");
   const result = await callAPI("/predict_crop", "POST", {
-    N, P, K, temperature, humidity, ph, rainfall,
+    N,
+    P,
+    K,
+    temperature,
+    humidity,
+    ph,
+    rainfall,
   });
 
   if (result.success) {
@@ -76,7 +85,6 @@ async function predictCrop(N, P, K, temperature, humidity, ph, rainfall) {
   }
   return result;
 }
-
 
 // ─────────────────────────────────────────────────────────────
 //  2. YIELD PREDICTION
@@ -99,12 +107,20 @@ async function predictCrop(N, P, K, temperature, humidity, ph, rainfall) {
  *                                    1500, 750.5, 200, 15);
  * console.log(result.data.yield); // e.g. 4.2
  */
-async function predictYield(crop, cropYear, season, state,
-                             area, annualRainfall, fertilizer, pesticide) {
+async function predictYield(
+  crop,
+  cropYear,
+  season,
+  state,
+  area,
+  annualRainfall,
+  fertilizer,
+  pesticide,
+) {
   console.log("📈 Calling Yield Prediction API...");
   const result = await callAPI("/predict_yield", "POST", {
     crop,
-    crop_year:       cropYear,
+    crop_year: cropYear,
     season,
     state,
     area,
@@ -114,8 +130,8 @@ async function predictYield(crop, cropYear, season, state,
   });
 
   if (result.success) {
-    const yieldVal       = result.data.yield;
-    const totalProduce   = (yieldVal * area).toFixed(1);
+    const yieldVal = result.data.yield;
+    const totalProduce = (yieldVal * area).toFixed(1);
     console.log(`  ✅ Predicted Yield: ${yieldVal} tons/ha`);
     console.log(`     Total Produce : ${totalProduce} tons (for ${area} ha)`);
   } else {
@@ -123,7 +139,6 @@ async function predictYield(crop, cropYear, season, state,
   }
   return result;
 }
-
 
 // ─────────────────────────────────────────────────────────────
 //  3. DISEASE DETECTION (Image Upload)
@@ -168,7 +183,6 @@ async function detectDisease(imageFile) {
   return result;
 }
 
-
 // ─────────────────────────────────────────────────────────────
 //  4. FERTILIZER RECOMMENDATION
 // ─────────────────────────────────────────────────────────────
@@ -189,19 +203,26 @@ async function detectDisease(imageFile) {
  * const result = await recommendFertilizer(26, 52, 38, "Sandy", "Maize", 37, 0, 0);
  * console.log(result.data.fertilizer); // e.g. "Urea"
  */
-async function recommendFertilizer(temperature, humidity, moisture,
-                                    soilType, cropType,
-                                    nitrogen, potassium, phosphorous) {
+async function recommendFertilizer(
+  temperature,
+  humidity,
+  moisture,
+  soilType,
+  cropType,
+  nitrogen,
+  potassium,
+  phosphorous,
+) {
   console.log("🧪 Calling Fertilizer Recommendation API...");
   const result = await callAPI("/predict_fertilizer", "POST", {
-    Temperature:  temperature,
-    Humidity:     humidity,
-    Moisture:     moisture,
-    "Soil Type":  soilType,
-    "Crop Type":  cropType,
-    Nitrogen:     nitrogen,
-    Potassium:    potassium,
-    Phosphorous:  phosphorous,
+    Temperature: temperature,
+    Humidity: humidity,
+    Moisture: moisture,
+    "Soil Type": soilType,
+    "Crop Type": cropType,
+    Nitrogen: nitrogen,
+    Potassium: potassium,
+    Phosphorous: phosphorous,
   });
 
   if (result.success) {
@@ -212,7 +233,6 @@ async function recommendFertilizer(temperature, humidity, moisture,
   }
   return result;
 }
-
 
 // ─────────────────────────────────────────────────────────────
 //  5. SOIL CLASSIFICATION (Image Upload)
@@ -252,7 +272,6 @@ async function classifySoil(soilImageFile) {
   return result;
 }
 
-
 // ─────────────────────────────────────────────────────────────
 //  6. CROP PRICE TRACKER
 // ─────────────────────────────────────────────────────────────
@@ -273,13 +292,14 @@ async function getCropPrice(cropName, state = "") {
   const result = await callAPI("/crop_price", "GET", null);
 
   if (result.success) {
-    console.log(`  ✅ ${cropName}: ₹${result.data.price} per ${result.data.unit}`);
+    console.log(
+      `  ✅ ${cropName}: ₹${result.data.price} per ${result.data.unit}`,
+    );
   } else {
     console.error(`  ❌ Error: ${result.error}`);
   }
   return result;
 }
-
 
 // ─────────────────────────────────────────────────────────────
 //  7. COMPLETE HTML INTEGRATION EXAMPLE
@@ -307,19 +327,27 @@ async function getCropPrice(cropName, state = "") {
 async function handleCropFormSubmit() {
   const getValue = (id) => parseFloat(document.getElementById(id).value);
 
-  const N           = getValue("nitrogen");
-  const P           = getValue("phosphorous");
-  const K           = getValue("potassium");
+  const N = getValue("nitrogen");
+  const P = getValue("phosphorous");
+  const K = getValue("potassium");
   const temperature = getValue("temperature");
-  const humidity    = getValue("humidity");
-  const ph          = getValue("ph");
-  const rainfall    = getValue("rainfall");
+  const humidity = getValue("humidity");
+  const ph = getValue("ph");
+  const rainfall = getValue("rainfall");
 
   // Show loading state
   const resultDiv = document.getElementById("cropResult");
   if (resultDiv) resultDiv.innerHTML = "<p>⏳ Predicting...</p>";
 
-  const result = await predictCrop(N, P, K, temperature, humidity, ph, rainfall);
+  const result = await predictCrop(
+    N,
+    P,
+    K,
+    temperature,
+    humidity,
+    ph,
+    rainfall,
+  );
 
   if (resultDiv) {
     if (result.success) {
@@ -335,13 +363,12 @@ async function handleCropFormSubmit() {
   }
 }
 
-
 // ─────────────────────────────────────────────────────────────
 //  8. DEMO - Run all API calls (Node.js)
 // ─────────────────────────────────────────────────────────────
 async function runAllDemos() {
   console.log("=".repeat(55));
-  console.log("   🌾 AgriTech API - JavaScript Fetch Examples");
+  console.log("   🌾 AgroZen API - JavaScript Fetch Examples");
   console.log("=".repeat(55));
 
   // 1. Crop Recommendation
@@ -361,8 +388,10 @@ async function runAllDemos() {
   await getCropPrice("Wheat", "Punjab");
 
   console.log("\n" + "=".repeat(55));
-  console.log("   Note: Disease detection requires a File object (browser only)");
-  console.log("   Start the server: cd AgriTech && python app.py");
+  console.log(
+    "   Note: Disease detection requires a File object (browser only)",
+  );
+  console.log("   Start the server: cd AgroZen && python app.py");
   console.log("=".repeat(55));
 }
 

@@ -65,7 +65,7 @@ class NotificationService:
         """
         try:
             msg = Message(
-                subject=f"AgriTech: {notification.title}",
+                subject=f"AgroZen: {notification.title}",
                 recipients=[email],
                 body=notification.message
             )

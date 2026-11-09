@@ -131,7 +131,7 @@ with st.sidebar:
     st.markdown(f"- 🔴 **Weeds:** {weed_count} species\n- 🟢 **Crops:** {crop_count} species")
     
     st.markdown("---")
-    st.caption("AgriTech Open-Source Seedling Intelligence System")
+    st.caption("AgroZen Open-Source Seedling Intelligence System")
 
 
 # --- Main Dashboard Header ---

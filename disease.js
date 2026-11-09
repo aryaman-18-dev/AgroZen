@@ -273,7 +273,8 @@ analyzeBtn.addEventListener("click", async () => {
   analyzeBtn.disabled = true;
 
   try {
-    const cropType = document.getElementById("diseaseCropType")?.value || "Unknown";
+    const cropType =
+      document.getElementById("diseaseCropType")?.value || "Unknown";
     const analysisImage = await prepareAnalysisImage(selectedFile);
     const response = await fetch("/api/v1/ai-disease/predict-trained", {
       method: "POST",
@@ -282,23 +283,41 @@ analyzeBtn.addEventListener("click", async () => {
     });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok || payload.status !== "success") {
-      throw new Error(payload.message || "Disease analysis failed. Please try again.");
+      throw new Error(
+        payload.message || "Disease analysis failed. Please try again.",
+      );
     }
 
     const prediction = payload.prediction || {};
     const diseaseKey = prediction.class_name || "Unknown___Unknown";
     const confidence = Number(prediction.confidence) || 0;
-    const diseaseInfo = confidence < 40
+    const alternatives = Array.isArray(prediction.alternatives)
+      ? prediction.alternatives
+      : [];
+    const runnerUp = alternatives.find(
+      (item) => item.class_name !== diseaseKey,
+    );
+    const margin = runnerUp
+      ? confidence - Number(runnerUp.confidence || 0)
+      : confidence;
+    // Softmax scores are not calibrated probabilities. Use a conservative UI
+    // gate so moderate/ambiguous scores are not presented as diagnoses.
+    const uncertain = confidence < 70 || margin < 15;
+    const candidateInfo = getDiseaseInfo(diseaseKey);
+    const diseaseInfo = uncertain
       ? {
-          name: "Low-confidence result",
-          severity: "low",
-          description: `The model’s closest match was ${getDiseaseInfo(diseaseKey).name}, but the score is low. Retake a clear photo of one leaf and try again.`,
-          treatment: "Do not treat based on this result. Compare symptoms with a local agricultural expert.",
+          name: "Uncertain result — no diagnosis",
+          severity: "unknown",
+          description: `The model’s closest match was ${candidateInfo.name} (${confidence.toFixed(1)}% raw model score), but this score is not calibrated and is not enough to identify a disease reliably. Take a close, well-lit photo of one leaf showing both healthy and affected areas, then try again.`,
+          treatment:
+            "Do not apply pesticides or fungicides based on this result. Compare visible symptoms with a local agricultural expert or extension service.",
         }
-      : getDiseaseInfo(diseaseKey);
+      : candidateInfo;
     const result = {
-      disease: confidence < 40 ? "Unknown___Uncertain" : diseaseKey,
+      disease: diseaseKey,
       confidence,
+      alternatives,
+      uncertain,
       info: diseaseInfo,
     };
 
@@ -314,16 +333,15 @@ analyzeBtn.addEventListener("click", async () => {
                         <div class="description">${escapeHtml(error.message || "Unable to analyze the image. Please try again.")}</div>
                     </div>
                 `;
-          document.getElementById("downloadPdfBtn").style.display = "none";
-      analyzeBtn.disabled = false;
-
+    document.getElementById("downloadPdfBtn").style.display = "none";
+    analyzeBtn.disabled = false;
   }
 
   analyzeBtn.disabled = false;
 });
 
 // === PREDICTION HISTORY & COMPARISON STATE ===
-const HISTORY_STORAGE_KEY = "agritech_disease_prediction_history";
+const HISTORY_STORAGE_KEY = "AgroZen_disease_prediction_history";
 let currentPredictionRecord = null;
 let currentPreviewDataUrl = null;
 
@@ -339,9 +357,11 @@ function getPredictionHistory() {
 
 function savePredictionRecord(result, thumbnailDataUrl) {
   const history = getPredictionHistory();
-  const crop = result.disease ? result.disease.split("___")[0].replace(/_/g, " ") : "Plant";
+  const crop = result.disease
+    ? result.disease.split("___")[0].replace(/_/g, " ")
+    : "Plant";
   const now = new Date();
-  
+
   const record = {
     id: "pred_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5),
     timestamp: now.getTime(),
@@ -410,7 +430,7 @@ function updateHistoryUI() {
   if (totalText) {
     totalText.textContent = `${history.length} scan${history.length === 1 ? "" : "s"} stored`;
   }
-  
+
   const compareBtn = document.getElementById("compareBtn");
   if (compareBtn) {
     const hasPrevious = history.length >= 2;
@@ -419,7 +439,8 @@ function updateHistoryUI() {
       const prev = history[1];
       compareBtn.title = `Compare with previous diagnosis (${prev.crop} - ${prev.name})`;
     } else {
-      compareBtn.title = "Compare will be available once you have more than 1 scan";
+      compareBtn.title =
+        "Compare will be available once you have more than 1 scan";
     }
   }
 }
@@ -436,11 +457,13 @@ function openComparisonModal(specificPreviousId = null) {
   }
 
   const previousCandidates = history.filter(
-    (item) => item.id !== currentPredictionRecord.id
+    (item) => item.id !== currentPredictionRecord.id,
   );
 
   if (previousCandidates.length === 0) {
-    alert("No previous scan found in history to compare with. Please upload another plant image to see side-by-side temporal changes.");
+    alert(
+      "No previous scan found in history to compare with. Please upload another plant image to see side-by-side temporal changes.",
+    );
     return;
   }
 
@@ -462,7 +485,9 @@ function openComparisonModal(specificPreviousId = null) {
     });
 
     const selectedPrevId = selectElem.value;
-    const prevRecord = previousCandidates.find((item) => item.id === selectedPrevId) || previousCandidates[0];
+    const prevRecord =
+      previousCandidates.find((item) => item.id === selectedPrevId) ||
+      previousCandidates[0];
     renderComparison(currentPredictionRecord, prevRecord);
   }
 
@@ -492,12 +517,21 @@ function renderComparison(curr, prev) {
   // Confidence difference
   const confDelta = Math.round(curr.confidence - prev.confidence);
   const confDeltaText = confDelta > 0 ? `+${confDelta}%` : `${confDelta}%`;
-  const confDiffClass = confDelta > 0 ? "diff-badge improved" : confDelta < 0 ? "diff-badge changed" : "diff-badge same";
+  const confDiffClass =
+    confDelta > 0
+      ? "diff-badge improved"
+      : confDelta < 0
+        ? "diff-badge changed"
+        : "diff-badge same";
 
   // Disease match
   const diseaseMatch = curr.name === prev.name;
-  const diseaseDiffClass = diseaseMatch ? "diff-badge same" : "diff-badge changed";
-  const diseaseDiffText = diseaseMatch ? "✓ Same Condition" : "↔ Different Diagnosis";
+  const diseaseDiffClass = diseaseMatch
+    ? "diff-badge same"
+    : "diff-badge changed";
+  const diseaseDiffText = diseaseMatch
+    ? "✓ Same Condition"
+    : "↔ Different Diagnosis";
   const diseaseRowClass = diseaseMatch ? "" : "diff-highlight-changed";
 
   // Crop match
@@ -559,7 +593,7 @@ function renderComparison(curr, prev) {
         </td>
         <td class="diff-col"><span class="diff-badge same">Visual</span></td>
       </tr>
-      <tr class="${cropMatch ? '' : 'diff-highlight-changed'}">
+      <tr class="${cropMatch ? "" : "diff-highlight-changed"}">
         <td class="param-col"><i class="fas fa-seedling"></i> Plant / Crop</td>
         <td class="prev-col"><strong>${prev.crop}</strong></td>
         <td class="curr-col"><strong>${curr.crop}</strong></td>
@@ -581,23 +615,23 @@ function renderComparison(curr, prev) {
         </td>
         <td class="diff-col"><span class="${severityDiffClass}">${severityDiffText}</span></td>
       </tr>
-      <tr class="${confDelta !== 0 ? 'diff-highlight-changed' : ''}">
+      <tr class="${confDelta !== 0 ? "diff-highlight-changed" : ""}">
         <td class="param-col"><i class="fas fa-percentage"></i> AI Confidence</td>
         <td class="prev-col"><strong>${prev.confidence}%</strong></td>
         <td class="curr-col"><strong>${curr.confidence}%</strong></td>
-        <td class="diff-col"><span class="${confDiffClass}">${confDelta > 0 ? '▲ ' : confDelta < 0 ? '▼ ' : ''}${confDeltaText}</span></td>
+        <td class="diff-col"><span class="${confDiffClass}">${confDelta > 0 ? "▲ " : confDelta < 0 ? "▼ " : ""}${confDeltaText}</span></td>
       </tr>
       <tr>
         <td class="param-col"><i class="fas fa-book-open"></i> Description & Symptoms</td>
         <td class="prev-col" style="font-size: 0.88rem; color: var(--text-gray);">${prev.description}</td>
         <td class="curr-col" style="font-size: 0.88rem; color: var(--text-gray);">${curr.description}</td>
-        <td class="diff-col"><span class="diff-badge same">${prev.description === curr.description ? 'Identical' : 'Updated'}</span></td>
+        <td class="diff-col"><span class="diff-badge same">${prev.description === curr.description ? "Identical" : "Updated"}</span></td>
       </tr>
-      <tr class="${prev.treatment !== curr.treatment ? 'diff-highlight-changed' : ''}">
+      <tr class="${prev.treatment !== curr.treatment ? "diff-highlight-changed" : ""}">
         <td class="param-col"><i class="fas fa-prescription-bottle-alt"></i> Recommended Treatment</td>
         <td class="prev-col" style="font-size: 0.88rem;">${prev.treatment}</td>
         <td class="curr-col" style="font-size: 0.88rem;">${curr.treatment}</td>
-        <td class="diff-col"><span class="diff-badge ${prev.treatment === curr.treatment ? 'same' : 'changed'}">${prev.treatment === curr.treatment ? 'Match' : 'Prescription'}</span></td>
+        <td class="diff-col"><span class="diff-badge ${prev.treatment === curr.treatment ? "same" : "changed"}">${prev.treatment === curr.treatment ? "Match" : "Prescription"}</span></td>
       </tr>
     `;
   }
@@ -618,7 +652,9 @@ function renderHistoryList() {
     return;
   }
 
-  container.innerHTML = history.map((item) => `
+  container.innerHTML = history
+    .map(
+      (item) => `
     <div class="history-card">
       <div class="history-card-info">
         <img src="${item.thumbnail}" alt="${item.name}" style="width: 55px; height: 55px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border);">
@@ -640,7 +676,9 @@ function renderHistoryList() {
         </button>
       </div>
     </div>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 function openComparisonWithHistorical(id) {
@@ -667,30 +705,87 @@ function displayResults(result) {
     medium: "⚠️",
     high: "🚨",
   };
+  const isHealthy = /___healthy$/i.test(disease);
+  const severityDisplay =
+    safeSeverity === "unknown" || isHealthy
+      ? "Plant disease severity: Not assessed"
+      : `Typical disease impact: ${safeSeverity.charAt(0).toUpperCase() + safeSeverity.slice(1)} (not measured from this photo)`;
 
   resultsDiv.innerHTML = `
     <div class="result-card">
         <div class="disease-name">${severityEmoji[severityClass] || "ℹ️"} ${safeName}</div>
         <div class="confidence">Model score (not calibrated): ${safeConfidence}%</div>
-        <div class="severity ${safeSeverity}">
-            Severity: ${safeSeverity.charAt(0).toUpperCase() + safeSeverity.slice(1)}
-        </div>
+        <div class="severity ${isHealthy || safeSeverity === "unknown" ? "" : safeSeverity}">${escapeHtml(severityDisplay)}</div>
         <div class="description">${safeDescription}</div>
         <div class="treatment">
-            <h4>🌿 Treatment Recommendations</h4>
+            <h4>${safeSeverity === "unknown" ? "🌿 Safe next step" : "🌿 General care guidance"}</h4>
             <p>${safeTreatment}</p>
         </div>
+        ${
+          result.uncertain && Array.isArray(result.alternatives)
+            ? `<div class="description"><strong>Other model matches (also unconfirmed):</strong> ${result.alternatives
+                .slice(0, 3)
+                .map(
+                  (item) =>
+                    `${escapeHtml(getDiseaseInfo(item.class_name).name)} ${escapeHtml(item.confidence)}%`,
+                )
+                .join(" · ")}</div>`
+            : ""
+        }
+        <button type="button" class="mark-healthy-btn" id="markHealthyBtn">I checked this leaf — mark it healthy</button>
     </div>
   `;
 
   // Save prediction into history
   savePredictionRecord(result, currentPreviewDataUrl);
+  const markHealthyBtn = document.getElementById("markHealthyBtn");
+  if (markHealthyBtn)
+    markHealthyBtn.addEventListener("click", markCurrentImageHealthy);
 
   // Show action buttons bar
   const actionsBar = document.getElementById("resultsActionsBar");
   if (actionsBar) {
     actionsBar.style.display = "flex";
   }
+}
+
+function markCurrentImageHealthy() {
+  if (!currentPredictionRecord) return;
+
+  const reviewedInfo = {
+    name: "Healthy leaf (user confirmed)",
+    severity: "unknown",
+    description:
+      "You reviewed this image and marked the leaf as healthy. This is your visual label; the model did not confirm it.",
+    treatment:
+      "No disease treatment is indicated by your review. Continue routine monitoring and seek local advice if symptoms appear.",
+  };
+  currentPredictionRecord.diseaseKey = `${currentPredictionRecord.crop.replace(/ /g, "_")}___healthy`;
+  currentPredictionRecord.name = reviewedInfo.name;
+  currentPredictionRecord.severity = "unknown";
+  currentPredictionRecord.description = reviewedInfo.description;
+  currentPredictionRecord.treatment = reviewedInfo.treatment;
+  currentPredictionRecord.userReviewedHealth = true;
+
+  try {
+    const history = getPredictionHistory().map((item) =>
+      item.id === currentPredictionRecord.id ? currentPredictionRecord : item,
+    );
+    localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history));
+  } catch (error) {
+    console.warn("Could not update prediction history:", error);
+  }
+
+  const title = resultsDiv.querySelector(".disease-name");
+  const severity = resultsDiv.querySelector(".severity");
+  const description = resultsDiv.querySelector(".description");
+  const treatment = resultsDiv.querySelector(".treatment p");
+  if (title) title.textContent = `✅ ${reviewedInfo.name}`;
+  if (severity) severity.textContent = "Plant disease severity: Not assessed";
+  if (description) description.textContent = reviewedInfo.description;
+  if (treatment) treatment.textContent = reviewedInfo.treatment;
+  document.getElementById("markHealthyBtn")?.remove();
+  updateHistoryUI();
 }
 
 // Modal functionality
@@ -749,7 +844,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(
     "📊 Disease Database loaded with",
     Object.keys(diseaseDatabase).length,
-    "diseases"
+    "diseases",
   );
 
   document.querySelector(".header").style.opacity = "0";
@@ -765,11 +860,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // Additional utility functions
 function validateImage(file) {
   const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-  const maxSize = 10 * 1024 * 1024; 
+  const maxSize = 10 * 1024 * 1024;
 
   if (!validTypes.includes(file.type)) {
     throw new Error(
-      "Invalid file type. Please upload JPG, PNG, or WebP images only."
+      "Invalid file type. Please upload JPG, PNG, or WebP images only.",
     );
   }
 
@@ -841,9 +936,17 @@ async function handleFileSelect(file) {
 }
 
 function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
-  })[char]);
+  return String(value).replace(
+    /[&<>"']/g,
+    (char) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[char],
+  );
 }
 
 function getDiseaseInfo(className) {
@@ -855,8 +958,14 @@ function getDiseaseInfo(className) {
   if (diseaseDatabase[normalized]) return diseaseDatabase[normalized];
 
   const [crop, disease] = className.split("___");
-  const cropName = (crop || "Plant").replace(/_\([^)]*\)/g, "").replace(/_/g, " ").trim();
-  const diseaseName = (disease || "Unknown").replace(/[()_]/g, " ").replace(/\s+/g, " ").trim();
+  const cropName = (crop || "Plant")
+    .replace(/_\([^)]*\)/g, "")
+    .replace(/_/g, " ")
+    .trim();
+  const diseaseName = (disease || "Unknown")
+    .replace(/[()_]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   const healthy = /healthy/i.test(diseaseName);
   return {
     name: healthy ? `Healthy ${cropName}` : `${cropName}: ${diseaseName}`,
@@ -877,10 +986,14 @@ async function prepareAnalysisImage(file) {
     image.src = imageUrl;
     await new Promise((resolve, reject) => {
       image.onload = resolve;
-      image.onerror = () => reject(new Error("Could not read the selected image."));
+      image.onerror = () =>
+        reject(new Error("Could not read the selected image."));
     });
     const maxDimension = 1600;
-    const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+    const scale = Math.min(
+      1,
+      maxDimension / Math.max(image.naturalWidth, image.naturalHeight),
+    );
     const canvas = document.createElement("canvas");
     canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
     canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
@@ -905,7 +1018,7 @@ function downloadPredictionPDF() {
 
   document.body.innerHTML = `
     <div style="font-family: Arial; padding: 20px;">
-      <h2>AgriTech - Prediction Result</h2>
+      <h2>AgroZen - Prediction Result</h2>
       <p><b>Date/Time:</b> ${now}</p>
       <hr/>
       ${resultsBox.innerHTML}
@@ -953,7 +1066,9 @@ document.addEventListener("DOMContentLoaded", () => {
     clearHistoryBtn.addEventListener("click", clearAllHistory);
   }
 
-  const openHistoryFromCompare = document.getElementById("openHistoryFromCompareBtn");
+  const openHistoryFromCompare = document.getElementById(
+    "openHistoryFromCompareBtn",
+  );
   if (openHistoryFromCompare) {
     openHistoryFromCompare.addEventListener("click", () => {
       closeModal("comparisonModal");
@@ -966,4 +1081,3 @@ document.addEventListener("DOMContentLoaded", () => {
     printCompareBtn.addEventListener("click", () => window.print());
   }
 });
-

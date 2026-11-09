@@ -1,5 +1,5 @@
 /**
- * AgriTech Contributor Certificate Generator
+ * AgroZen Contributor Certificate Generator
  * Dynamically fetches contributor stats from GitHub API and generates verifiable participation certificates.
  */
 
@@ -12,7 +12,7 @@ const FALLBACK_CONTRIBUTORS = [
     contributions: 142,
     role: "Project Maintainer & Lead Dev",
     badge: "Elite Open Source Pioneer",
-    date: "2026-09-01"
+    date: "2026-09-01",
   },
   {
     username: "Rushabh-Mahajan",
@@ -21,35 +21,38 @@ const FALLBACK_CONTRIBUTORS = [
     contributions: 96,
     role: "Core Platform Engineer",
     badge: "Master Code Contributor",
-    date: "2026-09-03"
+    date: "2026-09-03",
   },
   {
     username: "agri-dev-pro",
     name: "Aarav Sharma",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
     contributions: 54,
     role: "UI/UX & Frontend Specialist",
     badge: "Pro Contributor Champion",
-    date: "2026-08-20"
+    date: "2026-08-20",
   },
   {
     username: "green-code-bot",
     name: "Priya Patel",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200",
+    avatar:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200",
     contributions: 38,
     role: "AI & Disease Model Contributor",
     badge: "Verified Contributor",
-    date: "2026-08-28"
+    date: "2026-08-28",
   },
   {
     username: "crop-wizard",
     name: "Karan Verma",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
     contributions: 22,
     role: "Marketplace & Schemes Docs",
     badge: "Verified Contributor",
-    date: "2026-08-14"
-  }
+    date: "2026-08-14",
+  },
 ];
 
 let liveContributors = [...FALLBACK_CONTRIBUTORS];
@@ -97,7 +100,9 @@ function setupTheme() {
  */
 async function loadGitHubContributors() {
   try {
-    const res = await fetch("https://api.github.com/repos/omroy07/AgriTech/contributors?per_page=15");
+    const res = await fetch(
+      "https://api.github.com/repos/omroy07/AgroZen/contributors?per_page=15",
+    );
     if (!res.ok) throw new Error("API rate limit or response error");
     const data = await res.json();
 
@@ -116,7 +121,7 @@ async function loadGitHubContributors() {
           contributions: count,
           role: "Open Source Contributor",
           badge: badge,
-          date: new Date().toISOString().split("T")[0]
+          date: new Date().toISOString().split("T")[0],
         };
       });
     }
@@ -134,13 +139,17 @@ function renderQuickChips() {
   const container = document.getElementById("certChipsContainer");
   if (!container) return;
 
-  container.innerHTML = liveContributors.map((c) => `
-    <button class="cert-chip ${currentCertificateUser && currentCertificateUser.username === c.username ? 'active' : ''}" 
+  container.innerHTML = liveContributors
+    .map(
+      (c) => `
+    <button class="cert-chip ${currentCertificateUser && currentCertificateUser.username === c.username ? "active" : ""}" 
             data-username="${c.username}" type="button">
       <img src="${c.avatar}" alt="${c.name}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'" />
       <span>${c.name || c.username}</span>
     </button>
-  `).join("");
+  `,
+    )
+    .join("");
 
   container.querySelectorAll(".cert-chip").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -175,7 +184,7 @@ async function generateCertificateForUser(username) {
 
   // Check if user is already in cached list
   let matched = liveContributors.find(
-    (c) => c.username.toLowerCase() === username.toLowerCase()
+    (c) => c.username.toLowerCase() === username.toLowerCase(),
   );
 
   if (!matched) {
@@ -200,7 +209,7 @@ async function generateCertificateForUser(username) {
         contributions: count,
         role: "Open Source Contributor",
         badge: badge,
-        date: new Date().toISOString().split("T")[0]
+        date: new Date().toISOString().split("T")[0],
       };
     } catch (err) {
       console.warn("Could not fetch user directly:", err);
@@ -211,7 +220,7 @@ async function generateCertificateForUser(username) {
         contributions: 10,
         role: "Open Source Contributor",
         badge: "Verified Contributor",
-        date: new Date().toISOString().split("T")[0]
+        date: new Date().toISOString().split("T")[0],
       };
     }
   }
@@ -226,13 +235,19 @@ async function generateCertificateForUser(username) {
  */
 function generateCertId(username, date) {
   let hash = 0;
-  const str = `${username}-AgriTech-${date}`;
+  const str = `${username}-AgroZen-${date}`;
   for (let i = 0; i < str.length; i++) {
     hash = (hash << 5) - hash + str.charCodeAt(i);
     hash |= 0;
   }
-  const cleanHash = Math.abs(hash).toString(16).toUpperCase().padStart(6, "0").slice(0, 6);
-  const userPrefix = (username.replace(/[^a-zA-Z0-9]/g, "").slice(0, 4) || "USER").toUpperCase();
+  const cleanHash = Math.abs(hash)
+    .toString(16)
+    .toUpperCase()
+    .padStart(6, "0")
+    .slice(0, 6);
+  const userPrefix = (
+    username.replace(/[^a-zA-Z0-9]/g, "").slice(0, 4) || "USER"
+  ).toUpperCase();
   return `AGRI-CERT-${new Date(date).getFullYear()}-${userPrefix}-${cleanHash}`;
 }
 
@@ -247,17 +262,20 @@ function renderCertificate(user) {
   const formattedDate = new Date(issueDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
-    day: "numeric"
+    day: "numeric",
   });
   const certId = generateCertId(user.username, issueDate);
 
   document.getElementById("certRecipientAvatar").src = user.avatar;
-  document.getElementById("certRecipientAvatar").onerror = function() {
+  document.getElementById("certRecipientAvatar").onerror = function () {
     this.src = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
   };
-  document.getElementById("certRecipientName").textContent = user.name || user.username;
-  document.getElementById("certRecipientHandle").textContent = `@${user.username}`;
-  document.getElementById("certCommitCount").textContent = `${user.contributions} Commits & Merges`;
+  document.getElementById("certRecipientName").textContent =
+    user.name || user.username;
+  document.getElementById("certRecipientHandle").textContent =
+    `@${user.username}`;
+  document.getElementById("certCommitCount").textContent =
+    `${user.contributions} Commits & Merges`;
   document.getElementById("certBadgeText").textContent = user.badge;
   document.getElementById("certDateText").textContent = formattedDate;
   document.getElementById("certIdText").textContent = certId;
@@ -272,7 +290,7 @@ function renderCertificate(user) {
  */
 function updateSocialLinks(user, certId) {
   const pageUrl = `${window.location.origin}${window.location.pathname}?user=${encodeURIComponent(user.username)}`;
-  const shareText = `🎓 Honored to receive this Official Participation Certificate for contributing to AgriTech! Check out my contribution certificate (ID: ${certId}): ${pageUrl} #OpenSource #AgriTech #GitHub`;
+  const shareText = `🎓 Honored to receive this Official Participation Certificate for contributing to AgroZen! Check out my contribution certificate (ID: ${certId}): ${pageUrl} #OpenSource #AgroZen #GitHub`;
 
   const twitterBtn = document.getElementById("shareTwitterBtn");
   if (twitterBtn) {
@@ -355,11 +373,11 @@ async function downloadCertificatePng() {
         scale: 2.5,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: null
+        backgroundColor: null,
       });
 
       const link = document.createElement("a");
-      link.download = `AgriTech-Certificate-${currentCertificateUser.username}.png`;
+      link.download = `AgroZen-Certificate-${currentCertificateUser.username}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
       showToast("Certificate downloaded successfully! 🎉");
@@ -379,11 +397,14 @@ function copyShareableLink() {
   if (!currentCertificateUser) return;
   const url = `${window.location.origin}${window.location.pathname}?user=${encodeURIComponent(currentCertificateUser.username)}`;
 
-  navigator.clipboard.writeText(url).then(() => {
-    showToast("Shareable Certificate Link copied to clipboard! 📋");
-  }).catch(() => {
-    prompt("Copy your certificate link:", url);
-  });
+  navigator.clipboard
+    .writeText(url)
+    .then(() => {
+      showToast("Shareable Certificate Link copied to clipboard! 📋");
+    })
+    .catch(() => {
+      prompt("Copy your certificate link:", url);
+    });
 }
 
 /**

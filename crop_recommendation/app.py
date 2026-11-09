@@ -130,7 +130,7 @@ def download_report():
         
         # Logo/Header (optional)
         p.setFont('Helvetica-Bold', 18)
-        p.drawString(50, height - 60, "AgriTech Crop Recommendation Report")
+        p.drawString(50, height - 60, "AgroZen Crop Recommendation Report")
         
         # Date & Time
         p.setFont('Helvetica', 10)

@@ -1,5 +1,5 @@
 """
-Backend Package for AgriTech
+Backend Package for AgroZen
 Contains services, tasks, and configuration for async processing
 """
 

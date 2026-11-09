@@ -1,9 +1,11 @@
 # Spatial Analytics Implementation Plan
 
 ## Overview
-This document outlines the implementation of the "Smart Field Analytics" module for the AgriTech platform. This module enables farmers to map their fields, view satellite imagery overlays (NDVI), and receive location-based insights.
+
+This document outlines the implementation of the "Smart Field Analytics" module for the AgroZen platform. This module enables farmers to map their fields, view satellite imagery overlays (NDVI), and receive location-based insights.
 
 ## Architecture
+
 - **Backend Framework**: Flask (Integrated with existing `app.py`).
 - **Database**: PostgreSQL (Production) / SQLite (Dev) using SQLAlchemy.
 - **Spatial Data Storage**: GeoJSON strings (compatible with SQLite) or PostGIS Geometry (if available).
@@ -11,8 +13,9 @@ This document outlines the implementation of the "Smart Field Analytics" module 
 - **Image Processing**: Python (Rasterio/NumPy) for NDVI calculation.
 
 ## Folder Structure
+
 ```
-AgriTech/
+AgroZen/
 ├── spatial_analytics/          # New Module
 │   ├── __init__.py             # Blueprint definition
 │   ├── models.py               # FieldBoundary, AnalysisResult models
@@ -31,10 +34,12 @@ AgriTech/
 ## Step-by-Step Implementation
 
 ### Phase 1: dependencies
+
 1. Add `rasterio`, `geopandas`, `shapely` to `requirements.txt`.
 2. Ensure `numpy` and `opencv-python` are available.
 
 ### Phase 2: Backend Core (spatial_analytics)
+
 1. **Models**: Create `Field` model to store user-drawn boundaries (GeoJSON).
 2. **Routes**:
    - `POST /api/spatial/field`: Save field boundary.
@@ -46,6 +51,7 @@ AgriTech/
    - Generate colored overlay image (PNG).
 
 ### Phase 3: Frontend Dashboard (Leaflet)
+
 1. **Map Interface**:
    - Initialize Leaflet map.
    - Add drawing tools (`leaflet-draw`) for field creation.
@@ -59,16 +65,19 @@ AgriTech/
    - Display Heatmaps (Soil/Disease).
 
 ### Phase 4: Integration
+
 1. Register `spatial_bp` in `app.py`.
 2. Add navigation link to "Spatial Dashboard" in `navbar.html`.
 
 ## Key Components
 
 ### NDVI Formula
+
 ```python
 ndvi = (nir - red) / (nir + red)
 # normalize to -1 to 1
 ```
 
 ### Map Component
+
 Uses Leaflet L.map, L.geoJSON for boundaries, and L.imageOverlay for NDVI results.

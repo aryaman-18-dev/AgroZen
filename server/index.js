@@ -19,7 +19,7 @@ app.use(
   cors({
     origin: "*",
     credentials: true,
-  })
+  }),
 );
 
 app.use(express.json());
@@ -44,8 +44,8 @@ sendEmail = require("./Utils/email.js");
 (async () => {
   const emailSent = await sendEmail(
     "pidugubunny534@gmail.com",
-    "Test Email from AgriTech",
-    "<h1>This is a test email</h1><p>If you received this, email setup is working!</p>"
+    "Test Email from AgroZen",
+    "<h1>This is a test email</h1><p>If you received this, email setup is working!</p>",
   );
   console.log("Test email sent:", emailSent);
 })();

@@ -1,5 +1,5 @@
 """
-Hyperlocal Voice Assistant & WhatsApp/SMS Advisory Bot Service for AgriTech.
+Hyperlocal Voice Assistant & WhatsApp/SMS Advisory Bot Service for AgroZen.
 
 Integrates:
 - Twilio & Meta Cloud WhatsApp API Webhooks

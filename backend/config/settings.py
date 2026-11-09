@@ -1,5 +1,5 @@
 """
-Typed Configuration & Environment Management for AgriTech Backend.
+Typed Configuration & Environment Management for AgroZen Backend.
 Provides strict type-casting, validation, default fallbacks, and feature flags.
 """
 
@@ -59,12 +59,12 @@ def _get_list(key: str, default: List[str]) -> List[str]:
 @dataclass(frozen=True)
 class AppConfig:
     """Core Application & Server Configuration"""
-    app_name: str = "AgriTech"
+    app_name: str = "AgroZen"
     version: str = "1.0.0"
     env: str = os.environ.get("FLASK_ENV", "development").lower()
     debug: bool = _get_bool("DEBUG", os.environ.get("FLASK_ENV") != "production")
     testing: bool = _get_bool("TESTING", False)
-    secret_key: str = os.environ.get("SECRET_KEY", "agritech-dev-secret-key-change-in-prod-2026")
+    secret_key: str = os.environ.get("SECRET_KEY", "AgroZen-dev-secret-key-change-in-prod-2026")
     host: str = os.environ.get("HOST", "0.0.0.0")
     port: int = _get_int("PORT", 5000)
     api_prefix: str = "/api/v1"
@@ -76,8 +76,8 @@ class AppConfig:
 @dataclass(frozen=True)
 class DatabaseConfig:
     """Database & Connection Pool Settings"""
-    url: str = os.environ.get("DATABASE_URL", "sqlite:///agritech_dev.db")
-    dev_url: str = os.environ.get("DEV_DATABASE_URL", "sqlite:///agritech_dev.db")
+    url: str = os.environ.get("DATABASE_URL", "sqlite:///AgroZen_dev.db")
+    dev_url: str = os.environ.get("DEV_DATABASE_URL", "sqlite:///AgroZen_dev.db")
     echo: bool = _get_bool("DATABASE_ECHO", False)
     track_modifications: bool = False
     pool_size: int = _get_int("DATABASE_POOL_SIZE", 10)
@@ -88,7 +88,7 @@ class DatabaseConfig:
 @dataclass(frozen=True)
 class AuthConfig:
     """Authentication & JWT Settings"""
-    jwt_secret: str = os.environ.get("JWT_SECRET", os.environ.get("SECRET_KEY", "agritech-jwt-secret"))
+    jwt_secret: str = os.environ.get("JWT_SECRET", os.environ.get("SECRET_KEY", "AgroZen-jwt-secret"))
     jwt_algorithm: str = os.environ.get("JWT_ALGORITHM", "HS256")
     access_token_expire_minutes: int = _get_int("ACCESS_TOKEN_EXPIRE_MINUTES", 1440)  # 24 hours
     refresh_token_expire_days: int = _get_int("REFRESH_TOKEN_EXPIRE_DAYS", 30)

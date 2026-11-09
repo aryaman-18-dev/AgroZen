@@ -33,7 +33,7 @@ def test_notification():
     data = request.get_json()
     user_id = data.get('user_id')
     title = data.get('title', 'Test Notification')
-    message = data.get('message', 'This is a test notification from AgriTech')
+    message = data.get('message', 'This is a test notification from AgroZen')
     n_type = data.get('type', 'system')
     
     notification = NotificationService.create_notification(title, message, n_type, user_id)

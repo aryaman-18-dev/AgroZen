@@ -1,6 +1,6 @@
-# 🌾 Contributing to AgriTech
+# 🌾 Contributing to AgroZen
 
-Thanks for your interest in contributing to **AgriTech**! 🚀  
+Thanks for your interest in contributing to **AgroZen**! 🚀  
 We’re building smart agriculture tools to support farmers and improve food security using technology.
 
 ---
@@ -8,17 +8,24 @@ We’re building smart agriculture tools to support farmers and improve food sec
 ## 📌 How to Contribute
 
 ### 1. Fork & Clone the Repository
+
 First, fork the repo and then clone it to your local machine:
+
 ```bash
-git clone https://github.com/your-username/AgriTech.git
-cd AgriTech
+git clone https://github.com/your-username/AgroZen.git
+cd AgroZen
 ```
+
 ### 2. Create a New Branch
+
 Use a clear and descriptive name for your branch:
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
+
 ---
+
 ### 3. Make Your Changes
 
 You can:
@@ -37,15 +44,21 @@ You can:
 
 - Run your code locally and ensure everything works as expected.
 - Add test cases if needed to verify your functionality.
+
 ---
+
 ### 5. Commit and Push
+
 Write a meaningful commit message:
+
 ```bash
 git add .
 git commit -m "feat: short description of the feature"
 git push origin feature/your-feature-name
 ```
+
 ---
+
 ### 6. Submit a Pull Request (PR)
 
 - Navigate to your fork on GitHub
@@ -69,7 +82,7 @@ git push origin feature/your-feature-name
 
 If you have questions:
 
-- Open an [issue](https://github.com/omroy07/AgriTech/issues)  (ALSO MENTION SWOC & ECWOC clearly)
+- Open an [issue](https://github.com/omroy07/AgroZen/issues) (ALSO MENTION SWOC & ECWOC clearly)
 - Tag a maintainer in the discussion
 
 We’re happy to assist you!

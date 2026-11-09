@@ -1058,7 +1058,7 @@ select:valid {
   background: rgba(108, 117, 125, 0.1);
   color: #6c757d;
 }
- /* --- Cursor Trail Container --- */
+/* --- Cursor Trail Container --- */
 .circle-container {
   position: fixed;
   inset: 0;
@@ -1099,6 +1099,6 @@ select:valid {
 
 .cursor-hovering {
   transform: translate(-50%, -50%) scale(1.8);
-  background-color: #22c55e; /* AgriTech green */
+  background-color: #22c55e; /* AgroZen green */
   box-shadow: 0 0 20px #22c55e;
 }

@@ -9,7 +9,13 @@
 }
 
 body {
-  font-family: var(--font-primary, 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-family: var(
+    --font-primary,
+    "Open Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif
+  );
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -106,8 +112,8 @@ body {
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 999px;
-  background-color: #111827;  
-  color: #f9fafb;          
+  background-color: #111827;
+  color: #f9fafb;
   text-decoration: none;
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -120,13 +126,13 @@ body {
 
 /* adjust per theme */
 [data-theme="light"] .back-home-btn {
-  background-color: #e5f9ed; 
+  background-color: #e5f9ed;
   color: #f9fafb;
 }
 
 [data-theme="dark"] .back-home-btn {
-  background-color: #111827;  
-  color: #065f46;             
+  background-color: #111827;
+  color: #065f46;
   border-color: rgba(6, 95, 70, 0.4);
 }
 
@@ -138,7 +144,6 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(22, 163, 74, 0.4);
 }
-
 
 .back-icon {
   font-size: 1rem;
@@ -187,21 +192,22 @@ body {
 /* Page Header */
 .page-header {
   background: linear-gradient(135deg, #22c55e, #16a34a);
-  padding: 6px 10px;   /* reduced from 60px+ */
+  padding: 6px 10px; /* reduced from 60px+ */
   border-radius: 8px;
   color: #fff;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .page-header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>')
+    repeat;
   opacity: 0.3;
 }
 
@@ -219,12 +225,12 @@ body {
 .subtitle {
   font-size: 16px;
   margin-bottom: 4px;
-  color: rgba(255,255,255,.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .last-updated {
   font-size: 13px;
-  color: rgba(255,255,255,.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Main Content Layout */
@@ -349,7 +355,7 @@ body {
 }
 
 .terms-section ul li::before {
-  content: '•';
+  content: "•";
   color: var(--primary-green);
   font-weight: bold;
   position: absolute;
@@ -791,16 +797,16 @@ body {
 
 .cursor-hovering {
   transform: translate(-50%, -50%) scale(1.8);
-  background-color: #22c55e; /* Changes to AgriTech green on hover */
+  background-color: #22c55e; /* Changes to AgroZen green on hover */
   box-shadow: 0 0 20px #22c55e;
-}/* ================================
+} /* ================================
    NAVBAR ALIGNMENT FIX
    ================================ */
 
 .navbar {
   background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border-color);
-  padding: 0.6rem 0;   /* reduced from 1rem */
+  padding: 0.6rem 0; /* reduced from 1rem */
   position: sticky;
   top: 0;
   z-index: 100;
@@ -809,7 +815,7 @@ body {
 
 .navbar-content {
   display: flex;
-  align-items: center;          /* ✅ Vertical alignment */
+  align-items: center; /* ✅ Vertical alignment */
   justify-content: space-between;
   gap: 16px;
   padding: 12px 24px;
@@ -829,8 +835,8 @@ body {
 /* Right side buttons */
 .nav-buttons {
   display: flex;
-  align-items: center;          /* ✅ Align buttons vertically */
-  gap: 10px;                    /* ✅ Consistent spacing */
+  align-items: center; /* ✅ Align buttons vertically */
+  gap: 10px; /* ✅ Consistent spacing */
 }
 
 /* Buttons & links inside navbar */
@@ -859,16 +865,16 @@ body {
    ============================ */
 
 .navbar {
-  padding: 12px 0;              /* Vertical breathing space */
+  padding: 12px 0; /* Vertical breathing space */
 }
 
 .navbar-content {
-  max-width: 1200px;           /* Center + consistent width */
+  max-width: 1200px; /* Center + consistent width */
   margin: 0 auto;
-  padding: 0 24px;             /* Left/right spacing */
+  padding: 0 24px; /* Left/right spacing */
   display: flex;
   align-items: center;
-  gap: 24px;                   /* Space between brand & buttons */
+  gap: 24px; /* Space between brand & buttons */
 }
 
 /* Brand/logo spacing */
@@ -892,7 +898,7 @@ body {
 .nav-buttons {
   display: flex;
   align-items: center;
-  gap: 12px;                   /* Space between buttons */
+  gap: 12px; /* Space between buttons */
 }
 
 /* Button consistency */
@@ -931,16 +937,16 @@ body {
    ========================================= */
 
 .navbar-content {
-  max-width: 100% !important;   /* Allow full width */
+  max-width: 100% !important; /* Allow full width */
   width: 100%;
-  padding: 0 32px;              /* Edge spacing */
+  padding: 0 32px; /* Edge spacing */
   display: flex;
   align-items: center;
 }
 
 /* Force brand to extreme left */
 .navbar .brand {
-  margin-right: auto;          /* Push everything else right */
+  margin-right: auto; /* Push everything else right */
 }
 
 /* Kill spacer impact just in case */

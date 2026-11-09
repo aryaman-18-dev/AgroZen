@@ -15,6 +15,7 @@ pip install -r requirements.txt
 ```
 
 New packages installed:
+
 - `qrcode[pil]` - QR code generation
 - `cryptography` - Encryption for QR codes
 
@@ -25,11 +26,12 @@ Create or update your `.env` file:
 ```bash
 # Add these to your .env file
 QR_SECRET_KEY=your_secure_random_key_change_this_in_production
-JWT_SECRET=agritech_secret_key
-DATABASE_URL=sqlite:///agritech.db
+JWT_SECRET=AgroZen_secret_key
+DATABASE_URL=sqlite:///AgroZen.db
 ```
 
 **Important**: Generate a secure random key for production:
+
 ```bash
 python -c "import secrets; print(secrets.token_urlsafe(32))"
 ```
@@ -41,6 +43,7 @@ python migrations/init_traceability_db.py
 ```
 
 This will:
+
 - Create `produce_batches` table
 - Create `audit_trails` table
 - Create sample users (farmer, shopkeeper, admin)
@@ -58,6 +61,7 @@ The server will start on `http://localhost:5000`
 ### Option A: Use the Web UI
 
 Open your browser:
+
 ```
 http://localhost:5000/verify-produce.html
 ```
@@ -74,7 +78,7 @@ import jwt
 # Generate farmer token
 farmer_token = jwt.encode(
     {'user_id': 1, 'role': 'farmer', 'email': 'farmer.john@example.com'},
-    'agritech_secret_key',
+    'AgroZen_secret_key',
     algorithm='HS256'
 )
 print(f"Farmer Token: {farmer_token}")
@@ -96,6 +100,7 @@ curl -X POST http://localhost:5000/api/v1/traceability/batches \
 ```
 
 Response:
+
 ```json
 {
   "status": "success",
@@ -125,6 +130,7 @@ python examples/traceability_workflow.py
 ## Complete Workflow Example
 
 ### 1. Farmer Creates Batch
+
 ```http
 POST /api/v1/traceability/batches
 Authorization: Bearer <farmer_token>
@@ -138,6 +144,7 @@ Authorization: Bearer <farmer_token>
 ```
 
 ### 2. Farmer Moves to Quality Check
+
 ```http
 PUT /api/v1/traceability/batches/BATCH-XXX/status
 Authorization: Bearer <farmer_token>
@@ -150,6 +157,7 @@ Authorization: Bearer <farmer_token>
 ```
 
 ### 3. Farmer Approves for Logistics
+
 ```http
 PUT /api/v1/traceability/batches/BATCH-XXX/status
 Authorization: Bearer <farmer_token>
@@ -161,6 +169,7 @@ Authorization: Bearer <farmer_token>
 ```
 
 ### 4. Shopkeeper Receives Batch
+
 ```http
 PUT /api/v1/traceability/batches/BATCH-XXX/status
 Authorization: Bearer <shopkeeper_token>
@@ -172,6 +181,7 @@ Authorization: Bearer <shopkeeper_token>
 ```
 
 ### 5. Anyone Verifies Publicly
+
 ```http
 GET /api/v1/traceability/verify/BATCH-XXX
 (No authentication required)
@@ -179,16 +189,16 @@ GET /api/v1/traceability/verify/BATCH-XXX
 
 ## API Endpoints Summary
 
-| Endpoint | Method | Auth | Role | Description |
-|----------|--------|------|------|-------------|
-| `/batches` | POST | ✓ | Farmer, Admin | Create batch |
-| `/batches/{id}/status` | PUT | ✓ | Depends on status | Update status |
-| `/batches/{id}/quality` | PUT | ✓ | Farmer, Admin | Update quality |
-| `/batches/{id}` | GET | ✓ | Any | Get batch details |
-| `/batches` | GET | ✓ | Any | List batches |
-| `/verify/{id}` | GET | ✗ | Public | Public verification |
-| `/verify-qr` | POST | ✗ | Public | Verify QR code |
-| `/stats` | GET | ✓ | Any | Get statistics |
+| Endpoint                | Method | Auth | Role              | Description         |
+| ----------------------- | ------ | ---- | ----------------- | ------------------- |
+| `/batches`              | POST   | ✓    | Farmer, Admin     | Create batch        |
+| `/batches/{id}/status`  | PUT    | ✓    | Depends on status | Update status       |
+| `/batches/{id}/quality` | PUT    | ✓    | Farmer, Admin     | Update quality      |
+| `/batches/{id}`         | GET    | ✓    | Any               | Get batch details   |
+| `/batches`              | GET    | ✓    | Any               | List batches        |
+| `/verify/{id}`          | GET    | ✗    | Public            | Public verification |
+| `/verify-qr`            | POST   | ✗    | Public            | Verify QR code      |
+| `/stats`                | GET    | ✓    | Any               | Get statistics      |
 
 ## State Machine
 
@@ -203,6 +213,7 @@ Admins: Can do everything including rollbacks
 ## Testing
 
 Run automated tests:
+
 ```bash
 pytest tests/test_traceability.py -v
 ```
@@ -210,20 +221,24 @@ pytest tests/test_traceability.py -v
 ## Troubleshooting
 
 ### Issue: "Token is missing!"
+
 - Add Authorization header: `Authorization: Bearer <token>`
 - Generate token using JWT with user info
 
 ### Issue: "Batch not found"
+
 - Check batch_id is correct
 - Run database migration script
 - Verify database connection
 
 ### Issue: "User role cannot transition batch"
+
 - Review state machine rules
 - Check user role in token
 - Verify current batch status
 
 ### Issue: "Invalid or tampered QR code"
+
 - Ensure QR_SECRET_KEY is consistent
 - Don't modify QR code data
 - Check encryption/decryption
@@ -245,6 +260,7 @@ pytest tests/test_traceability.py -v
 ## Support
 
 For issues or questions:
+
 - Open an issue on GitHub
 - Check the troubleshooting section
 - Review the logs for security events

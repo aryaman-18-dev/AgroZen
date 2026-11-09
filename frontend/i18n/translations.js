@@ -1,10 +1,10 @@
 translations = {
     'en': {
-        'welcome': 'Welcome to AgriTech',
+        'welcome': 'Welcome to AgroZen',
         'dashboard': 'Dashboard',
     },
     'hi': {
-        'welcome': 'AgriTech me svagat hai',
+        'welcome': 'AgroZen me svagat hai',
         'dashboard': 'Dashboard',
     }
 }

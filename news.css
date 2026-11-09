@@ -50,15 +50,17 @@ body {
 
 body {
   background-color: var(--bg-color);
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* News Container */
-.agritech-news {
+.AgroZen-news {
   position: relative;
   min-height: 100vh;
   padding-top: 1rem;
@@ -128,7 +130,9 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
   flex-shrink: 0;
   align-self: center;
   box-shadow: none !important;
@@ -160,7 +164,9 @@ body {
 
 .sun-rays {
   transform-origin: center;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease;
 }
 
 .moon-bite {
@@ -852,7 +858,7 @@ body {
 
 .cursor-hovering {
   transform: translate(-50%, -50%) scale(1.8);
-  background-color: #22c55e; /* AgriTech green */
+  background-color: #22c55e; /* AgroZen green */
   box-shadow: 0 0 20px #22c55e;
 }
 

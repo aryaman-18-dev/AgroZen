@@ -7,7 +7,7 @@ class Config:
     TESTING = False
     
     # Database
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///agritech.db')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'sqlite:///AgroZen.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Mail
@@ -49,7 +49,7 @@ class Config:
 class DevelopmentConfig(Config):
     """Development Configuration"""
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL', 'sqlite:///agritech_dev.db')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL', 'sqlite:///AgroZen_dev.db')
     SQLALCHEMY_ECHO = True  # Log SQL queries in development
 
 class ProductionConfig(Config):

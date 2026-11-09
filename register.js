@@ -1,4 +1,4 @@
-// register.js — AgriTech Registration Page Handler
+// register.js — AgroZen Registration Page Handler
 // Change from original: handleRegister is async + removed fake setTimeout
 
 const ALLOWED_ROLES = ["buyer", "farmer", "equipment", "grocery", "expert"];
@@ -53,7 +53,10 @@ function validateRegisterFields(formData) {
     return "Please enter your email address";
   }
 
-  if (!isValidEmail(formData.email) || !formData.email.toLowerCase().endsWith("@gmail.com")) {
+  if (
+    !isValidEmail(formData.email) ||
+    !formData.email.toLowerCase().endsWith("@gmail.com")
+  ) {
     setFieldState(emailInput, false);
     return "Please use a valid @gmail.com address";
   }
@@ -218,15 +221,20 @@ async function handleRegister(event) {
     showAuthMessage(result.message, "success");
     setTimeout(() => {
       // Redirect to the role-specific home page
-      window.location.href = window.authManager.getHomePageForRole(result.user.role);
+      window.location.href = window.authManager.getHomePageForRole(
+        result.user.role,
+      );
     }, 1500);
   } else {
     showAuthMessage(result.message, "error");
 
     const msg = result.message.toLowerCase();
-    if (msg.includes("email") || msg.includes("gmail")) document.getElementById("email").classList.add("error");
-    if (msg.includes("fullname") || msg.includes("full name")) document.getElementById("fullname").classList.add("error");
-    if (msg.includes("password")) document.getElementById("password").classList.add("error");
+    if (msg.includes("email") || msg.includes("gmail"))
+      document.getElementById("email").classList.add("error");
+    if (msg.includes("fullname") || msg.includes("full name"))
+      document.getElementById("fullname").classList.add("error");
+    if (msg.includes("password"))
+      document.getElementById("password").classList.add("error");
 
     registerBtn.classList.remove("loading");
     registerText.textContent = "Create Account";
@@ -238,8 +246,12 @@ async function handleRegister(event) {
 document.querySelectorAll("input, select").forEach((input) => {
   input.addEventListener("input", updateProgress);
   input.addEventListener("change", updateProgress);
-  input.addEventListener("focus", function () { this.parentElement.style.transform = "translateY(-2px)"; });
-  input.addEventListener("blur", function () { this.parentElement.style.transform = "translateY(0)"; });
+  input.addEventListener("focus", function () {
+    this.parentElement.style.transform = "translateY(-2px)";
+  });
+  input.addEventListener("blur", function () {
+    this.parentElement.style.transform = "translateY(0)";
+  });
 });
 
 document.addEventListener("keydown", function (e) {
@@ -261,7 +273,9 @@ document.addEventListener("keydown", function (e) {
 });
 
 document.addEventListener("DOMContentLoaded", updateProgress);
-document.getElementById("password").addEventListener("input", checkPasswordStrength);
+document
+  .getElementById("password")
+  .addEventListener("input", checkPasswordStrength);
 // Lamp Toggle Feature
 document.addEventListener("DOMContentLoaded", () => {
   const lampToggle = document.getElementById("lampToggle");
@@ -270,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!lampToggle || !darkOverlay) return;
 
   const formInputs = document.querySelectorAll(
-    "#role, #fullname, #email, #password, #confirmPassword, #register-btn"
+    "#role, #fullname, #email, #password, #confirmPassword, #register-btn",
   );
 
   let lampOn = true;
@@ -282,15 +296,14 @@ document.addEventListener("DOMContentLoaded", () => {
       lampToggle.textContent = "💡 ON";
       darkOverlay.classList.add("hidden");
 
-      formInputs.forEach(input => {
+      formInputs.forEach((input) => {
         input.disabled = false;
       });
-
     } else {
       lampToggle.textContent = "💡 OFF";
       darkOverlay.classList.remove("hidden");
 
-      formInputs.forEach(input => {
+      formInputs.forEach((input) => {
         input.disabled = true;
       });
     }

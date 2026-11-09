@@ -216,4 +216,4 @@ class AlgorithmicArbitrageMatrix:
             details=f"Autonomous bot executed trade pair {opportunity.source_grid_id}->{opportunity.target_grid_id}"
         ))
         
-        logger.info(f"💰 🚀  [AgriTech AI] Arbitrage Trade Executed! ${realized_profit:.2f} profit booked. Margin: {opportunity.gross_margin_pct}%")
+        logger.info(f"💰 🚀  [AgroZen AI] Arbitrage Trade Executed! ${realized_profit:.2f} profit booked. Margin: {opportunity.gross_margin_pct}%")

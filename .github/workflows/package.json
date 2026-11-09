@@ -1,7 +1,7 @@
 {
-  "name": "agritech-frontend",
+  "name": "AgroZen-frontend",
   "version": "1.0.0",
-  "description": "AgriTech Frontend",
+  "description": "AgroZen Frontend",
   "scripts": {
     "test": "echo 'No frontend tests configured' && exit 0",
     "lint": "eslint src/frontend/js/ --ext .js",

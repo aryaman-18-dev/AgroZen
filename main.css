@@ -42,7 +42,9 @@ body {
   display: flex;
   flex-direction: column;
   padding-top: var(--navbar-height);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /*========================================
@@ -56,7 +58,11 @@ body {
   left: 0;
   width: 100%;
   height: var(--navbar-height);
-  background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
+  background: linear-gradient(
+    135deg,
+    var(--green-primary),
+    var(--green-secondary)
+  );
   box-shadow: 0 2px 12px rgba(76, 175, 80, 0.2);
   z-index: 9999;
   transition: all 0.3s ease;
@@ -250,9 +256,15 @@ body {
   width: 100%;
   max-height: 0;
   overflow: hidden;
-  background: linear-gradient(180deg, var(--green-primary), var(--green-secondary));
+  background: linear-gradient(
+    180deg,
+    var(--green-primary),
+    var(--green-secondary)
+  );
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: max-height 0.4s ease, padding 0.4s ease;
+  transition:
+    max-height 0.4s ease,
+    padding 0.4s ease;
   z-index: 9998;
 }
 
@@ -1030,7 +1042,10 @@ select.language-select:focus {
   border-radius: 50%;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
   z-index: 1100;
   display: flex;
   align-items: center;
@@ -1058,7 +1073,10 @@ select.language-select:focus {
   border-radius: 50%;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
   z-index: 1100;
   display: flex;
   align-items: center;
@@ -1176,6 +1194,6 @@ select.language-select:focus {
 
 .cursor-hovering {
   transform: translate(-50%, -50%) scale(1.8);
-  background-color: #22c55e; /* AgriTech green */
+  background-color: #22c55e; /* AgroZen green */
   box-shadow: 0 0 20px #22c55e;
 }

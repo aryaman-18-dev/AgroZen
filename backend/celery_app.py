@@ -22,7 +22,7 @@ def make_celery(app):
 
 # Simple instance for module-level imports
 celery_app = Celery(
-    'agritech',
+    'AgroZen',
     broker=REDIS_URL,
     backend=REDIS_URL,
     include=['backend.tasks']

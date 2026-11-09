@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 translation_bp = Blueprint("translation", __name__)
 content_bp = Blueprint("dynamic_content", __name__)
 
-# Sample/Default Dynamic Content Repositories for AgriTech
+# Sample/Default Dynamic Content Repositories for AgroZen
 DYNAMIC_BLOGS = [
     {
         "id": 1,

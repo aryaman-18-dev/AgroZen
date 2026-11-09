@@ -11,7 +11,7 @@ def setup_logger():
     log_file = os.path.join(log_dir, 'app.log')
 
     # Create a custom logger
-    logger = logging.getLogger('AgriTech')
+    logger = logging.getLogger('AgroZen')
     logger.setLevel(logging.INFO)
 
     # Create handlers

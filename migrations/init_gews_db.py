@@ -17,7 +17,7 @@ def init_app():
     # Database configuration
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
         'DATABASE_URL', 
-        'sqlite:///agritech.db'
+        'sqlite:///AgroZen.db'
     )
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     

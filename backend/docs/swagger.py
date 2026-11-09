@@ -49,9 +49,9 @@ def _build_spec():
     return {
         "openapi": "3.0.3",
         "info": {
-            "title": "AgriTech Authentication API",
+            "title": "AgroZen Authentication API",
             "version": "1.0.0",
-            "description": "OpenAPI documentation for the AgriTech authentication endpoints.",
+            "description": "OpenAPI documentation for the AgroZen authentication endpoints.",
         },
         "servers": [
             {
@@ -91,7 +91,7 @@ def swagger_ui():
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AgriTech API Docs</title>
+  <title>AgroZen API Docs</title>
   <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
   <style>
     body {
@@ -116,7 +116,7 @@ def swagger_ui():
 </head>
 <body>
   <header class="swagger-header">
-    <h1>AgriTech Authentication API</h1>
+    <h1>AgroZen Authentication API</h1>
     <p>Local Swagger UI for testing registration, login, password recovery, and session endpoints.</p>
   </header>
   <div id="swagger-ui"></div>

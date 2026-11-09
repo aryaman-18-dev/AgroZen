@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About AgriTech</title>
+    <title>About AgroZen</title>
     <link rel="icon" type="image/png" href="./images/logo.png">
     <link rel="stylesheet" href="./about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -20,7 +20,7 @@
 
     <main class="main-content">
         <section class="hero-section">
-            <h1>About AgriTech</h1>
+            <h1>About AgroZen</h1>
             <p class="hero-subtitle">Smart Agriculture for a Sustainable Future</p>
         </section>
 
@@ -28,7 +28,7 @@
             <div class="card">
                 <h2>🌾 Our Mission</h2>
                 <p>
-                    At AgriTech, we are dedicated to revolutionizing agriculture through cutting-edge technology.
+                    At AgroZen, we are dedicated to revolutionizing agriculture through cutting-edge technology.
                     Our mission is to empower farmers with intelligent tools and data-driven insights that enhance
                     crop productivity, reduce resource waste, and promote sustainable farming practices.
                 </p>
@@ -97,7 +97,7 @@
             <div class="card">
                 <h2>👥 Our Team</h2>
                 <p>
-                    AgriTech is built by a dedicated team of developers, data scientists, and agricultural experts
+                    AgroZen is built by a dedicated team of developers, data scientists, and agricultural experts
                     who are passionate about using technology to solve real-world agricultural challenges. We work
                     closely with farmers, agricultural institutions, and technology partners to continuously improve
                     our solutions.
@@ -108,15 +108,15 @@
                 <h2>🤝 Get Involved</h2>
                 <p>
                     We believe in the power of collaboration and open-source development. If you're interested in
-                    contributing to AgriTech, please visit our
+                    contributing to AgroZen, please visit our
                     <a href="./CONTRIBUTING.md" class="link">Contributing Guidelines</a> to get started.
                 </p>
                 <p>
                     You can also connect with us on GitHub at
-                    <a href="https://github.com/omroy07/AgriTech" target="_blank" class="link">omroy07/AgriTech</a>
+                    <a href="https://github.com/omroy07/AgroZen" target="_blank" class="link">omroy07/AgroZen</a>
                     You can also connect with us on GitHub at
-                    <a href="https://github.com/omroy07/AgriTech" target="_blank" rel="noopener"
-                        class="link">omroy07/AgriTech</a>
+                    <a href="https://github.com/omroy07/AgroZen" target="_blank" rel="noopener"
+                        class="link">omroy07/AgroZen</a>
                 </p>
             </div>
 
@@ -138,8 +138,8 @@
         <div class="footer-inner-content">
             <div class="footer-section footer-brand">
                 <a href="main.html" class="brand-header">
-                    <img src="images/logo.png" alt="AgriTech logo" class="brand-logo" />
-                    <h3>AgriTech</h3>
+                    <img src="images/logo.png" alt="AgroZen logo" class="brand-logo" />
+                    <h3>AgroZen</h3>
                 </a>
 
 
@@ -174,8 +174,8 @@
                         <h4>Contact</h4>
                         <ul>
                             <li>
-                                <a href="mailto:contact@agritech.com">
-                                    <i class="fas fa-envelope"></i> contact@agritech.com
+                                <a href="mailto:contact@AgroZen.com">
+                                    <i class="fas fa-envelope"></i> contact@AgroZen.com
                                 </a>
                             </li>
                             <li>
@@ -213,7 +213,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>© <span id="current-year"></span> AgriTech. All rights reserved.</p>
+                <p>© <span id="current-year"></span> AgroZen. All rights reserved.</p>
             </div>
 
             <div class="footer-wave-overlay"></div>
@@ -338,7 +338,7 @@
                 const next = current === 'light' ? 'dark' : 'light';
 
                 root.setAttribute('data-theme', next);
-                localStorage.setItem('agritech-theme', next);
+                localStorage.setItem('AgroZen-theme', next);
 
                 const themeLabel = document.querySelector('.theme-label');
                 if (themeLabel) {
@@ -391,7 +391,7 @@
 
         // --- DOM Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('agritech-theme') || 'dark';
+            const savedTheme = localStorage.getItem('AgroZen-theme') || 'dark';
             document.documentElement.setAttribute('data-theme', savedTheme);
 
             const currentYearSpan = document.getElementById("current-year");

@@ -1,54 +1,85 @@
-# src/train.py
-
+"""Train and evaluate the fertilizer recommendation model from the local CSV."""
+from pathlib import Path
+import json
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import accuracy_score
 import joblib
-import os
-from utils import encode_features, soil_encoder, crop_encoder, fertilizer_encoder
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, balanced_accuracy_score, classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
-# Load dataset
-df = pd.read_csv('../data/fertilizer_dataset.csv')
+ROOT = Path(__file__).resolve().parents[1]
+DATA_PATH = ROOT / "data" / "fertilizer_dataset.csv"
+MODEL_DIR = ROOT / "saved_model"
+TARGET = "Fertilizer Name"
+CATEGORICAL = ["Soil Type", "Crop Type"]
+NUMERIC = ["Temparature", "Humidity ", "Moisture", "Nitrogen", "Potassium", "Phosphorous"]
+FEATURES = NUMERIC[:3] + CATEGORICAL + NUMERIC[3:]
 
-# Encode categorical variables
-df, soil_encoder, crop_encoder, fertilizer_encoder = encode_features(df)
 
-# Features and target
-X = df.drop(['Fertilizer Name'], axis=1)
-y = df['Fertilizer Name']
+def main():
+    df = pd.read_csv(DATA_PATH)
+    required = set(FEATURES + [TARGET])
+    missing = sorted(required.difference(df.columns))
+    if missing:
+        raise ValueError(f"Dataset is missing columns: {missing}")
+    df = df[FEATURES + [TARGET]].dropna().copy()
+    if len(df) < 40:
+        raise ValueError(f"Need at least 40 complete rows; found {len(df)}")
+    class_counts = df[TARGET].value_counts()
+    if class_counts.min() < 2:
+        raise ValueError("Each fertilizer class needs at least two examples for a stratified holdout.")
 
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X = df[FEATURES]
+    target_encoder = LabelEncoder()
+    y = target_encoder.fit_transform(df[TARGET].astype(str))
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.25, random_state=42, stratify=y
+    )
+    preprocessor = ColumnTransformer([
+        ("categorical", OneHotEncoder(handle_unknown="ignore"), CATEGORICAL),
+        ("numeric", "passthrough", NUMERIC),
+    ])
+    pipeline = Pipeline([
+        ("preprocess", preprocessor),
+        ("classifier", RandomForestClassifier(
+            n_estimators=300,
+            min_samples_leaf=2,
+            class_weight="balanced_subsample",
+            random_state=42,
+        )),
+    ])
+    pipeline.fit(X_train, y_train)
+    predictions = pipeline.predict(X_test)
+    accuracy = float(accuracy_score(y_test, predictions))
+    balanced = float(balanced_accuracy_score(y_test, predictions))
+    report = classification_report(
+        y_test, predictions, labels=list(range(len(target_encoder.classes_))),
+        target_names=[str(x) for x in target_encoder.classes_],
+        output_dict=True, zero_division=0,
+    )
+    MODEL_DIR.mkdir(parents=True, exist_ok=True)
+    joblib.dump(pipeline, MODEL_DIR / "fertilizer_pipeline.pkl")
+    joblib.dump(target_encoder, MODEL_DIR / "fertilizer_encoder.pkl")
+    metrics = {
+        "rows_total": int(len(df)),
+        "rows_train": int(len(X_train)),
+        "rows_holdout": int(len(X_test)),
+        "classes": {str(k): int(v) for k, v in class_counts.items()},
+        "accuracy": accuracy,
+        "balanced_accuracy": balanced,
+        "classification_report": report,
+        "note": "Small dataset; holdout metrics are noisy and are not evidence of field performance.",
+    }
+    (MODEL_DIR / "evaluation.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
+    print(f"Rows: {len(df)} (train {len(X_train)}, holdout {len(X_test)})")
+    print(f"Holdout accuracy: {accuracy:.3f}")
+    print(f"Holdout balanced accuracy: {balanced:.3f}")
+    print("Class counts:", class_counts.to_dict())
+    print("Saved model and evaluation to", MODEL_DIR)
 
-# Hyperparameter tuning using GridSearchCV
-param_grid = {
-    'n_estimators': [50, 100, 150, 200],
-    'max_depth': [None, 10, 20, 30],
-    'min_samples_split': [2, 5, 10],
-    'min_samples_leaf': [1, 2, 4]
-}
 
-rf = RandomForestClassifier(random_state=42)
-grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, n_jobs=-1, verbose=2)
-grid_search.fit(X_train, y_train)
-
-# Best model
-best_clf = grid_search.best_estimator_
-
-# Evaluate model
-y_pred = best_clf.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-print(f"[INFO] Model accuracy after tuning: {accuracy:.2f}")
-
-# Create directory to save model and encoders
-if not os.path.exists('../saved_model'):
-    os.makedirs('../saved_model')
-
-# Save model and encoders
-joblib.dump(best_clf, '../saved_model/fertilizer_model.pkl')
-joblib.dump(soil_encoder, '../saved_model/soil_encoder.pkl')
-joblib.dump(crop_encoder, '../saved_model/crop_encoder.pkl')
-joblib.dump(fertilizer_encoder, '../saved_model/fertilizer_encoder.pkl')
-
-print("[INFO] Model and encoders saved successfully.")
+if __name__ == "__main__":
+    main()

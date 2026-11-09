@@ -1,467 +1,469 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Favorite Blogs - AgroZen</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Favorite Blogs - AgriTech</title>
+    <link rel="stylesheet" href="blog.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <link rel="stylesheet" href="blog.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      /* 🎨 THEME VARIABLES */
+      :root {
+        --bg-main: linear-gradient(180deg, #eef3f8, #dfe7f0);
+        --bg-card: #ffffff;
+        --text-main: #1e1e1e;
+        --text-muted: #555;
+        --primary: #4caf50;
+        --danger: #e74c3c;
+        --secondary: #6c757d;
+        --shadow: rgba(0, 0, 0, 0.08);
+      }
 
-  <style>
-    /* 🎨 THEME VARIABLES */
-    :root {
-      --bg-main: linear-gradient(180deg, #eef3f8, #dfe7f0);
-      --bg-card: #ffffff;
-      --text-main: #1e1e1e;
-      --text-muted: #555;
-      --primary: #4CAF50;
-      --danger: #e74c3c;
-      --secondary: #6c757d;
-      --shadow: rgba(0, 0, 0, 0.08);
-    }
+      /* 🌙 DARK THEME OVERRIDES */
+      body.dark-theme {
+        --bg-main: linear-gradient(180deg, #121212, #1f1f1f);
+        --bg-card: #2a2a2a;
+        --text-main: #f1f1f1;
+        --text-muted: #bdbdbd;
+        --primary: #81c784;
+        --danger: #ef5350;
+        --secondary: #9e9e9e;
+        --shadow: rgba(0, 0, 0, 0.45);
+      }
 
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(180deg, #eef3f8, #dfe7f0);
+        background: var(--bg-main);
+        color: var(--text-main);
+      }
 
-    /* 🌙 DARK THEME OVERRIDES */
-    body.dark-theme {
-      --bg-main: linear-gradient(180deg, #121212, #1f1f1f);
-      --bg-card: #2a2a2a;
-      --text-main: #f1f1f1;
-      --text-muted: #bdbdbd;
-      --primary: #81c784;
-      --danger: #ef5350;
-      --secondary: #9e9e9e;
-      --shadow: rgba(0, 0, 0, 0.45);
-    }
+      /* ACCESSIBILITY: visible focus for keyboard users */
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--primary);
+        outline-offset: 3px;
+      }
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #eef3f8, #dfe7f0);
-      background: var(--bg-main);
-      color: var(--text-main);
-    }
+      /* BASE STYLES */
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+      }
 
+      /* ACCESSIBILITY */
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--primary);
+        outline-offset: 3px;
+      }
 
-    /* ACCESSIBILITY: visible focus for keyboard users */
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid var(--primary);
-      outline-offset: 3px;
-    }
+      /* LAYOUT */
+      .AgroZen-blog {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 3rem 1rem;
+      }
 
+      .favorites-container {
+        max-width: 1200px;
+        width: 100%;
+      }
 
-    /* BASE STYLES */
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: var(--bg-main);
-      color: var(--text-main);
-    }
+      .favorites-title {
+        font-size: 2.8rem;
+        color: var(--primary);
+      }
 
+      .favorites-title i {
+        color: var(--danger);
+      }
 
-    /* ACCESSIBILITY */
-    button:focus-visible,
-    a:focus-visible {
-      outline: 3px solid var(--primary);
-      outline-offset: 3px;
-    }
+      .favorites-stats {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+      }
 
-    /* LAYOUT */
-    .agritech-blog {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 3rem 1rem;
-    }
+      #favoritesContainer {
+        background: var(--bg-card);
+        box-shadow: 0 15px 35px var(--shadow);
+        border-radius: 18px;
+        padding: 3rem 2rem;
+      }
 
-    .favorites-container {
-      max-width: 1200px;
-      width: 100%;
-    }
+      .favorites-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
 
+      .favorites-title {
+        font-size: 2.8rem;
+        color: var(--primary);
+      }
 
-    .favorites-title {
-      font-size: 2.8rem;
-      color: var(--primary);
-    }
+      .favorites-title i {
+        color: var(--danger);
+      }
 
-    .favorites-title i {
-      color: var(--danger);
-    }
+      .favorites-stats {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+      }
 
-    .favorites-stats {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-    }
+      .action-btn {
+        padding: 0.9rem 1.6rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
 
-    #favoritesContainer {
-      background: var(--bg-card);
-      box-shadow: 0 15px 35px var(--shadow);
-      border-radius: 18px;
-      padding: 3rem 2rem;
-    }
+      .no-favorites {
+        color: var(--text-muted);
+      }
 
+      .card-description {
+        color: var(--text-muted);
+      }
 
-    .favorites-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
+      .blog-card {
+        background: var(--bg-card);
+      }
 
-    .favorites-title {
-      font-size: 2.8rem;
-      color: var(--primary);
-    }
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+      }
 
-    .favorites-title i {
-      color: var(--danger);
-    }
+      .btn-secondary {
+        background: var(--secondary);
+        color: #fff;
+      }
 
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
 
-    .favorites-stats {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-    }
+      #favoritesContainer {
+        background: var(--bg-card);
+        box-shadow: 0 15px 35px var(--shadow);
+        border-radius: 18px;
+        padding: 3rem 2rem;
+      }
 
+      .favorites-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2.5rem;
+        flex-wrap: wrap;
+      }
 
-    .action-btn {
-      padding: 0.9rem 1.6rem;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+      .action-btn {
+        padding: 0.9rem 1.6rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
 
-    .no-favorites {
-      color: var(--text-muted);
-    }
-
-    .card-description {
-      color: var(--text-muted);
-    }
-
-    .blog-card {
-      background: var(--bg-card);
-    }
-
-    .btn-danger {
-      background: var(--danger);
-      color: #fff;
-    }
-
-    .btn-secondary {
-      background: var(--secondary);
-      color: #fff;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    #favoritesContainer {
-      background: var(--bg-card);
-      box-shadow: 0 15px 35px var(--shadow);
-      border-radius: 18px;
-      padding: 3rem 2rem;
-    }
-
-    .favorites-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-
-    .action-btn {
-      padding: 0.9rem 1.6rem;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-
-    /* .no-favorites {
+      /* .no-favorites {
             text-align: center;
             color: #555;
         } */
 
-    .no-favorites i {
-      font-size: 4.5rem;
-      color: var(--text-muted);
-    }
+      .no-favorites i {
+        font-size: 4.5rem;
+        color: var(--text-muted);
+      }
 
-    .no-favorites {
-      color: var(--text-muted);
-    }
+      .no-favorites {
+        color: var(--text-muted);
+      }
 
-    .card-description {
-      color: var(--text-muted);
-    }
+      .card-description {
+        color: var(--text-muted);
+      }
 
-    .blog-card {
-      background: var(--bg-card);
-      margin-bottom: 2rem;
-    }
+      .blog-card {
+        background: var(--bg-card);
+        margin-bottom: 2rem;
+      }
 
-    .btn-danger {
-      background: var(--danger);
-      color: #fff;
-    }
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+      }
 
-    .btn-secondary {
-      background: var(--secondary);
-      color: #fff;
-    }
+      .btn-secondary {
+        background: var(--secondary);
+        color: #fff;
+      }
 
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
 
+      .remove-btn {
+        background: var(--danger);
+        color: #fff;
+      }
 
-    .remove-btn {
-      background: var(--danger);
-      color: #fff;
-    }
+      .back-to-blog {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding: 1rem 1.8rem;
+        background: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 999px;
+        font-weight: 600;
+        background: var(--primary);
+        color: #fff;
+      }
 
+      .action-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+      }
 
-    .back-to-blog {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-      padding: 1rem 1.8rem;
-      background: #4CAF50;
-      color: white;
-      text-decoration: none;
-      border-radius: 999px;
-      font-weight: 600;
-      background: var(--primary);
-      color: #fff;
-    }
+      .no-favorites i {
+        font-size: 4.5rem;
+        color: var(--text-muted);
+      }
 
+      .favorite-item-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
 
-    .action-btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
+      .remove-btn {
+        background: var(--danger);
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
 
-    .no-favorites i {
-      font-size: 4.5rem;
-      color: var(--text-muted);
-    }
+      .back-to-blog {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding: 1rem 1.8rem;
+        background: var(--primary);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 999px;
+        font-weight: 600;
+      }
 
-    .favorite-item-actions {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
+      a,
+      button {
+        color: inherit;
+      }
 
-    .remove-btn {
-      background: var(--danger);
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
+      body.dark-theme img {
+        filter: brightness(0.9) contrast(1.1);
+      }
 
-    .back-to-blog {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-      padding: 1rem 1.8rem;
-      background: var(--primary);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 999px;
-      font-weight: 600;
-    }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: var(--text-main);
+      }
 
+      p,
+      span,
+      li {
+        color: var(--text-main);
+      }
 
-    a,
-    button {
-      color: inherit;
-    }
+      .card-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--text-main);
+      }
 
+      /* ⬆ Back to Top Button */
+      #backToTop {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: none;
+        background: var(--primary);
+        color: #fff;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 25px var(--shadow);
+        z-index: 999;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
 
-    body.dark-theme img {
-      filter: brightness(0.9) contrast(1.1);
-    }
+      #backToTop:hover {
+        transform: translateY(-3px);
+        opacity: 0.9;
+      }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: var(--text-main);
-    }
+      #backToTop:focus-visible {
+        outline: 3px solid var(--primary);
+        outline-offset: 4px;
+      }
+    </style>
+    <link rel="stylesheet" href="footer.css" />
+  </head>
 
-    p,
-    span,
-    li {
-      color: var(--text-main);
-    }
+  <body>
+    <section class="AgroZen-blog">
+      <div class="favorites-container">
+        <div class="favorites-header">
+          <h1 class="favorites-title">
+            <i class="fas fa-heart" aria-hidden="true"></i>
+            My Favorite Blogs
+          </h1>
 
+          <p class="favorites-stats">
+            You have
+            <span id="favoritesCount" aria-live="polite">0</span>
+            saved articles
+          </p>
+        </div>
 
+        <div class="favorites-actions">
+          <button
+            class="action-btn btn-danger"
+            onclick="clearAllFavorites()"
+            aria-label="Clear all favorite blogs"
+          >
+            <i class="fas fa-trash" aria-hidden="true"></i>
+            Clear All
+          </button>
 
+          <button
+            class="action-btn btn-secondary"
+            onclick="exportFavorites()"
+            aria-label="Export favorite blogs"
+          >
+            <i class="fas fa-download" aria-hidden="true"></i>
+            Export
+          </button>
 
-    .card-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--text-main);
-    }
+          <button
+            class="action-btn btn-secondary"
+            onclick="toggleTheme()"
+            aria-label="Toggle dark mode"
+          >
+            <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
+            Theme
+          </button>
 
+          <a
+            href="blog.html"
+            class="action-btn btn-primary"
+            aria-label="Go back to blog page"
+          >
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Back to Blog
+          </a>
+        </div>
 
-
-
-
-    /* ⬆ Back to Top Button */
-    #backToTop {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px var(--shadow);
-      z-index: 999;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    #backToTop:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-    }
-
-    #backToTop:focus-visible {
-      outline: 3px solid var(--primary);
-      outline-offset: 4px;
-    }
-  </style>
-  <link rel="stylesheet" href="footer.css" />
-</head>
-
-<body>
-  <section class="agritech-blog">
-    <div class="favorites-container">
-
-      <div class="favorites-header">
-        <h1 class="favorites-title">
-          <i class="fas fa-heart" aria-hidden="true"></i>
-          My Favorite Blogs
-        </h1>
-
-        <p class="favorites-stats">
-          You have
-          <span id="favoritesCount" aria-live="polite">0</span>
-          saved articles
-        </p>
+        <div
+          id="favoritesContainer"
+          role="region"
+          aria-label="Favorite blogs list"
+        ></div>
       </div>
+    </section>
 
-      <div class="favorites-actions">
-        <button class="action-btn btn-danger" onclick="clearAllFavorites()" aria-label="Clear all favorite blogs">
-          <i class="fas fa-trash" aria-hidden="true"></i>
-          Clear All
-        </button>
+    <!-- Back to Top Button -->
+    <button id="backToTop" aria-label="Back to top" title="Back to top">
+      <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+    <!-- <script src="favorite.js"></script> -->
+    <script>
+      class FavoritesManager {
+        constructor() {
+          this.storageKey = "AgroZen_favorite_blogs";
+          this.favorites =
+            JSON.parse(localStorage.getItem(this.storageKey)) || [];
+          window.favoritesManager = this;
+        }
 
-        <button class="action-btn btn-secondary" onclick="exportFavorites()" aria-label="Export favorite blogs">
-          <i class="fas fa-download" aria-hidden="true"></i>
-          Export
-        </button>
+        isFavorite(blogId) {
+          return this.favorites.some((blog) => blog.id === blogId);
+        }
 
-        <button class="action-btn btn-secondary" onclick="toggleTheme()" aria-label="Toggle dark mode">
-          <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
-          Theme
-        </button>
+        addToFavorites(blogData) {
+          if (this.isFavorite(blogData.id)) return false;
+          this.favorites.push(blogData);
+          this.save();
+          return true;
+        }
 
-        <a href="blog.html" class="action-btn btn-primary" aria-label="Go back to blog page">
-          <i class="fas fa-arrow-left" aria-hidden="true"></i>
-          Back to Blog
-        </a>
-      </div>
+        removeFromFavorites(blogId) {
+          this.favorites = this.favorites.filter((blog) => blog.id !== blogId);
+          this.save();
+          return true;
+        }
 
-      <div id="favoritesContainer" role="region" aria-label="Favorite blogs list"></div>
-    </div>
-  </section>
+        getFavorites() {
+          return this.favorites;
+        }
 
-  <!-- Back to Top Button -->
-  <button id="backToTop" aria-label="Back to top" title="Back to top">
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
-  </button>
-  <!-- <script src="favorite.js"></script> -->
-  <script>
-    class FavoritesManager {
-      constructor() {
-        this.storageKey = 'agritech_favorite_blogs';
-        this.favorites = JSON.parse(localStorage.getItem(this.storageKey)) || [];
-        window.favoritesManager = this;
+        save() {
+          localStorage.setItem(this.storageKey, JSON.stringify(this.favorites));
+        }
       }
 
-      isFavorite(blogId) {
-        return this.favorites.some(blog => blog.id === blogId);
+      if (!window.favoritesManager) {
+        new FavoritesManager();
       }
 
-      addToFavorites(blogData) {
-        if (this.isFavorite(blogData.id)) return false;
-        this.favorites.push(blogData);
-        this.save();
-        return true;
-      }
+      class FavoritesPage {
+        constructor(favorites = []) {
+          this.favorites = favorites;
+          this.renderFavorites();
+          this.updateStats();
+        }
 
-      removeFromFavorites(blogId) {
-        this.favorites = this.favorites.filter(blog => blog.id !== blogId);
-        this.save();
-        return true;
-      }
+        renderFavorites() {
+          const container = document.getElementById("favoritesContainer");
 
-      getFavorites() {
-        return this.favorites;
-      }
-
-      save() {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.favorites));
-      }
-    }
-
-    if (!window.favoritesManager) {
-      new FavoritesManager();
-    }
-
-    class FavoritesPage {
-      constructor(favorites = []) {
-        this.favorites = favorites;
-        this.renderFavorites();
-        this.updateStats();
-      }
-
-      renderFavorites() {
-        const container = document.getElementById('favoritesContainer');
-
-        if (this.favorites.length === 0) {
-          container.innerHTML = `
+          if (this.favorites.length === 0) {
+            container.innerHTML = `
                 <div class="no-favorites">
                     <i class="far fa-heart" aria-hidden="true"></i>
                     <h3>No Favorite Blogs Yet</h3>
@@ -474,12 +476,14 @@
                     </a>
                 </div>
             `;
-          return;
-        }
+            return;
+          }
 
-        container.innerHTML = `
+          container.innerHTML = `
             <div class="blog-grid">
-                ${this.favorites.map(blog => `
+                ${this.favorites
+                  .map(
+                    (blog) => `
                     <div class="blog-card">
                         <img src="${blog.image}" alt="${blog.title}">
 
@@ -509,295 +513,336 @@
                             </div>
                         </div>
                     </div>
-                `).join("")}
+                `,
+                  )
+                  .join("")}
             </div>
         `;
 
-        this.enableKeyboardSupport();
-      }
+          this.enableKeyboardSupport();
+        }
 
-      enableKeyboardSupport() {
-        document.querySelectorAll('.favorite-btn').forEach(btn => {
-          btn.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              removeFavorite(btn.dataset.id);
-            }
+        enableKeyboardSupport() {
+          document.querySelectorAll(".favorite-btn").forEach((btn) => {
+            btn.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                removeFavorite(btn.dataset.id);
+              }
+            });
           });
+        }
+
+        updateStats() {
+          document.getElementById("favoritesCount").textContent =
+            this.favorites.length;
+        }
+      }
+
+      function removeFavorite(id) {
+        window.favoritesManager.removeFromFavorites(id);
+      }
+
+      function clearAllFavorites() {
+        if (confirm("Are you sure you want to clear all favorites?")) {
+          window.favoritesManager.favorites = [];
+          window.favoritesManager.save();
+          location.reload(); // refresh the page to show 0
+        }
+      }
+
+      function exportFavorites() {
+        const favorites =
+          JSON.parse(localStorage.getItem("AgroZen_favorite_blogs")) || [];
+
+        if (favorites.length === 0) {
+          alert("No favorites to export");
+          return;
+        }
+
+        const blob = new Blob([JSON.stringify(favorites, null, 2)], {
+          type: "application/json",
         });
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "AgroZen-favorites.json";
+        a.click();
+        URL.revokeObjectURL(url);
       }
 
-      updateStats() {
-        document.getElementById('favoritesCount').textContent =
-          this.favorites.length;
-      }
-    }
-
-    function removeFavorite(id) {
-      window.favoritesManager.removeFromFavorites(id);
-    }
-
-
-    function clearAllFavorites() {
-      if (confirm('Are you sure you want to clear all favorites?')) {
-        window.favoritesManager.favorites = [];
-        window.favoritesManager.save();
-        location.reload(); // refresh the page to show 0
-      }
-    }
-
-
-
-    function exportFavorites() {
-      const favorites =
-        JSON.parse(localStorage.getItem('agritech_favorite_blogs')) || [];
-
-      if (favorites.length === 0) {
-        alert('No favorites to export');
-        return;
-      }
-
-      const blob = new Blob(
-        [JSON.stringify(favorites, null, 2)],
-        { type: 'application/json' }
-      );
-
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'agritech-favorites.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const favorites = window.favoritesManager.getFavorites();
-      new FavoritesPage(favorites);
-    });
-
-
-
-
-    function toggleTheme() {
-      document.body.classList.toggle('dark-theme');
-
-      const isDark = document.body.classList.contains('dark-theme');
-      localStorage.setItem('agritech_theme', isDark ? 'dark' : 'light');
-
-      updateThemeIcon(isDark);
-    }
-
-    function updateThemeIcon(isDark) {
-      const icon = document.getElementById('themeIcon');
-      if (!icon) return;
-
-      icon.className = isDark
-        ? 'fas fa-sun'
-        : 'fas fa-moon';
-    }
-
-
-    // Back to Top Button
-    const backToTopBtn = document.getElementById('backToTop');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = 'flex';
-      } else {
-        backToTopBtn.style.display = 'none';
-      }
-    });
-
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+      document.addEventListener("DOMContentLoaded", () => {
+        const favorites = window.favoritesManager.getFavorites();
+        new FavoritesPage(favorites);
       });
-    });
 
-  </script>
-  <!-- ===== Universal Back To Top Button (All Pages) ===== -->
-  <style>
-    #globalBackToTop {
-      position: fixed;
-      bottom: 90px;
-      /* prevents overlap with chatbot/floating icons */
-      right: 25px;
-      z-index: 9999;
-      display: none;
-      background: #2ecc71;
-      color: #ffffff;
-      border: none;
-      border-radius: 50%;
-      width: 52px;
-      height: 52px;
-      font-size: 22px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-      transition: opacity 0.3s ease, transform 0.2s ease;
-    }
+      function toggleTheme() {
+        document.body.classList.toggle("dark-theme");
 
-    #globalBackToTop:hover {
-      transform: scale(1.12);
-      background: #27ae60;
-    }
+        const isDark = document.body.classList.contains("dark-theme");
+        localStorage.setItem("AgroZen_theme", isDark ? "dark" : "light");
 
-    @media (max-width: 768px) {
-      #globalBackToTop {
-        bottom: 100px;
-        /* better spacing on mobile */
-        right: 18px;
-        width: 48px;
-        height: 48px;
-        font-size: 20px;
+        updateThemeIcon(isDark);
       }
-    }
-  </style>
 
-  <button id="globalBackToTop" title="Back to Top">↑</button>
+      function updateThemeIcon(isDark) {
+        const icon = document.getElementById("themeIcon");
+        if (!icon) return;
 
-  <script>
-    (function () {
-      const btn = document.getElementById("globalBackToTop");
+        icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
+      }
 
-      // Show button after scrolling down
-      window.addEventListener("scroll", function () {
+      // Back to Top Button
+      const backToTopBtn = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", () => {
         if (window.scrollY > 300) {
-          btn.style.display = "block";
+          backToTopBtn.style.display = "flex";
         } else {
-          btn.style.display = "none";
+          backToTopBtn.style.display = "none";
         }
       });
 
-      // Smooth scroll to top on click
-      btn.addEventListener("click", function () {
+      backToTopBtn.addEventListener("click", () => {
         window.scrollTo({
           top: 0,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       });
-    })();
+    </script>
+    <!-- ===== Universal Back To Top Button (All Pages) ===== -->
+    <style>
+      #globalBackToTop {
+        position: fixed;
+        bottom: 90px;
+        /* prevents overlap with chatbot/floating icons */
+        right: 25px;
+        z-index: 9999;
+        display: none;
+        background: #2ecc71;
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        width: 52px;
+        height: 52px;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        transition:
+          opacity 0.3s ease,
+          transform 0.2s ease;
+      }
 
-    //   document.addEventListener("DOMContentLoaded", () => {
-    //   if (!window.favoritesManager) {
-    //     window.favoritesManager = new FavoritesManager();
-    //   }
+      #globalBackToTop:hover {
+        transform: scale(1.12);
+        background: #27ae60;
+      }
 
-    //   const favorites = window.favoritesManager.getFavorites();
-    //   new FavoritesPage(favorites);
+      @media (max-width: 768px) {
+        #globalBackToTop {
+          bottom: 100px;
+          /* better spacing on mobile */
+          right: 18px;
+          width: 48px;
+          height: 48px;
+          font-size: 20px;
+        }
+      }
+    </style>
 
-    //   // Optional: listen for updates
-    //   document.addEventListener("favoritesLoaded", (e) => {
-    //     new FavoritesPage(e.detail.favorites);
-    //   });
-    // });
+    <button id="globalBackToTop" title="Back to Top">↑</button>
 
-  </script>
-  <!-- ===== End Back To Top Button ===== -->
+    <script>
+      (function () {
+        const btn = document.getElementById("globalBackToTop");
 
-  <footer class="site-footer tech-dark-theme final-match">
-    <div class="footer-top-accent"></div>
+        // Show button after scrolling down
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            btn.style.display = "block";
+          } else {
+            btn.style.display = "none";
+          }
+        });
 
-    <div class="footer-inner-content">
-      <div class="footer-section footer-brand">
-        <a href="index.html" class="brand-header">
-          <img src="images/logo.png" alt="AgriTech logo" class="brand-logo" />
-          <h3>AgriTech</h3>
-        </a>
+        // Smooth scroll to top on click
+        btn.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      })();
 
-        <p class="tagline">
-          Empowering India's Farming Future with innovative technology
-          connecting every stakeholder.
-        </p>
+      //   document.addEventListener("DOMContentLoaded", () => {
+      //   if (!window.favoritesManager) {
+      //     window.favoritesManager = new FavoritesManager();
+      //   }
 
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="X (formerly Twitter)"><i class="fab fa-x-twitter"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
+      //   const favorites = window.favoritesManager.getFavorites();
+      //   new FavoritesPage(favorites);
 
-      <div class="footer-group-links">
-        <div class="footer-section footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li>
-              <a href="index.html"><i class="fas fa-home"></i> Home</a>
-            </li>
-            <li>
-              <a href="login.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-            </li>
-            <li>
-              <a href="marketplace.html"><i class="fas fa-store"></i> Marketplace</a>
-            </li>
-            <li>
-              <a href="weather_dashboard.html"><i class="fas fa-cloud-sun"></i> Weather</a>
-            </li>
-            <li>
-              <a href="contact.html"><i class="fas fa-headset"></i> Contact Us</a>
-            </li>
-            <li>
-              <a href="feed-back.html"><i class="fas fa-comment-dots"></i> Feedback</a>
-            </li>
-            <li>
-              <a href="terms-and-service.html"><i class="fas fa-file-contract"></i> Terms & Service</a>
-            </li>
-            <li>
-              <a href="privacy-policy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
-            </li>
-          </ul>
-        </div>
+      //   // Optional: listen for updates
+      //   document.addEventListener("favoritesLoaded", (e) => {
+      //     new FavoritesPage(e.detail.favorites);
+      //   });
+      // });
+    </script>
+    <!-- ===== End Back To Top Button ===== -->
 
-        <div class="footer-section footer-contact">
-          <h4>Contact</h4>
-          <ul>
-            <li>
-              <a href="mailto:contact@agritech.com">
-                <i class="fas fa-envelope"></i> contact@agritech.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+910000000000">
-                <i class="fas fa-phone"></i> +91 00000 00000
-              </a>
-            </li>
-          </ul>
-        </div>
+    <footer class="site-footer tech-dark-theme final-match">
+      <div class="footer-top-accent"></div>
 
-        <div class="footer-section footer-newsletter">
-          <h4>Newsletter</h4>
-          <p class="newsletter-desc">
-            Subscribe to get the latest farming insights, tips, and updates.
+      <div class="footer-inner-content">
+        <div class="footer-section footer-brand">
+          <a href="index.html" class="brand-header">
+            <img src="images/logo.png" alt="AgroZen logo" class="brand-logo" />
+            <h3>AgroZen</h3>
+          </a>
+
+          <p class="tagline">
+            Empowering India's Farming Future with innovative technology
+            connecting every stakeholder.
           </p>
-          <form class="newsletter-form" onsubmit="return handleNewsletterSubmit(event, this)">
-            <div class="newsletter-input-group">
-              <input type="email" class="newsletter-input" placeholder="Enter your email to get the latest updates..."
-                required aria-label="Email address for newsletter" />
-              <button type="submit" class="newsletter-btn" aria-label="Subscribe to newsletter">
-                <span>Subscribe</span>
-                <i class="fas fa-paper-plane"></i>
-              </button>
-            </div>
-            <div class="newsletter-feedback" style="display:none;" role="status" aria-live="polite"></div>
-            <div class="newsletter-footer-optout">
-              <small>No spam. <a href="javascript:void(0)" onclick="openUnsubscribeModal(event)">Unsubscribe</a>
-                anytime.</small>
-            </div>
-          </form>
+
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="X (formerly Twitter)"
+              ><i class="fab fa-x-twitter"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="footer-group-links">
+          <div class="footer-section footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+              </li>
+              <li>
+                <a href="login.html"
+                  ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+                >
+              </li>
+              <li>
+                <a href="marketplace.html"
+                  ><i class="fas fa-store"></i> Marketplace</a
+                >
+              </li>
+              <li>
+                <a href="weather_dashboard.html"
+                  ><i class="fas fa-cloud-sun"></i> Weather</a
+                >
+              </li>
+              <li>
+                <a href="contact.html"
+                  ><i class="fas fa-headset"></i> Contact Us</a
+                >
+              </li>
+              <li>
+                <a href="feed-back.html"
+                  ><i class="fas fa-comment-dots"></i> Feedback</a
+                >
+              </li>
+              <li>
+                <a href="terms-and-service.html"
+                  ><i class="fas fa-file-contract"></i> Terms & Service</a
+                >
+              </li>
+              <li>
+                <a href="privacy-policy.html"
+                  ><i class="fas fa-shield-alt"></i> Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section footer-contact">
+            <h4>Contact</h4>
+            <ul>
+              <li>
+                <a href="mailto:contact@AgroZen.com">
+                  <i class="fas fa-envelope"></i> contact@AgroZen.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+910000000000">
+                  <i class="fas fa-phone"></i> +91 00000 00000
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section footer-newsletter">
+            <h4>Newsletter</h4>
+            <p class="newsletter-desc">
+              Subscribe to get the latest farming insights, tips, and updates.
+            </p>
+            <form
+              class="newsletter-form"
+              onsubmit="return handleNewsletterSubmit(event, this);"
+            >
+              <div class="newsletter-input-group">
+                <input
+                  type="email"
+                  class="newsletter-input"
+                  placeholder="Enter your email to get the latest updates..."
+                  required
+                  aria-label="Email address for newsletter"
+                />
+                <button
+                  type="submit"
+                  class="newsletter-btn"
+                  aria-label="Subscribe to newsletter"
+                >
+                  <span>Subscribe</span>
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+              <div
+                class="newsletter-feedback"
+                style="display: none"
+                role="status"
+                aria-live="polite"
+              ></div>
+              <div class="newsletter-footer-optout">
+                <small
+                  >No spam.
+                  <a
+                    href="javascript:void(0)"
+                    onclick="openUnsubscribeModal(event)"
+                    >Unsubscribe</a
+                  >
+                  anytime.</small
+                >
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-bottom">
-      <p>© <span id="current-year">2026</span> AgriTech. All rights reserved. <a href="privacy-policy.html">Privacy
-          Policy</a> · <a href="terms-and-service.html">Terms</a> · <a href="cookie-policy.html">Cookie Policy</a></p>
-    </div>
+      <div class="footer-bottom">
+        <p>
+          © <span id="current-year">2026</span> AgroZen. All rights reserved.
+          <a href="privacy-policy.html">Privacy Policy</a> ·
+          <a href="terms-and-service.html">Terms</a> ·
+          <a href="cookie-policy.html">Cookie Policy</a>
+        </p>
+      </div>
 
-    <div class="footer-wave-overlay"></div>
-  </footer>
-  <script src="footer.js"></script>
-</body>
-
+      <div class="footer-wave-overlay"></div>
+    </footer>
+    <script src="footer.js"></script>
+  </body>
 </html>

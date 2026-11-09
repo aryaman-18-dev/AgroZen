@@ -1,4 +1,4 @@
-// login.js — AgriTech Login Page Handler
+// login.js — AgroZen Login Page Handler
 // Only change from original: handleLogin is now async (Firebase calls are async)
 
 function isValidEmail(email) {
@@ -39,31 +39,36 @@ async function handleLogin(event) {
   const passwordInput = document.getElementById("password");
   const loginBtn = document.querySelector('button[type="submit"]');
 
-  const email    = emailInput.value.trim();
+  const email = emailInput.value.trim();
   const password = passwordInput.value;
 
-  const validationMessage = validateLoginFields(email, password, emailInput, passwordInput);
+  const validationMessage = validateLoginFields(
+    email,
+    password,
+    emailInput,
+    passwordInput,
+  );
   if (validationMessage) {
     showAuthMessage(validationMessage, "error");
     return;
   }
 
   // Basic client-side password length validation
-  const pwdInput = document.getElementById('password');
-  const pwdErr = document.getElementById('loginPasswordError');
+  const pwdInput = document.getElementById("password");
+  const pwdErr = document.getElementById("loginPasswordError");
   if (password.length < 8) {
-    pwdErr.textContent = 'Password must be at least 8 characters long.';
-    pwdInput.classList.add('error');
+    pwdErr.textContent = "Password must be at least 8 characters long.";
+    pwdInput.classList.add("error");
     return;
   } else {
-    if (pwdErr) pwdErr.textContent = '';
-    pwdInput.classList.remove('error');
+    if (pwdErr) pwdErr.textContent = "";
+    pwdInput.classList.remove("error");
   }
 
   // Loading state
   const originalText = loginBtn.innerText;
-  loginBtn.innerText  = "Logging in...";
-  loginBtn.disabled   = true;
+  loginBtn.innerText = "Logging in...";
+  loginBtn.disabled = true;
 
   // Clear previous error styles
   emailInput.classList.remove("error");
@@ -75,7 +80,9 @@ async function handleLogin(event) {
     showAuthMessage(result.message, "success");
     // Role-based redirect
     setTimeout(() => {
-      window.location.href = window.authManager.getHomePageForRole(result.user.role);
+      window.location.href = window.authManager.getHomePageForRole(
+        result.user.role,
+      );
     }, 1000);
   } else {
     showAuthMessage(result.message, "error");
@@ -88,7 +95,7 @@ async function handleLogin(event) {
     }
 
     loginBtn.innerText = originalText;
-    loginBtn.disabled  = false;
+    loginBtn.disabled = false;
   }
 }
 
@@ -102,10 +109,10 @@ function togglePassword() {
   const eyeIcon = document.getElementById("password-eye");
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
-    eyeIcon.className  = "fas fa-eye-slash";
+    eyeIcon.className = "fas fa-eye-slash";
   } else {
     passwordInput.type = "password";
-    eyeIcon.className  = "fas fa-eye";
+    eyeIcon.className = "fas fa-eye";
   }
 }
 // Lamp Toggle Feature
@@ -115,9 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!lampToggle || !darkOverlay) return;
 
-  const inputs = document.querySelectorAll(
-    'input, button[type="submit"]'
-  );
+  const inputs = document.querySelectorAll('input, button[type="submit"]');
 
   let lampOn = true;
 
@@ -128,15 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
       lampToggle.textContent = "💡 ON";
       darkOverlay.classList.add("hidden");
 
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         input.disabled = false;
       });
-
     } else {
       lampToggle.textContent = "💡 OFF";
       darkOverlay.classList.remove("hidden");
 
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         input.disabled = true;
       });
     }

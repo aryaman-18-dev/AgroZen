@@ -10,17 +10,20 @@ The Geospatial Early Warning System (GEWS) is an advanced disease outbreak detec
 ## Key Features
 
 ### 1. Geo-Tagged Disease Reporting 📍
+
 - Farmers can report disease incidents with GPS coordinates
 - Captures disease name, crop affected, severity, symptoms, and affected area
 - Automatic verification workflow for reported incidents
 
 ### 2. Spatial Outbreak Detection 🔍
+
 - **Automated hourly analysis** using DBSCAN-like clustering
 - Groups incidents within 50km radius
 - Minimum 3 incidents required to declare outbreak
 - AI-powered risk assessment (low, medium, high, critical)
 
 ### 3. Real-Time Emergency Alerts ⚠️
+
 - **SocketIO push notifications** for immediate farmer alerts
 - Three alert levels:
   - **Urgent**: Within outbreak zone (<50km)
@@ -29,6 +32,7 @@ The Geospatial Early Warning System (GEWS) is an advanced disease outbreak detec
 - Multi-language support (English, Hindi, Marathi)
 
 ### 4. AI-Generated Action Reports 📄
+
 - Gemini AI generates preventative measures PDFs
 - Includes:
   - Immediate actions (24-48 hours)
@@ -38,6 +42,7 @@ The Geospatial Early Warning System (GEWS) is an advanced disease outbreak detec
   - Community coordination steps
 
 ### 5. Interactive Mapping 🗺️
+
 - GeoJSON endpoints for disease incidents and outbreak zones
 - Visualize outbreaks on interactive maps
 - Color-coded risk levels
@@ -48,6 +53,7 @@ The Geospatial Early Warning System (GEWS) is an advanced disease outbreak detec
 ### Database Models
 
 #### `DiseaseIncident`
+
 ```python
 - incident_id: Unique identifier (INC-XXXX)
 - disease_name: Name of disease
@@ -59,6 +65,7 @@ The Geospatial Early Warning System (GEWS) is an advanced disease outbreak detec
 ```
 
 #### `OutbreakZone`
+
 ```python
 - zone_id: Unique identifier (ZONE-XXXX)
 - center_latitude, center_longitude: Cluster center
@@ -69,6 +76,7 @@ The Geospatial Early Warning System (GEWS) is an advanced disease outbreak detec
 ```
 
 #### `OutbreakAlert`
+
 ```python
 - alert_id: Unique identifier (ALERT-XXXX)
 - user_id: Farmer receiving alert
@@ -84,17 +92,20 @@ The Geospatial Early Warning System (GEWS) is an advanced disease outbreak detec
 #### Core Algorithms
 
 **Distance Calculation**: Haversine formula
+
 ```python
 d = 2 * R * arcsin(sqrt(sin²(Δφ/2) + cos(φ1) * cos(φ2) * sin²(Δλ/2)))
 ```
 
 **Clustering**: DBSCAN-like spatial clustering
+
 - Groups incidents by disease + crop
 - 50km epsilon (radius)
 - Min 3 points per cluster
 - Calculates centroid, average severity, total area
 
 **Risk Assessment**:
+
 - `critical`: >10 incidents OR avg severity > 2.5
 - `high`: 6-10 incidents OR avg severity > 2.0
 - `medium`: 3-5 incidents OR avg severity > 1.5
@@ -103,6 +114,7 @@ d = 2 * R * arcsin(sqrt(sin²(Δφ/2) + cos(φ1) * cos(φ2) * sin²(Δλ/2)))
 ### Celery Tasks
 
 #### `detect_disease_outbreaks_task` (Hourly)
+
 ```python
 # Runs every hour via Celery Beat
 1. Analyze last 30 days of incidents
@@ -112,6 +124,7 @@ d = 2 * R * arcsin(sqrt(sin²(Δφ/2) + cos(φ1) * cos(φ2) * sin²(Δλ/2)))
 ```
 
 #### `send_outbreak_emergency_alerts_task`
+
 ```python
 # Triggered for each new outbreak zone
 1. Find farmers within 75km (1.5x radius)
@@ -123,6 +136,7 @@ d = 2 * R * arcsin(sqrt(sin²(Δφ/2) + cos(φ1) * cos(φ2) * sin²(Δλ/2)))
 ```
 
 #### `generate_outbreak_pdf_report_task`
+
 ```python
 # AI-powered preventative action report
 1. Query Gemini AI for recommendations
@@ -136,9 +150,11 @@ d = 2 * R * arcsin(sqrt(sin²(Δφ/2) + cos(φ1) * cos(φ2) * sin²(Δλ/2)))
 ### Disease Reporting
 
 #### `POST /api/v1/disease/incidents`
+
 Report a geo-tagged disease incident.
 
 **Request**:
+
 ```json
 {
   "disease_name": "Late Blight",
@@ -152,18 +168,23 @@ Report a geo-tagged disease incident.
 ```
 
 **Response**:
+
 ```json
 {
   "success": true,
   "incident_id": "INC-A1B2C3D4E5F6",
-  "incident": { /* full incident data */ }
+  "incident": {
+    /* full incident data */
+  }
 }
 ```
 
 #### `GET /api/v1/disease/incidents`
+
 Query disease incidents with filters.
 
 **Query Params**:
+
 - `disease_name`: Filter by disease
 - `crop`: Filter by crop type
 - `severity`: Filter by severity level
@@ -171,29 +192,36 @@ Query disease incidents with filters.
 - `days`: Time window (default: 30)
 
 #### `GET /api/v1/disease/incidents/geojson`
+
 Get incidents as GeoJSON for mapping.
 
 ### Outbreak Monitoring
 
 #### `GET /api/v1/disease/outbreaks`
+
 List active outbreak zones.
 
 **Query Params**:
+
 - `disease_name`, `crop`, `risk_level`: Filters
 - `lat`, `lon`: Calculate distances from location
 
 #### `GET /api/v1/disease/outbreaks/<zone_id>`
+
 Get detailed outbreak zone information with all incidents.
 
 #### `GET /api/v1/disease/outbreaks/geojson`
+
 Get outbreak zones as GeoJSON polygons.
 
 ### Risk Assessment
 
 #### `GET /api/v1/disease/my-risk`
+
 Check if logged-in user's farm is at risk.
 
 **Response**:
+
 ```json
 {
   "is_at_risk": true,
@@ -211,18 +239,22 @@ Check if logged-in user's farm is at risk.
       "distance_km": 12.3
     }
   ],
-  "recent_alerts": [ /* alert history */ ]
+  "recent_alerts": [
+    /* alert history */
+  ]
 }
 ```
 
 ### Alert Management
 
 #### `GET /api/v1/disease/alerts`
+
 Get user's outbreak alerts.
 
 **Query Params**: `status`, `priority`
 
 #### `POST /api/v1/disease/alerts/<alert_id>/acknowledge`
+
 Mark an alert as acknowledged.
 
 ## Setup Instructions
@@ -280,7 +312,7 @@ CELERYBEAT_SCHEDULE = {
 export GEMINI_API_KEY=your_gemini_api_key_here
 
 # Database URL (if using PostgreSQL with PostGIS)
-export DATABASE_URL=postgresql://user:pass@localhost/agritech
+export DATABASE_URL=postgresql://user:pass@localhost/AgroZen
 ```
 
 ### 6. Start Services
@@ -309,7 +341,7 @@ const incident = await reportDisease({
   latitude: 18.5204,
   longitude: 73.8567,
   affected_area: 3.2,
-  symptoms: "Water-soaked lesions on leaves"
+  symptoms: "Water-soaked lesions on leaves",
 });
 ```
 
@@ -328,12 +360,12 @@ if (riskStatus.is_at_risk) {
 
 ```javascript
 // SocketIO client
-socket.on('outbreak_alert', (alert) => {
+socket.on("outbreak_alert", (alert) => {
   showNotification({
     title: alert.title,
     message: alert.message,
     priority: alert.priority,
-    pdfUrl: `/files/${alert.pdf_report_id}`
+    pdfUrl: `/files/${alert.pdf_report_id}`,
   });
 });
 ```
@@ -342,12 +374,16 @@ socket.on('outbreak_alert', (alert) => {
 
 ```javascript
 // Fetch GeoJSON data
-const incidents = await fetch('/api/v1/disease/incidents/geojson').then(r => r.json());
-const zones = await fetch('/api/v1/disease/outbreaks/geojson').then(r => r.json());
+const incidents = await fetch("/api/v1/disease/incidents/geojson").then((r) =>
+  r.json(),
+);
+const zones = await fetch("/api/v1/disease/outbreaks/geojson").then((r) =>
+  r.json(),
+);
 
 // Render with Leaflet/Mapbox
-map.addSource('incidents', { type: 'geojson', data: incidents });
-map.addSource('zones', { type: 'geojson', data: zones });
+map.addSource("incidents", { type: "geojson", data: incidents });
+map.addSource("zones", { type: "geojson", data: zones });
 ```
 
 ## Testing
@@ -396,16 +432,19 @@ def test_outbreak_clustering():
 ## Performance Considerations
 
 ### Database Indexes
+
 - **GIST spatial indexes** on all geometry columns
 - B-tree indexes on `disease_name`, `crop_affected`, `status`
 - Composite index on `(disease_name, crop_affected, status)`
 
 ### Query Optimization
+
 - Use PostGIS `ST_DWithin` for proximity queries (10x faster than Haversine)
 - Limit time windows (default 30 days) to reduce scan size
 - Paginate large result sets
 
 ### Scalability
+
 - Celery tasks run asynchronously (non-blocking)
 - SocketIO scales horizontally with Redis pub/sub
 - PDF generation offloaded to background workers
@@ -414,6 +453,7 @@ def test_outbreak_clustering():
 ## Monitoring & Alerts
 
 ### Metrics to Track
+
 - Number of incidents reported per day
 - Active outbreak zones
 - Alert delivery success rate
@@ -421,6 +461,7 @@ def test_outbreak_clustering():
 - Celery task execution time
 
 ### Logging
+
 ```python
 logger.info(f"Outbreak detected: {zone_id} - {disease} in {crop}")
 logger.warning(f"Failed to send alert to user {user_id}")
@@ -448,22 +489,26 @@ logger.error(f"PDF generation failed: {error}")
 ## Troubleshooting
 
 ### Issue: No alerts sent
+
 - Check Celery worker is running
 - Verify users have farm locations set
 - Check SocketIO connection status
 - Review Celery logs for task failures
 
 ### Issue: Slow proximity queries
+
 - Enable PostGIS extension
 - Verify GIST indexes exist: `\d+ disease_incidents`
 - Reduce search radius or time window
 
 ### Issue: PDF generation fails
+
 - Verify `GEMINI_API_KEY` is set
 - Check ReportLab installation
 - Review disk space for temp files
 
 ### Issue: Incorrect distances
+
 - Verify coordinate order (latitude, longitude)
 - Check coordinate range (-90 to 90, -180 to 180)
 - Ensure coordinates are in decimal degrees (not DMS)
@@ -478,7 +523,7 @@ logger.error(f"PDF generation failed: {error}")
 
 ## License
 
-Part of AgriTech platform - See main LICENSE file.
+Part of AgroZen platform - See main LICENSE file.
 
 ## Contributors
 

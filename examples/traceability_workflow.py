@@ -118,7 +118,7 @@ class TraceabilityClient:
 def main():
     client = TraceabilityClient()
     
-    print("\nAGRITECH SUPPLY CHAIN SYSTEM")
+    print("\nAgroZen SUPPLY CHAIN SYSTEM")
     print("Initializing automated workflow...")
     
     # 1. Create

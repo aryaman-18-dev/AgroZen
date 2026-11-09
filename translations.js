@@ -4,9 +4,9 @@ window.translations = {
         "service_crop": "Smart Crop Monitoring", "service_supply": "Supply Chain Support", "service_sustainable": "Sustainable Farming Guidance", "service_market": "Marketplace Services", "service_finance": "Financial & Insurance Support",
         "search": "Search...", "light": "Light", "login": "Login", "faq": "FAQ", "register": "Register",
         "hero_title": "Empowering Agriculture Through Technology",
-        "hero_desc": "AgriTech connects Farmers, Buyers, Equipment Suppliers, and Grocery Sellers to revolutionize India's agricultural ecosystem.",
+        "hero_desc": "AgroZen connects Farmers, Buyers, Equipment Suppliers, and Grocery Sellers to revolutionize India's agricultural ecosystem.",
         "benefits_title": "Our Platform Benefits",
-        "benefits_desc": "AgriTech brings tailored tools and services to every stakeholder in the agricultural value chain.",
+        "benefits_desc": "AgroZen brings tailored tools and services to every stakeholder in the agricultural value chain.",
         "f_farmers": "Farmers", "f_farmers_desc": "Real-time crop monitoring, weather alerts, and direct-market access.",
         "f_buyers": "Buyers & Retailers", "f_buyers_desc": "Source verified produce directly from farmers and manage bulk orders.",
         "f_equip": "Equipment Suppliers", "f_equip_desc": "List equipment, offer rentals, and connect with nearby farmers.",
@@ -179,7 +179,7 @@ window.translations = {
         "footer_tagline": "ਤਕਨਾਲੋਜੀ ਰਾਹੀਂ ਭਾਰਤ ਦੇ ਖੇਤੀਬਾੜੀ ਭਵਿੱਖ ਨੂੰ ਸਸ਼ਕਤ ਬਣਾਉਣਾ।",
         "footer_links": "ਕੁਇੱਕ ਲਿੰਕ", "footer_contact": "ਸੰਪਰਕ", "footer_dash": "ਡੈਸ਼ਬੋਰਡ", "footer_terms": "ਸ਼ਰਤਾਂ ਅਤੇ ਸੇਵਾ", "footer_ai": "AI ਸਹਾਇਕ"
     }
-};��ளுடன் இணையுங்கள்.",
+};��ளுடன் இணையுங்கள்.",
         "f_grocery": "மளிகை விற்பனையாளர்கள்", "f_grocery_desc": "நம்பகமான வழங்குநர்களை இணைத்து தரமான பொருட்களைப் பெறுங்கள்.",
         "f_advice": "விவசாய நிபுணர்கள் & ஆலோசகர்கள்", "f_advice_desc": "ஆலோசனைகளைப் பகிர்ந்து கொள்ளுங்கள் மற்றும் தொலைதூர நோய் கண்டறிதல் சேவைகளை வழங்கவும்.",
         "f_finance": "நிதி & காப்பீடு", "f_finance_desc": "விவசாயத்திற்காக வடிவமைக்கப்பட்ட கடன் மற்றும் பயிர் காப்பீடுகளைப் பெறுங்கள்.",

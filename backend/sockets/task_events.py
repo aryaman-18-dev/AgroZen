@@ -5,7 +5,7 @@ from backend.extensions.socketio import socketio
 @socketio.on('connect')
 def handle_connect():
     """Handle client connection."""
-    emit('connected', {'message': 'Connected to AgriTech WebSocket server'})
+    emit('connected', {'message': 'Connected to AgroZen WebSocket server'})
 
 
 @socketio.on('disconnect')

@@ -15,7 +15,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.getenv(
         'DATABASE_URL',
-        'sqlite:///agritech_dev.db'
+        'sqlite:///AgroZen_dev.db'
     )
 
 
@@ -24,7 +24,7 @@ class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.getenv(
         'DATABASE_URL',
-        'postgresql://user:password@localhost/agritech_prod'
+        'postgresql://user:password@localhost/AgroZen_prod'
     )
 
 

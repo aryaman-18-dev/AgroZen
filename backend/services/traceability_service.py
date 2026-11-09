@@ -232,7 +232,7 @@ class TraceabilityService:
                 "cold_chain_temp_c": "12.5°C (Continuous GPS IoT Monitor)",
                 "relative_humidity_pct": 88.0,
                 "qr_sticker_serial": f"QR-STICKER-{batch_id}",
-                "destination_hub": "AgriTech Fresh Hub Mumbai / Consumer Retail"
+                "destination_hub": "AgroZen Fresh Hub Mumbai / Consumer Retail"
             },
             previous_hash=prev_hash,
             performed_by="EcoLogistics Dispatch Lead",
@@ -278,7 +278,7 @@ class TraceabilityService:
                 "is_valid": is_valid_chain,
                 "verified_blocks": verified_count,
                 "root_hash": batch.integrity_hash,
-                "ledger_protocol": "AgriTech SHA-256 Immutable Chained Ledger",
+                "ledger_protocol": "AgroZen SHA-256 Immutable Chained Ledger",
                 "smart_contract_id": f"0x{hashlib.sha256(batch_id.encode()).hexdigest()[:40]}"
             }
             return data, None
@@ -309,7 +309,7 @@ class TraceabilityService:
         return True, len(logs)
 
     @classmethod
-    def generate_qr_sticker_image(cls, batch_id: str, host_url: str = "https://agritech.com") -> bytes:
+    def generate_qr_sticker_image(cls, batch_id: str, host_url: str = "https://AgroZen.com") -> bytes:
         """
         Generate high-resolution printable QR code sticker image bytes (PNG)
         containing QR matrix, batch ID, crop name, and farm origin.
@@ -344,7 +344,7 @@ class TraceabilityService:
             draw.rectangle([(10, 10), (sticker_w - 10, 75)], fill="#065f46")
 
             # Header text
-            draw.text((35, 24), "🌾 AGRITECH VERIFIED PRODUCE", fill="#ffffff")
+            draw.text((35, 24), "🌾 AgroZen VERIFIED PRODUCE", fill="#ffffff")
             draw.text((35, 48), "Farm-to-Fork Traceability Passport", fill="#a7f3d0")
 
             # Paste QR Code

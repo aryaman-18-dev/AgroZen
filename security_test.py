@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Security testing script for AgriTech Flask applications
+Security testing script for AgroZen Flask applications
 Tests input validation, SQL injection prevention, and error handling
 """
 
@@ -219,7 +219,7 @@ def test_api_endpoints():
 
 def main():
     """Run all security tests"""
-    print("AgriTech Security Testing Suite")
+    print("AgroZen Security Testing Suite")
     print("=" * 50)
     
     test_missing_fields()

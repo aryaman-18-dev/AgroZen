@@ -1,7 +1,7 @@
 """
-AgriTech API Test Suite
+AgroZen API Test Suite
 ========================
-Automated tests for all AgriTech API endpoints.
+Automated tests for all AgroZen API endpoints.
 Run this to verify your server is working correctly.
 
 Usage:
@@ -10,7 +10,7 @@ Usage:
 Requirements:
     pip install requests pytest
 
-GitHub: https://github.com/omroy07/AgriTech
+GitHub: https://github.com/omroy07/AgroZen
 """
 
 import requests
@@ -336,7 +336,7 @@ def test_batch_from_json():
 # ─────────────────────────────────────────────────────────────
 def main():
     print("=" * 55)
-    print("   🧪 AgriTech API Test Suite")
+    print("   🧪 AgroZen API Test Suite")
     print("=" * 55)
 
     # Pre-check: server must be running

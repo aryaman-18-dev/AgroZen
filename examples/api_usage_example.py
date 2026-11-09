@@ -1,17 +1,17 @@
 """
-AgriTech API Usage Example
+AgroZen API Usage Example
 ==========================
-This script demonstrates how to use all the AgriTech API endpoints
+This script demonstrates how to use all the AgroZen API endpoints
 from a Python script (without opening a browser).
 
 Requirements:
     pip install requests pillow
 
 Usage:
-    1. Start the AgriTech server: python app.py
+    1. Start the AgroZen server: python app.py
     2. Run this script:           python api_usage_example.py
 
-GitHub: https://github.com/omroy07/AgriTech
+GitHub: https://github.com/omroy07/AgroZen
 """
 
 import requests
@@ -52,7 +52,7 @@ def _handle_response(response):
 
 
 def check_server():
-    """Check if the AgriTech server is running."""
+    """Check if the AgroZen server is running."""
     try:
         r = requests.get(BASE_URL, timeout=5)
         _log(f"✅ Server is running at {BASE_URL}")
@@ -349,13 +349,13 @@ def batch_crop_prediction(json_file_path):
 # ─────────────────────────────────────────────
 def main():
     print("=" * 55)
-    print("   🌾 AgriTech API - Python Usage Examples")
+    print("   🌾 AgroZen API - Python Usage Examples")
     print("=" * 55)
 
     # Check if server is up
     if not check_server():
         print("\n💡 To start the server:")
-        print("   cd AgriTech && python app.py")
+        print("   cd AgroZen && python app.py")
         sys.exit(1)
 
     print("\n" + "─" * 55)

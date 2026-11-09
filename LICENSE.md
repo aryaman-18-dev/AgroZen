@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2026 AgriTech
+Copyright (c) 2026 AgroZen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
@@ -22,9 +22,9 @@ SOFTWARE.
 
 ---
 
-# AgriTech Open Source License Notice
+# AgroZen Open Source License Notice
 
-AgriTech is an open-source platform focused on empowering smart and sustainable agriculture through technology-driven solutions.
+AgroZen is an open-source platform focused on empowering smart and sustainable agriculture through technology-driven solutions.
 
 This project includes features such as:
 
@@ -58,4 +58,4 @@ Before contributing, please read:
 For queries or collaboration:
 
 GitHub Repository:
-https://github.com/omroy07/AgriTech
+https://github.com/omroy07/AgroZen

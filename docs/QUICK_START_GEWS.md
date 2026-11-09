@@ -7,27 +7,31 @@ The **Geospatial Early Warning System (GEWS)** detects disease outbreaks on farm
 ## 5-Minute Quick Start
 
 ### Step 1: Install Dependencies
+
 ```bash
 pip install geoalchemy2 shapely flask-jwt-extended
 ```
 
 ### Step 2: Run Database Migration
+
 ```bash
-cd d:/AgriTech
+cd d:/AgroZen
 python migrations/init_gews_db.py
 python migrations/init_gews_db.py --sample
 ```
 
 ### Step 3: Set Environment Variables
+
 ```bash
 # Optional: For AI-powered PDF reports
 set GEMINI_API_KEY=your_gemini_api_key
 
 # Optional: PostgreSQL with PostGIS
-set DATABASE_URL=postgresql://user:pass@localhost/agritech
+set DATABASE_URL=postgresql://user:pass@localhost/AgroZen
 ```
 
 ### Step 4: Start Services
+
 ```bash
 # Terminal 1: Flask app
 python app.py
@@ -42,6 +46,7 @@ celery -A backend.tasks beat --loglevel=info
 ### Step 5: Test the API
 
 #### Report a Disease Incident
+
 ```bash
 curl -X POST http://localhost:5000/api/v1/disease/incidents ^
   -H "Authorization: Bearer YOUR_JWT_TOKEN" ^
@@ -50,12 +55,14 @@ curl -X POST http://localhost:5000/api/v1/disease/incidents ^
 ```
 
 #### Check Your Farm's Risk
+
 ```bash
 curl http://localhost:5000/api/v1/disease/my-risk ^
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
 #### View Active Outbreaks
+
 ```bash
 curl http://localhost:5000/api/v1/disease/outbreaks ^
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
@@ -64,15 +71,19 @@ curl http://localhost:5000/api/v1/disease/outbreaks ^
 ## Key Concepts
 
 ### Disease Incident
+
 A single report of disease from a farmer with GPS coordinates.
 
 ### Outbreak Zone
+
 Automatically created when 3+ incidents are found within 50km radius for the same disease+crop combination.
 
 ### Outbreak Alert
+
 Emergency notification sent to farmers within 75km (1.5x outbreak radius) of an active outbreak.
 
 ### Alert Priorities
+
 - **Urgent**: Your farm is inside the outbreak zone (<50km)
 - **High**: You're very close to the outbreak (50-60km)
 - **Medium**: Take preventive action (60-75km)
@@ -111,19 +122,20 @@ Farmer Reports Incident (GPS tagged)
 
 ## API Endpoints (Summary)
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/api/v1/disease/incidents` | POST | Report disease |
-| `/api/v1/disease/incidents` | GET | Query incidents |
-| `/api/v1/disease/outbreaks` | GET | List outbreak zones |
-| `/api/v1/disease/my-risk` | GET | Check farm risk |
-| `/api/v1/disease/alerts` | GET | User's alerts |
-| `/api/v1/disease/incidents/geojson` | GET | Map data for incidents |
-| `/api/v1/disease/outbreaks/geojson` | GET | Map data for outbreaks |
+| Endpoint                            | Method | Purpose                |
+| ----------------------------------- | ------ | ---------------------- |
+| `/api/v1/disease/incidents`         | POST   | Report disease         |
+| `/api/v1/disease/incidents`         | GET    | Query incidents        |
+| `/api/v1/disease/outbreaks`         | GET    | List outbreak zones    |
+| `/api/v1/disease/my-risk`           | GET    | Check farm risk        |
+| `/api/v1/disease/alerts`            | GET    | User's alerts          |
+| `/api/v1/disease/incidents/geojson` | GET    | Map data for incidents |
+| `/api/v1/disease/outbreaks/geojson` | GET    | Map data for outbreaks |
 
 ## Database Tables
 
 ### disease_incidents
+
 - `incident_id`: INC-XXXXXXXXXXXX
 - `disease_name`, `crop_affected`
 - `latitude`, `longitude` (GPS)
@@ -131,6 +143,7 @@ Farmer Reports Incident (GPS tagged)
 - `verification_status`: pending, verified, rejected
 
 ### outbreak_zones
+
 - `zone_id`: ZONE-XXXXXXXXXXXX
 - `center_latitude`, `center_longitude`
 - `radius_km`: Default 50km
@@ -138,6 +151,7 @@ Farmer Reports Incident (GPS tagged)
 - `status`: active, resolved, archived
 
 ### outbreak_alerts
+
 - `alert_id`: ALERT-XXXXXXXXXXXX
 - `user_id`: Farmer receiving alert
 - `outbreak_zone_id`: Related outbreak
@@ -148,6 +162,7 @@ Farmer Reports Incident (GPS tagged)
 ## Configuration
 
 ### Celery Beat Schedule
+
 Add to your Celery configuration:
 
 ```python
@@ -163,6 +178,7 @@ CELERYBEAT_SCHEDULE = {
 ```
 
 ### PostGIS Setup (Optional)
+
 For PostgreSQL users:
 
 ```sql
@@ -178,9 +194,10 @@ SELECT PostGIS_Version();
 ## Frontend Integration Examples
 
 ### 1. Report Disease with GPS
+
 ```javascript
 // Get user's current location
-navigator.geolocation.getCurrentPosition(position => {
+navigator.geolocation.getCurrentPosition((position) => {
   const data = {
     disease_name: "Late Blight",
     crop_affected: "Tomato",
@@ -188,33 +205,34 @@ navigator.geolocation.getCurrentPosition(position => {
     longitude: position.coords.longitude,
     severity_level: "high",
     symptoms: "Brown spots on leaves",
-    affected_area: 2.5
+    affected_area: 2.5,
   };
-  
-  fetch('/api/v1/disease/incidents', {
-    method: 'POST',
+
+  fetch("/api/v1/disease/incidents", {
+    method: "POST",
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 });
 ```
 
 ### 2. Real-Time Alerts
+
 ```javascript
 // SocketIO connection
-const socket = io('http://localhost:5000');
+const socket = io("http://localhost:5000");
 
-socket.on('outbreak_alert', (alert) => {
+socket.on("outbreak_alert", (alert) => {
   showNotification({
     title: alert.title,
     message: alert.message,
     priority: alert.priority,
-    pdfUrl: alert.pdf_report_id ? `/files/${alert.pdf_report_id}` : null
+    pdfUrl: alert.pdf_report_id ? `/files/${alert.pdf_report_id}` : null,
   });
-  
+
   // Update map with new outbreak
   if (alert.zone_id) {
     updateOutbreakLayer(alert.zone_id);
@@ -223,22 +241,23 @@ socket.on('outbreak_alert', (alert) => {
 ```
 
 ### 3. Interactive Map with Leaflet.js
+
 ```javascript
 // Initialize map
-const map = L.map('outbreak-map').setView([18.5204, 73.8567], 10);
+const map = L.map("outbreak-map").setView([18.5204, 73.8567], 10);
 
 // Add base layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
 // Load outbreak zones
-fetch('/api/v1/disease/outbreaks/geojson')
-  .then(r => r.json())
-  .then(geojson => {
+fetch("/api/v1/disease/outbreaks/geojson")
+  .then((r) => r.json())
+  .then((geojson) => {
     L.geoJSON(geojson, {
       style: (feature) => ({
         color: getRiskColor(feature.properties.risk_level),
         fillOpacity: 0.3,
-        weight: 2
+        weight: 2,
       }),
       onEachFeature: (feature, layer) => {
         layer.bindPopup(`
@@ -247,16 +266,20 @@ fetch('/api/v1/disease/outbreaks/geojson')
           Risk: ${feature.properties.risk_level}<br>
           Incidents: ${feature.properties.incident_count}
         `);
-      }
+      },
     }).addTo(map);
   });
 
 function getRiskColor(risk) {
-  switch(risk) {
-    case 'critical': return '#dc2626';
-    case 'high': return '#f59e0b';
-    case 'medium': return '#eab308';
-    default: return '#22c55e';
+  switch (risk) {
+    case "critical":
+      return "#dc2626";
+    case "high":
+      return "#f59e0b";
+    case "medium":
+      return "#eab308";
+    default:
+      return "#22c55e";
   }
 }
 ```
@@ -264,6 +287,7 @@ function getRiskColor(risk) {
 ## Troubleshooting
 
 ### Issue: No outbreaks detected
+
 **Solution**: Make sure you have at least 3 incidents within 50km for the same disease+crop combination.
 
 ```bash
@@ -275,6 +299,7 @@ python migrations/init_gews_db.py --sample
 ```
 
 ### Issue: Alerts not sending
+
 **Solution**: Verify Celery worker and beat are running.
 
 ```bash
@@ -286,6 +311,7 @@ celery -A backend.tasks inspect scheduled
 ```
 
 ### Issue: Slow proximity queries
+
 **Solution**: Enable PostGIS for 10x faster spatial queries.
 
 ```sql
@@ -298,6 +324,7 @@ CREATE EXTENSION postgis;
 ```
 
 ### Issue: PDF generation fails
+
 **Solution**: Set Gemini API key or disable PDF generation.
 
 ```bash

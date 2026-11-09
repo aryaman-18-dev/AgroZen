@@ -2,7 +2,7 @@
 
 ## Overview
 
-The ML Model Versioning and Rollback System provides a robust mechanism for managing machine learning model versions in the AgriTech application. It enables safe deployments, easy rollbacks, and comprehensive audit trails for all model changes.
+The ML Model Versioning and Rollback System provides a robust mechanism for managing machine learning model versions in the AgroZen application. It enables safe deployments, easy rollbacks, and comprehensive audit trails for all model changes.
 
 ## Key Features
 
@@ -158,31 +158,37 @@ model_manager.add_performance_metrics(
 ## REST API Endpoints
 
 ### Get Model Registry
+
 ```
 GET /api/v1/models/registry
 ```
 
 ### List Model Versions
+
 ```
 GET /api/v1/models/{model_name}/versions
 ```
 
 Example:
+
 ```bash
 curl http://localhost:5000/api/v1/models/crop_recommendation/versions
 ```
 
 ### Get Active Version
+
 ```
 GET /api/v1/models/{model_name}/active
 ```
 
 ### Get Version Metadata
+
 ```
 GET /api/v1/models/{model_name}/{version}/metadata
 ```
 
 ### Set Active Version
+
 ```
 POST /api/v1/models/{model_name}/set-active
 Content-Type: application/json
@@ -193,6 +199,7 @@ Content-Type: application/json
 ```
 
 ### Rollback Model
+
 ```
 POST /api/v1/models/{model_name}/rollback
 Content-Type: application/json
@@ -204,6 +211,7 @@ Content-Type: application/json
 ```
 
 ### Update Performance Metrics
+
 ```
 POST /api/v1/models/{model_name}/performance
 Content-Type: application/json
@@ -220,11 +228,13 @@ Content-Type: application/json
 ```
 
 ### Check Model Health
+
 ```
 GET /api/v1/models/{model_name}/health
 ```
 
 ### Delete a Version
+
 ```
 DELETE /api/v1/models/{model_name}/{version}/delete
 ```
@@ -250,6 +260,7 @@ python backend/ml_models/migrate_models.py --summary
 ### Step 2: Verify Migration
 
 The script will:
+
 1. Load models from legacy locations
 2. Create versioned storage structure
 3. Set initial versions as active
@@ -258,22 +269,24 @@ The script will:
 
 ## Supported Model Types
 
-| Type | Format | Extension | Framework |
-|------|--------|-----------|-----------|
-| **SKLEARN** | Joblib | .pkl | scikit-learn |
-| **KERAS** | H5 | .h5 | TensorFlow/Keras |
-| **PYTORCH** | PyTorch | .pth | PyTorch |
-| **PICKLE** | Pickle | .pkl | Python pickle |
-| **CUSTOM** | Custom | varies | Custom format |
+| Type        | Format  | Extension | Framework        |
+| ----------- | ------- | --------- | ---------------- |
+| **SKLEARN** | Joblib  | .pkl      | scikit-learn     |
+| **KERAS**   | H5      | .h5       | TensorFlow/Keras |
+| **PYTORCH** | PyTorch | .pth      | PyTorch          |
+| **PICKLE**  | Pickle  | .pkl      | Python pickle    |
+| **CUSTOM**  | Custom  | varies    | Custom format    |
 
 ## Version Naming Conventions
 
 ### Semantic Versioning (Recommended)
+
 - **v1.0.0** - Major.Minor.Patch
 - **v1.0.0-beta** - Pre-release versions
 - **v1.0.0+metadata** - Build metadata
 
 ### Date-based Versioning
+
 - **2026_02_15** - YYYY_MM_DD format
 - **2026_02_15_v1** - Date with version counter
 
@@ -428,10 +441,12 @@ python backend/ml_models/migrate_models.py --migrate-all
 ## Support and Debugging
 
 For detailed logs, check:
+
 - `backend/ml_models/versioning_logs/{model_name}_usage.log` - Operation logs
 - Application logs - Error and warning messages
 
 Enable debug logging:
+
 ```python
 import logging
 logging.getLogger('backend.ml_models').setLevel(logging.DEBUG)

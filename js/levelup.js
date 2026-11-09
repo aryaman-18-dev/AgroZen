@@ -20,7 +20,7 @@ const MOCK_CONTRIBUTORS = [
     tier: "Elite",
     points: 3450,
     role: "Project Maintainer & Lead Dev",
-    heatmap: [3, 2, 3, 1, 3, 2, 3, 3, 1, 2, 3, 2, 3, 3]
+    heatmap: [3, 2, 3, 1, 3, 2, 3, 3, 1, 2, 3, 2, 3, 3],
   },
   {
     username: "Rushabh-Mahajan",
@@ -33,12 +33,13 @@ const MOCK_CONTRIBUTORS = [
     tier: "Master",
     points: 1980,
     role: "Core Platform Engineer",
-    heatmap: [2, 3, 1, 2, 3, 2, 2, 3, 1, 0, 2, 3, 2, 2]
+    heatmap: [2, 3, 1, 2, 3, 2, 2, 3, 1, 0, 2, 3, 2, 2],
   },
   {
     username: "agri-dev-pro",
     name: "Aarav Sharma",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
     commits: 54,
     prs: 12,
     issues: 6,
@@ -46,12 +47,13 @@ const MOCK_CONTRIBUTORS = [
     tier: "Pro",
     points: 920,
     role: "UI/UX & Frontend Specialist",
-    heatmap: [1, 2, 0, 2, 2, 1, 3, 1, 2, 1, 0, 2, 1, 2]
+    heatmap: [1, 2, 0, 2, 2, 1, 3, 1, 2, 1, 0, 2, 1, 2],
   },
   {
     username: "green-code-bot",
     name: "Priya Patel",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200",
+    avatar:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200",
     commits: 38,
     prs: 9,
     issues: 4,
@@ -59,12 +61,13 @@ const MOCK_CONTRIBUTORS = [
     tier: "Contributor",
     points: 480,
     role: "AI & Disease Model Contributor",
-    heatmap: [0, 1, 2, 1, 0, 2, 1, 2, 1, 1, 2, 0, 1, 1]
+    heatmap: [0, 1, 2, 1, 0, 2, 1, 2, 1, 1, 2, 0, 1, 1],
   },
   {
     username: "crop-wizard",
     name: "Karan Verma",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
     commits: 22,
     prs: 5,
     issues: 3,
@@ -72,8 +75,8 @@ const MOCK_CONTRIBUTORS = [
     tier: "Beginner",
     points: 210,
     role: "Marketplace & Schemes Docs",
-    heatmap: [1, 0, 1, 0, 1, 1, 0, 1, 2, 0, 1, 0, 1, 0]
-  }
+    heatmap: [1, 0, 1, 0, 1, 1, 0, 1, 2, 0, 1, 0, 1, 0],
+  },
 ];
 
 const MOCK_IMPACT_ITEMS = [
@@ -85,7 +88,7 @@ const MOCK_IMPACT_ITEMS = [
     category: "UI/UX",
     points: 150,
     status: "Merged & Verified",
-    date: "2026-09-03"
+    date: "2026-09-03",
   },
   {
     title: "Interactive Level Up Contributor Growth Hub",
@@ -95,7 +98,7 @@ const MOCK_IMPACT_ITEMS = [
     category: "Core Platform",
     points: 250,
     status: "Merged & Verified",
-    date: "2026-09-03"
+    date: "2026-09-03",
   },
   {
     title: "AI Disease Prediction Model Precision Enhancement",
@@ -105,7 +108,7 @@ const MOCK_IMPACT_ITEMS = [
     category: "AI/ML",
     points: 200,
     status: "Merged & Verified",
-    date: "2026-08-28"
+    date: "2026-08-28",
   },
   {
     title: "Dark/Light Theme Contrast Accessibility Overhaul",
@@ -115,7 +118,7 @@ const MOCK_IMPACT_ITEMS = [
     category: "UI/UX",
     points: 120,
     status: "Merged & Verified",
-    date: "2026-08-20"
+    date: "2026-08-20",
   },
   {
     title: "Government Schemes Localization & i18n Translation",
@@ -125,8 +128,8 @@ const MOCK_IMPACT_ITEMS = [
     category: "Documentation",
     points: 80,
     status: "Merged & Verified",
-    date: "2026-08-14"
-  }
+    date: "2026-08-14",
+  },
 ];
 
 let currentTab = "month";
@@ -144,10 +147,12 @@ async function initLevelUpPage() {
 
 async function fetchGitHubContributors() {
   try {
-    const res = await fetch("https://api.github.com/repos/omroy07/AgriTech/contributors?per_page=10");
+    const res = await fetch(
+      "https://api.github.com/repos/omroy07/AgroZen/contributors?per_page=10",
+    );
     if (!res.ok) throw new Error("GitHub API rate limit or error");
     const data = await res.json();
-    
+
     if (Array.isArray(data) && data.length > 0) {
       allContributors = data.map((item, idx) => {
         const commits = item.contributions || 10;
@@ -170,12 +175,15 @@ async function fetchGitHubContributors() {
           tier: tier,
           points: pts,
           role: "GitHub Open Source Contributor",
-          heatmap: [2, 3, 1, 2, 3, 2, 3, 1, 2, 3, 2, 1, 3, 2]
+          heatmap: [2, 3, 1, 2, 3, 2, 3, 1, 2, 3, 2, 1, 3, 2],
         };
       });
     }
   } catch (err) {
-    console.warn("Using fallback local contributor data for Level Up page:", err);
+    console.warn(
+      "Using fallback local contributor data for Level Up page:",
+      err,
+    );
   }
 }
 
@@ -183,7 +191,7 @@ function renderHeroStats() {
   const totalContribs = allContributors.length;
   const totalPRs = allContributors.reduce((acc, curr) => acc + curr.prs, 0);
   const totalPts = allContributors.reduce((acc, curr) => acc + curr.points, 0);
-  const maxStreak = Math.max(...allContributors.map(c => c.streak));
+  const maxStreak = Math.max(...allContributors.map((c) => c.streak));
 
   const totalContribsEl = document.getElementById("statTotalContributors");
   const totalPRsEl = document.getElementById("statTotalPRs");
@@ -207,34 +215,46 @@ function renderPodium() {
 
   podiumEl.innerHTML = `
     <!-- Rank 2: Silver -->
-    ${top2 ? `
+    ${
+      top2
+        ? `
     <div class="lu-podium-card lu-podium-2">
       <div class="lu-podium-rank">2</div>
       <img class="lu-podium-avatar" src="${top2.avatar}" alt="${top2.name}" />
       <h3 class="lu-podium-name">${top2.name}</h3>
       <div class="lu-podium-handle">@${top2.username}</div>
       <div class="lu-podium-score">${top2.points} pts</div>
-    </div>` : ""}
+    </div>`
+        : ""
+    }
 
     <!-- Rank 1: Gold -->
-    ${top1 ? `
+    ${
+      top1
+        ? `
     <div class="lu-podium-card lu-podium-1">
       <div class="lu-podium-rank">👑 1</div>
       <img class="lu-podium-avatar" src="${top1.avatar}" alt="${top1.name}" />
       <h3 class="lu-podium-name">${top1.name}</h3>
       <div class="lu-podium-handle">@${top1.username}</div>
       <div class="lu-podium-score">${top1.points} pts</div>
-    </div>` : ""}
+    </div>`
+        : ""
+    }
 
     <!-- Rank 3: Bronze -->
-    ${top3 ? `
+    ${
+      top3
+        ? `
     <div class="lu-podium-card lu-podium-3">
       <div class="lu-podium-rank">3</div>
       <img class="lu-podium-avatar" src="${top3.avatar}" alt="${top3.name}" />
       <h3 class="lu-podium-name">${top3.name}</h3>
       <div class="lu-podium-handle">@${top3.username}</div>
       <div class="lu-podium-score">${top3.points} pts</div>
-    </div>` : ""}
+    </div>`
+        : ""
+    }
   `;
 }
 
@@ -243,16 +263,23 @@ function renderLeaderboardTable(filterText = "") {
   if (!tbody) return;
 
   let sorted = [...allContributors].sort((a, b) => b.points - a.points);
-  
+
   if (filterText) {
     const q = filterText.toLowerCase();
-    sorted = sorted.filter(c => c.name.toLowerCase().includes(q) || c.username.toLowerCase().includes(q) || c.tier.toLowerCase().includes(q));
+    sorted = sorted.filter(
+      (c) =>
+        c.name.toLowerCase().includes(q) ||
+        c.username.toLowerCase().includes(q) ||
+        c.tier.toLowerCase().includes(q),
+    );
   }
 
-  tbody.innerHTML = sorted.map((c, idx) => `
+  tbody.innerHTML = sorted
+    .map(
+      (c, idx) => `
     <tr>
       <td>
-        <span class="lu-rank-badge" style="background:${idx === 0 ? '#f59e0b' : idx === 1 ? '#94a3b8' : idx === 2 ? '#d97706' : 'rgba(148,163,184,0.2)'}; color:${idx < 3 ? '#fff' : 'var(--lu-text)'}">
+        <span class="lu-rank-badge" style="background:${idx === 0 ? "#f59e0b" : idx === 1 ? "#94a3b8" : idx === 2 ? "#d97706" : "rgba(148,163,184,0.2)"}; color:${idx < 3 ? "#fff" : "var(--lu-text)"}">
           ${idx + 1}
         </span>
       </td>
@@ -266,8 +293,8 @@ function renderLeaderboardTable(filterText = "") {
         </div>
       </td>
       <td>
-        <span class="lu-tier-badge ${c.tier === 'Elite' ? 'tier-elite' : ''}">
-          <i class="fas ${c.tier === 'Elite' ? 'fa-crown' : 'fa-award'}"></i> ${c.tier}
+        <span class="lu-tier-badge ${c.tier === "Elite" ? "tier-elite" : ""}">
+          <i class="fas ${c.tier === "Elite" ? "fa-crown" : "fa-award"}"></i> ${c.tier}
         </span>
       </td>
       <td><strong>${c.points} pts</strong></td>
@@ -279,14 +306,18 @@ function renderLeaderboardTable(filterText = "") {
         </a>
       </td>
     </tr>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 function renderContributorCards() {
   const grid = document.getElementById("contributorCardsGrid");
   if (!grid) return;
 
-  grid.innerHTML = allContributors.map(c => `
+  grid.innerHTML = allContributors
+    .map(
+      (c) => `
     <div class="lu-contrib-card">
       <div class="lu-card-header">
         <img class="lu-card-avatar" src="${c.avatar}" alt="${c.name}" />
@@ -317,7 +348,7 @@ function renderContributorCards() {
           <span style="color:var(--lu-accent);">${c.points} pts</span>
         </div>
         <div class="lu-heatmap-grid">
-          ${c.heatmap.map(lvl => `<div class="lu-heatmap-cell lvl-${lvl}"></div>`).join("")}
+          ${c.heatmap.map((lvl) => `<div class="lu-heatmap-cell lvl-${lvl}"></div>`).join("")}
         </div>
       </div>
 
@@ -330,7 +361,9 @@ function renderContributorCards() {
         </a>
       </div>
     </div>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 function renderImpactTable(filterText = "", category = "all") {
@@ -340,27 +373,38 @@ function renderImpactTable(filterText = "", category = "all") {
   let items = [...MOCK_IMPACT_ITEMS];
 
   if (category !== "all") {
-    items = items.filter(item => item.category.toLowerCase() === category.toLowerCase());
+    items = items.filter(
+      (item) => item.category.toLowerCase() === category.toLowerCase(),
+    );
   }
 
   if (filterText) {
     const q = filterText.toLowerCase();
-    items = items.filter(item => item.title.toLowerCase().includes(q) || item.contributor.toLowerCase().includes(q) || item.pr.toLowerCase().includes(q));
+    items = items.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.contributor.toLowerCase().includes(q) ||
+        item.pr.toLowerCase().includes(q),
+    );
   }
 
-  tbody.innerHTML = items.map(item => `
+  tbody.innerHTML = items
+    .map(
+      (item) => `
     <tr>
       <td><strong>${item.title}</strong></td>
       <td>
         <span class="lu-user-name">${item.contributor}</span>
         <span class="lu-user-handle">@${item.handle}</span>
       </td>
-      <td><a href="https://github.com/omroy07/AgriTech" target="_blank" style="color:var(--lu-accent-secondary); text-decoration:none; font-weight:600;">${item.pr}</a></td>
+      <td><a href="https://github.com/omroy07/AgroZen" target="_blank" style="color:var(--lu-accent-secondary); text-decoration:none; font-weight:600;">${item.pr}</a></td>
       <td><span class="lu-tier-badge">${item.category}</span></td>
       <td><span class="lu-pts-badge">+${item.points} pts</span></td>
       <td><span class="lu-status-tag"><i class="fas fa-check-circle"></i> ${item.status}</span></td>
     </tr>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 function setupEventListeners() {
@@ -376,20 +420,26 @@ function setupEventListeners() {
 
   if (impactSearch) {
     impactSearch.addEventListener("input", () => {
-      renderImpactTable(impactSearch.value, impactCategory ? impactCategory.value : "all");
+      renderImpactTable(
+        impactSearch.value,
+        impactCategory ? impactCategory.value : "all",
+      );
     });
   }
 
   if (impactCategory) {
     impactCategory.addEventListener("change", () => {
-      renderImpactTable(impactSearch ? impactSearch.value : "", impactCategory.value);
+      renderImpactTable(
+        impactSearch ? impactSearch.value : "",
+        impactCategory.value,
+      );
     });
   }
 
   const tabBtns = document.querySelectorAll(".lu-tab");
-  tabBtns.forEach(btn => {
+  tabBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      tabBtns.forEach(b => b.classList.remove("active"));
+      tabBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       currentTab = btn.dataset.tab;
       renderLeaderboardTable(searchInput ? searchInput.value : "");

@@ -1,20 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="icon" type="image/png" href="images/logo.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy"
-content="
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
 default-src 'self';
 script-src 'self' 'unsafe-inline' https://generativelanguage.googleapis.com;
 style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
 font-src https://cdnjs.cloudflare.com;
 img-src 'self' data: https:;
 connect-src 'self' http://localhost:3000;
-">
+"
+    />
 
-    <title>AgriTech Assistant - Smart Farming Solutions</title>
+    <title>AgroZen Assistant - Smart Farming Solutions</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -24,20 +26,28 @@ connect-src 'self' http://localhost:3000;
     <!-- Prevent theme flash on page load -->
     <script>
       (function () {
-        const saved = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        document.documentElement.setAttribute(
+          "data-theme",
+          saved || (prefersDark ? "dark" : "light"),
+        );
       })();
     </script>
 
     <link rel="stylesheet" href="chat.css" />
     <link rel="stylesheet" href="theme.css" />
     <link rel="stylesheet" href="footer.css" />
-</head>
+  </head>
   <body>
     <header>
       <div class="header-content">
-        <div class="nav-left" style="display: flex; align-items: center; gap: 1.5rem;">
+        <div
+          class="nav-left"
+          style="display: flex; align-items: center; gap: 1.5rem"
+        >
           <button class="nav-back" id="backToHomeBtn">
             <i class="fas fa-arrow-left"></i> Back to Home
           </button>
@@ -46,19 +56,24 @@ connect-src 'self' http://localhost:3000;
             <h1>AgriBot</h1>
           </div>
         </div>
-        
-        <div class="nav-right" style="display: flex; align-items: center;">
-          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-        <span class="theme-toggle-track">
-          <span class="theme-toggle-icon sun-icon" aria-hidden="true">
-            <i class="fas fa-sun"></i>
-          </span>
-          <span class="theme-toggle-icon moon-icon" aria-hidden="true">
-            <i class="fas fa-moon"></i>
-          </span>
-          <span class="theme-toggle-thumb"></span>
-        </span>
-      </button>
+
+        <div class="nav-right" style="display: flex; align-items: center">
+          <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle theme"
+            title="Toggle theme"
+          >
+            <span class="theme-toggle-track">
+              <span class="theme-toggle-icon sun-icon" aria-hidden="true">
+                <i class="fas fa-sun"></i>
+              </span>
+              <span class="theme-toggle-icon moon-icon" aria-hidden="true">
+                <i class="fas fa-moon"></i>
+              </span>
+              <span class="theme-toggle-thumb"></span>
+            </span>
+          </button>
         </div>
       </div>
     </header>
@@ -71,36 +86,51 @@ connect-src 'self' http://localhost:3000;
           <div class="drop-overlay-content">
             <i class="fas fa-cloud-upload-alt drop-icon"></i>
             <h3>Drop your crop or plant image here</h3>
-            <p>We'll analyze it for diseases and plant health recommendations</p>
+            <p>
+              We'll analyze it for diseases and plant health recommendations
+            </p>
           </div>
         </div>
 
         <div class="chat-header">
           <i class="fas fa-robot"></i>
-          <h2>Ask me about AgriTech features or agriculture support</h2>
-          <button type="button" id="clear-chat-btn" class="theme-toggle" aria-label="Clear chat history" title="Clear chat history" style="margin-left: auto; width: auto; min-width: 44px; padding: 0 14px; border-radius: 999px;">
-        <span class="theme-toggle-track">
-          <span class="theme-toggle-icon sun-icon" aria-hidden="true">
-            <i class="fas fa-sun"></i>
-          </span>
-          <span class="theme-toggle-icon moon-icon" aria-hidden="true">
-            <i class="fas fa-moon"></i>
-          </span>
-          <span class="theme-toggle-thumb"></span>
-        </span>
-      </button>
+          <h2>Ask me about AgroZen features or agriculture support</h2>
+          <button
+            type="button"
+            id="clear-chat-btn"
+            class="theme-toggle"
+            aria-label="Clear chat history"
+            title="Clear chat history"
+            style="
+              margin-left: auto;
+              width: auto;
+              min-width: 44px;
+              padding: 0 14px;
+              border-radius: 999px;
+            "
+          >
+            <span class="theme-toggle-track">
+              <span class="theme-toggle-icon sun-icon" aria-hidden="true">
+                <i class="fas fa-sun"></i>
+              </span>
+              <span class="theme-toggle-icon moon-icon" aria-hidden="true">
+                <i class="fas fa-moon"></i>
+              </span>
+              <span class="theme-toggle-thumb"></span>
+            </span>
+          </button>
         </div>
 
         <div id="chat-window">
           <div class="welcome-message">
-            <h3><i class="fas fa-leaf"></i> Welcome to AgriTech Assistant!</h3>
+            <h3><i class="fas fa-leaf"></i> Welcome to AgroZen Assistant!</h3>
             <p>
               I'm powered by Google Gemini AI to help with all your farming
-              questions and guide you through AgriTech platform features.
+              questions and guide you through AgroZen platform features.
             </p>
 
             <div class="suggestions">
-              <div class="suggestion">What can I do on AgriTech?</div>
+              <div class="suggestion">What can I do on AgroZen?</div>
               <div class="suggestion">How to use crop recommendation?</div>
               <div class="suggestion">Best crops for this season?</div>
               <div class="suggestion">Organic pest control methods</div>
@@ -117,23 +147,46 @@ connect-src 'self' http://localhost:3000;
         </div>
 
         <!-- Image Preview Container -->
-        <div id="image-preview-container" class="image-preview-container" style="display: none;">
+        <div
+          id="image-preview-container"
+          class="image-preview-container"
+          style="display: none"
+        >
           <div class="preview-wrapper">
             <img id="image-preview" src="" alt="Selected crop preview" />
-            <button type="button" id="remove-image-btn" class="remove-img" aria-label="Remove image" title="Remove image">
+            <button
+              type="button"
+              id="remove-image-btn"
+              class="remove-img"
+              aria-label="Remove image"
+              title="Remove image"
+            >
               <i class="fas fa-times"></i>
             </button>
           </div>
           <div class="preview-meta">
-            <span class="preview-title" id="preview-filename"><i class="fas fa-image"></i> Image attached</span>
+            <span class="preview-title" id="preview-filename"
+              ><i class="fas fa-image"></i> Image attached</span
+            >
             <span class="preview-hint">Ready for AI crop diagnosis</span>
           </div>
         </div>
 
         <form id="chat-form">
           <div class="input-container">
-            <input type="file" id="image-input" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;" />
-            <button type="button" id="upload-photo-btn" class="camera-btn" aria-label="Upload crop photo for diagnosis" title="Upload crop photo for AI diagnosis">
+            <input
+              type="file"
+              id="image-input"
+              accept="image/png, image/jpeg, image/jpg, image/webp"
+              style="display: none"
+            />
+            <button
+              type="button"
+              id="upload-photo-btn"
+              class="camera-btn"
+              aria-label="Upload crop photo for diagnosis"
+              title="Upload crop photo for AI diagnosis"
+            >
               <i class="fas fa-camera"></i>
             </button>
 
@@ -152,12 +205,26 @@ connect-src 'self' http://localhost:3000;
     </main>
 
     <!-- Lightbox Modal for Zooming In-Chat Images -->
-    <div id="image-lightbox-modal" class="image-lightbox-modal" aria-hidden="true" style="display: none;">
+    <div
+      id="image-lightbox-modal"
+      class="image-lightbox-modal"
+      aria-hidden="true"
+      style="display: none"
+    >
       <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
       <div class="lightbox-content">
-        <button type="button" id="lightbox-close-btn" class="lightbox-close" aria-label="Close full view">&times;</button>
+        <button
+          type="button"
+          id="lightbox-close-btn"
+          class="lightbox-close"
+          aria-label="Close full view"
+        >
+          &times;
+        </button>
         <img id="lightbox-img" src="" alt="Full view crop photo" />
-        <div class="lightbox-caption" id="lightbox-caption">Crop diagnosis image</div>
+        <div class="lightbox-caption" id="lightbox-caption">
+          Crop diagnosis image
+        </div>
       </div>
     </div>
 
@@ -185,8 +252,8 @@ connect-src 'self' http://localhost:3000;
       .social-media a:hover {
         background: rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
-      } 
-       /* --- Cursor Trail Container --- */
+      }
+      /* --- Cursor Trail Container --- */
       .circle-container {
         position: fixed;
         inset: 0;
@@ -227,15 +294,15 @@ connect-src 'self' http://localhost:3000;
 
       .cursor-hovering {
         transform: translate(-50%, -50%) scale(1.8);
-        background-color: #22c55e; /* AgriTech green */
+        background-color: #22c55e; /* AgroZen green */
         box-shadow: 0 0 20px #22c55e;
       }
     </style>
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="images/logo.png" alt="AgriTech logo" class="footer-logo" />
-          <h3>AgriTech</h3>
+          <img src="images/logo.png" alt="AgroZen logo" class="footer-logo" />
+          <h3>AgroZen</h3>
           <p>Empowering India's Farming Future</p>
           <div class="social-media">
             <a
@@ -279,7 +346,8 @@ connect-src 'self' http://localhost:3000;
               >
             </li>
             <li>
-              <a href="Crop Yield Prediction/crop_yield_app/templates/index.html"
+              <a
+                href="Crop Yield Prediction/crop_yield_app/templates/index.html"
                 >Yield Prediction</a
               >
             </li>
@@ -294,13 +362,17 @@ connect-src 'self' http://localhost:3000;
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">© <span id="current-year">2026</span> AgriTech • Made for farmers
+      <div class="footer-bottom">
+        © <span id="current-year">2026</span> AgroZen • Made for farmers
         <div class="footer-section footer-newsletter">
           <h4>Newsletter</h4>
           <p class="newsletter-desc">
             Subscribe to get the latest farming insights, tips, and updates.
           </p>
-          <form class="newsletter-form" onsubmit="return handleNewsletterSubmit(event, this)">
+          <form
+            class="newsletter-form"
+            onsubmit="return handleNewsletterSubmit(event, this);"
+          >
             <div class="newsletter-input-group">
               <input
                 type="email"
@@ -309,159 +381,186 @@ connect-src 'self' http://localhost:3000;
                 required
                 aria-label="Email address for newsletter"
               />
-              <button type="submit" class="newsletter-btn" aria-label="Subscribe to newsletter">
+              <button
+                type="submit"
+                class="newsletter-btn"
+                aria-label="Subscribe to newsletter"
+              >
                 <span>Subscribe</span>
                 <i class="fas fa-paper-plane"></i>
               </button>
             </div>
-            <div class="newsletter-feedback" style="display:none;" role="status" aria-live="polite"></div>
+            <div
+              class="newsletter-feedback"
+              style="display: none"
+              role="status"
+              aria-live="polite"
+            ></div>
             <div class="newsletter-footer-optout">
-              <small>No spam. <a href="javascript:void(0)" onclick="openUnsubscribeModal(event)">Unsubscribe</a> anytime.</small>
+              <small
+                >No spam.
+                <a
+                  href="javascript:void(0)"
+                  onclick="openUnsubscribeModal(event)"
+                  >Unsubscribe</a
+                >
+                anytime.</small
+              >
             </div>
           </form>
         </div>
-</div>
+      </div>
     </footer>
-     <!-- Cursor Trail -->
-<div class="circle-container" id="cursorTrail"></div>
+    <!-- Cursor Trail -->
+    <div class="circle-container" id="cursorTrail"></div>
     <script>
-  document.getElementById("backToHomeBtn").addEventListener("click", () => {
-    // Preserve theme
-    const currentTheme =
-      document.documentElement.getAttribute("data-theme") || "light";
-    localStorage.setItem("theme", currentTheme);
+      document.getElementById("backToHomeBtn").addEventListener("click", () => {
+        // Preserve theme
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme") || "light";
+        localStorage.setItem("theme", currentTheme);
 
-    // Preserve scroll position of home page
-    localStorage.setItem("homeScrollY", window.scrollY);
+        // Preserve scroll position of home page
+        localStorage.setItem("homeScrollY", window.scrollY);
 
-    // Navigate back
-    window.location.href = "index.html";
-  });
-  // --- Cursor Trailing Effect ---
-const container = document.getElementById('cursorTrail');
-const circleCount = 12;
-const circles = [];
-
-let mouseX = 0;
-let mouseY = 0;
-
-// Create circles
-for (let i = 0; i < circleCount; i++) {
-    const circle = document.createElement('div');
-    circle.classList.add('cursor-circle');
-    container.appendChild(circle);
-    circles.push({ el: circle, x: 0, y: 0 });
-}
-
-// Mouse move
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
-
-// Click effects
-document.addEventListener('mousedown', () => {
-    circles.forEach(c => c.el.classList.add('cursor-clicking'));
-});
-document.addEventListener('mouseup', () => {
-    circles.forEach(c => c.el.classList.remove('cursor-clicking'));
-});
-
-// Hover effects on interactive elements
-document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, .cta-button, .service-card, .shipment-card')) {
-        circles.forEach(c => c.el.classList.add('cursor-hovering'));
-    }
-});
-document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('a, button, .cta-button, .service-card, .shipment-card')) {
-        circles.forEach(c => c.el.classList.remove('cursor-hovering'));
-    }
-});
-
-// Animate trailing effect
-function animateCursor() {
-    let x = mouseX;
-    let y = mouseY;
-
-    circles.forEach((circle) => {
-        circle.x += (x - circle.x) * 0.25;
-        circle.y += (y - circle.y) * 0.25;
-
-        circle.el.style.left = circle.x + 'px';
-        circle.el.style.top = circle.y + 'px';
-
-        x = circle.x;
-        y = circle.y;
-    });
-
-    requestAnimationFrame(animateCursor);
-}
-animateCursor();
-</script>
-<!-- ===== Universal Back To Top Button (All Pages) ===== -->
-<style>
-  #globalBackToTop {
-    position: fixed;
-    bottom: 20px; /* prevents overlap with chatbot/floating icons */
-    right: 25px;
-    z-index: 9999;
-    display: none;
-    background: #2ecc71;
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    width: 52px;
-    height: 52px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-    transition: opacity 0.3s ease, transform 0.2s ease;
-  }
-
-  #globalBackToTop:hover {
-    transform: scale(1.12);
-    background: #27ae60;
-  }
-
-  @media (max-width: 768px) {
-    #globalBackToTop {
-      bottom: 50px;
-      right: 18px;
-      width: 48px;
-      height: 48px;
-      font-size: 20px;
-    }
-  }
-</style>
-
-<button id="globalBackToTop" title="Back to Top">↑</button>
-
-<script>
-  (function () {
-    const btn = document.getElementById("globalBackToTop");
-
-    // Show button after scrolling down
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 300) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
-      }
-    });
-
-    // Smooth scroll to top on click
-    btn.addEventListener("click", function () {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        // Navigate back
+        window.location.href = "index.html";
       });
-    });
-  })();
-</script>
-<!-- ===== End Back To Top Button ===== -->
+      // --- Cursor Trailing Effect ---
+      const container = document.getElementById("cursorTrail");
+      const circleCount = 12;
+      const circles = [];
+
+      let mouseX = 0;
+      let mouseY = 0;
+
+      // Create circles
+      for (let i = 0; i < circleCount; i++) {
+        const circle = document.createElement("div");
+        circle.classList.add("cursor-circle");
+        container.appendChild(circle);
+        circles.push({ el: circle, x: 0, y: 0 });
+      }
+
+      // Mouse move
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // Click effects
+      document.addEventListener("mousedown", () => {
+        circles.forEach((c) => c.el.classList.add("cursor-clicking"));
+      });
+      document.addEventListener("mouseup", () => {
+        circles.forEach((c) => c.el.classList.remove("cursor-clicking"));
+      });
+
+      // Hover effects on interactive elements
+      document.addEventListener("mouseover", (e) => {
+        if (
+          e.target.closest(
+            "a, button, .cta-button, .service-card, .shipment-card",
+          )
+        ) {
+          circles.forEach((c) => c.el.classList.add("cursor-hovering"));
+        }
+      });
+      document.addEventListener("mouseout", (e) => {
+        if (
+          e.target.closest(
+            "a, button, .cta-button, .service-card, .shipment-card",
+          )
+        ) {
+          circles.forEach((c) => c.el.classList.remove("cursor-hovering"));
+        }
+      });
+
+      // Animate trailing effect
+      function animateCursor() {
+        let x = mouseX;
+        let y = mouseY;
+
+        circles.forEach((circle) => {
+          circle.x += (x - circle.x) * 0.25;
+          circle.y += (y - circle.y) * 0.25;
+
+          circle.el.style.left = circle.x + "px";
+          circle.el.style.top = circle.y + "px";
+
+          x = circle.x;
+          y = circle.y;
+        });
+
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+    </script>
+    <!-- ===== Universal Back To Top Button (All Pages) ===== -->
+    <style>
+      #globalBackToTop {
+        position: fixed;
+        bottom: 20px; /* prevents overlap with chatbot/floating icons */
+        right: 25px;
+        z-index: 9999;
+        display: none;
+        background: #2ecc71;
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        width: 52px;
+        height: 52px;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        transition:
+          opacity 0.3s ease,
+          transform 0.2s ease;
+      }
+
+      #globalBackToTop:hover {
+        transform: scale(1.12);
+        background: #27ae60;
+      }
+
+      @media (max-width: 768px) {
+        #globalBackToTop {
+          bottom: 50px;
+          right: 18px;
+          width: 48px;
+          height: 48px;
+          font-size: 20px;
+        }
+      }
+    </style>
+
+    <button id="globalBackToTop" title="Back to Top">↑</button>
+
+    <script>
+      (function () {
+        const btn = document.getElementById("globalBackToTop");
+
+        // Show button after scrolling down
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            btn.style.display = "block";
+          } else {
+            btn.style.display = "none";
+          }
+        });
+
+        // Smooth scroll to top on click
+        btn.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      })();
+    </script>
+    <!-- ===== End Back To Top Button ===== -->
 
     <script src="footer.js"></script>
-</body>
+  </body>
 </html>

@@ -1,5 +1,5 @@
 /* Import theme system */
-@import url('theme.css');
+@import url("theme.css");
 
 /* =========================================
    Base Styles
@@ -8,7 +8,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 :root {
@@ -106,12 +108,10 @@ body {
   }
 }
 
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
-
 }
 
 /* Header */
@@ -124,7 +124,6 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 15px var(--shadow-header);
   z-index: 100;
-
 }
 
 .header-content {
@@ -133,7 +132,6 @@ body {
   align-items: center;
   padding: 15px 0;
 }
-
 
 /* =========================================
    Main Layout & Content
@@ -403,6 +401,6 @@ section ul li::before {
 
 .cursor-hovering {
   transform: translate(-50%, -50%) scale(1.8);
-  background-color: #22c55e; /* AgriTech green */
+  background-color: #22c55e; /* AgroZen green */
   box-shadow: 0 0 20px #22c55e;
 }

@@ -680,7 +680,7 @@
     .cursor-hovering {
       transform: translate(-50%, -50%) scale(1.8);
       background-color: #22c55e;
-      /* AgriTech green */
+      /* AgroZen green */
       box-shadow: 0 0 20px #22c55e;
     }
 
@@ -1244,7 +1244,7 @@
         else { label.textContent = 'Light'; icon.classList.replace('fa-sun', 'fa-moon'); }
       }
 
-      const savedTheme = localStorage.getItem('agritech-theme') || 'light';
+      const savedTheme = localStorage.getItem('AgroZen-theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
       updateUI(savedTheme);
 
@@ -1252,7 +1252,7 @@
         const html = document.documentElement;
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
-        localStorage.setItem('agritech-theme', next);
+        localStorage.setItem('AgroZen-theme', next);
         updateUI(next);
       });
     }
@@ -1583,8 +1583,8 @@
     <div class="footer-inner-content">
       <div class="footer-section footer-brand">
         <a href="index.html" class="brand-header">
-          <img src="images/logo.png" alt="AgriTech logo" class="brand-logo" />
-          <h3>AgriTech</h3>
+          <img src="images/logo.png" alt="AgroZen logo" class="brand-logo" />
+          <h3>AgroZen</h3>
         </a>
 
         <p class="tagline">
@@ -1635,8 +1635,8 @@
           <h4>Contact</h4>
           <ul>
             <li>
-              <a href="mailto:contact@agritech.com">
-                <i class="fas fa-envelope"></i> contact@agritech.com
+              <a href="mailto:contact@AgroZen.com">
+                <i class="fas fa-envelope"></i> contact@AgroZen.com
               </a>
             </li>
             <li>
@@ -1676,7 +1676,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>© <span id="current-year">2026</span> AgriTech. All rights reserved. <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-and-service.html">Terms</a> · <a href="cookie-policy.html">Cookie Policy</a></p>
+      <p>© <span id="current-year">2026</span> AgroZen. All rights reserved. <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-and-service.html">Terms</a> · <a href="cookie-policy.html">Cookie Policy</a></p>
     </div>
 
     <div class="footer-wave-overlay"></div>

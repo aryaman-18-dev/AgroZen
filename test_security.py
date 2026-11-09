@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Security Test Script for AgriTech Firebase Configuration
+Security Test Script for AgroZen Firebase Configuration
 This script verifies that sensitive information is properly secured.
 """
 
@@ -92,7 +92,7 @@ def test_client_side_exposure():
         # Look for common patterns that indicate hardcoded credentials
         suspicious_patterns = [
             'apiKey: "AIza',
-            'projectId: "agritech',
+            'projectId: "AgroZen',
             'apiKey: "YOUR_API_KEY"',
             'projectId: "YOUR_PROJECT_ID"'
         ]
@@ -140,7 +140,7 @@ def test_gitignore():
 
 def main():
     """Run all security tests"""
-    print("🔒 AgriTech Firebase Security Test Suite")
+    print("🔒 AgroZen Firebase Security Test Suite")
     print("=" * 50)
     
     tests = [

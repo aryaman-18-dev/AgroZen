@@ -54,7 +54,7 @@ def meta_webhook_verify():
     token = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
 
-    expected_token = os.environ.get("META_WHATSAPP_VERIFY_TOKEN", "agritech_bot_token_2025")
+    expected_token = os.environ.get("META_WHATSAPP_VERIFY_TOKEN", "AgroZen_bot_token_2025")
 
     if mode == "subscribe" and token == expected_token:
         logger.info("Meta WhatsApp webhook verified successfully.")

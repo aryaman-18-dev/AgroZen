@@ -1,5 +1,5 @@
 /**
- * AgriTech JSON-based Chatbot Module
+ * AgroZen JSON-based Chatbot Module
  * Provides intelligent response matching with fuzzy search capabilities
  */
 
@@ -9,10 +9,44 @@ class JSONChatbot {
     this.fallbackResponses = [];
     this.isLoaded = false;
     this.stopWords = new Set([
-      'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how',
-      'i', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'to', 'was',
-      'what', 'when', 'where', 'which', 'who', 'why', 'with', 'can', 'you',
-      'me', 'my', 'we', 'our', 'about', 'please', 'tell'
+      "a",
+      "an",
+      "and",
+      "are",
+      "as",
+      "at",
+      "be",
+      "by",
+      "for",
+      "from",
+      "how",
+      "i",
+      "in",
+      "is",
+      "it",
+      "of",
+      "on",
+      "or",
+      "that",
+      "the",
+      "to",
+      "was",
+      "what",
+      "when",
+      "where",
+      "which",
+      "who",
+      "why",
+      "with",
+      "can",
+      "you",
+      "me",
+      "my",
+      "we",
+      "our",
+      "about",
+      "please",
+      "tell",
     ]);
     this.loadResponses();
   }
@@ -22,7 +56,7 @@ class JSONChatbot {
    */
   async loadResponses() {
     try {
-      const response = await fetch('./chatbot-responses.json');
+      const response = await fetch("./chatbot-responses.json");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -30,19 +64,18 @@ class JSONChatbot {
       const data = await response.json();
       this.responses = data.responses || [];
       this.fallbackResponses = data.fallback_responses || [
-        "I’m currently running in offline mode. You can ask me about soil health, crops, irrigation, or fertilizers."
+        "I’m currently running in offline mode. You can ask me about soil health, crops, irrigation, or fertilizers.",
       ];
 
       this.isLoaded = true;
-      console.log('Chatbot responses loaded successfully');
-
+      console.log("Chatbot responses loaded successfully");
     } catch (error) {
-      console.error('Failed to load chatbot responses:', error);
+      console.error("Failed to load chatbot responses:", error);
 
       // Friendly agriculture-focused fallback
       this.responses = [];
       this.fallbackResponses = [
-        "I’m currently running in offline mode. Here’s some general advice: focus on soil health, proper irrigation, and timely crop care."
+        "I’m currently running in offline mode. Here’s some general advice: focus on soil health, proper irrigation, and timely crop care.",
       ];
 
       this.isLoaded = false;
@@ -53,10 +86,10 @@ class JSONChatbot {
    * Normalize user text for matching
    */
   normalizeText(text) {
-    return String(text || '')
+    return String(text || "")
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, ' ')
-      .replace(/\s+/g, ' ')
+      .replace(/[^a-z0-9\s]/g, " ")
+      .replace(/\s+/g, " ")
       .trim();
   }
 
@@ -68,7 +101,7 @@ class JSONChatbot {
     if (!normalized) return [];
 
     return normalized
-      .split(' ')
+      .split(" ")
       .filter((word) => word.length > 1 && !this.stopWords.has(word));
   }
 
@@ -125,7 +158,7 @@ class JSONChatbot {
         matrix[j][i] = Math.min(
           matrix[j][i - 1] + 1,
           matrix[j - 1][i] + 1,
-          matrix[j - 1][i - 1] + substitutionCost
+          matrix[j - 1][i - 1] + substitutionCost,
         );
       }
     }
@@ -168,19 +201,29 @@ class JSONChatbot {
 
     const exactMatch = normalizedInput === normalizedQuery ? 1.0 : 0;
     const containsMatch =
-      normalizedInput.includes(normalizedQuery) || normalizedQuery.includes(normalizedInput)
+      normalizedInput.includes(normalizedQuery) ||
+      normalizedQuery.includes(normalizedInput)
         ? 0.9
         : 0;
-    const levenshteinSimilarity = this.calculateSimilarity(normalizedInput, normalizedQuery);
-    const keyPhraseMatch = this.containsKeyPhrases(normalizedInput, normalizedQuery);
-    const tokenOverlap = this.calculateTokenOverlap(normalizedInput, normalizedQuery);
+    const levenshteinSimilarity = this.calculateSimilarity(
+      normalizedInput,
+      normalizedQuery,
+    );
+    const keyPhraseMatch = this.containsKeyPhrases(
+      normalizedInput,
+      normalizedQuery,
+    );
+    const tokenOverlap = this.calculateTokenOverlap(
+      normalizedInput,
+      normalizedQuery,
+    );
 
     return Math.max(
       exactMatch,
       containsMatch,
       levenshteinSimilarity * 0.55 + tokenOverlap * 0.45,
       keyPhraseMatch * 0.75,
-      tokenOverlap * 0.8
+      tokenOverlap * 0.8,
     );
   }
 
@@ -189,7 +232,9 @@ class JSONChatbot {
    */
   getQueryVariants(responseObj) {
     if (!responseObj || !responseObj.query) return [];
-    return Array.isArray(responseObj.query) ? responseObj.query : [responseObj.query];
+    return Array.isArray(responseObj.query)
+      ? responseObj.query
+      : [responseObj.query];
   }
 
   /**
@@ -207,7 +252,7 @@ class JSONChatbot {
       return `${base}\n\nTry asking about: crop recommendation, irrigation, soil health, or plant diseases.`;
     }
 
-    return `${base}\n\nYou can also ask: ${suggestions.join(' | ')}`;
+    return `${base}\n\nYou can also ask: ${suggestions.join(" | ")}`;
   }
 
   /**
@@ -219,7 +264,7 @@ class JSONChatbot {
         response: this.getRandomFallback(),
         matched: false,
         confidence: 0,
-        matchedQuery: null
+        matchedQuery: null,
       };
     }
 
@@ -232,7 +277,7 @@ class JSONChatbot {
     for (const responseObj of this.responses) {
       const queries = this.getQueryVariants(responseObj);
       let itemBestScore = 0;
-      let itemBestQuery = '';
+      let itemBestQuery = "";
 
       for (const query of queries) {
         const score = this.scoreQuery(input, query);
@@ -257,7 +302,7 @@ class JSONChatbot {
         response: bestMatch.response,
         matched: true,
         confidence: bestScore,
-        matchedQuery: rankedMatches[0] ? rankedMatches[0].query : null
+        matchedQuery: rankedMatches[0] ? rankedMatches[0].query : null,
       };
     }
 
@@ -265,7 +310,7 @@ class JSONChatbot {
       response: this.buildFallbackResponse(input, rankedMatches),
       matched: false,
       confidence: rankedMatches[0] ? rankedMatches[0].score : 0,
-      matchedQuery: rankedMatches[0] ? rankedMatches[0].query : null
+      matchedQuery: rankedMatches[0] ? rankedMatches[0].query : null,
     };
   }
 
@@ -273,10 +318,15 @@ class JSONChatbot {
    * Get random fallback response
    */
   getRandomFallback() {
-    if (!Array.isArray(this.fallbackResponses) || this.fallbackResponses.length === 0) {
+    if (
+      !Array.isArray(this.fallbackResponses) ||
+      this.fallbackResponses.length === 0
+    ) {
       return "I’m currently running in offline mode. Please ask about farming topics.";
     }
-    const randomIndex = Math.floor(Math.random() * this.fallbackResponses.length);
+    const randomIndex = Math.floor(
+      Math.random() * this.fallbackResponses.length,
+    );
     return this.fallbackResponses[randomIndex];
   }
 
@@ -327,6 +377,6 @@ class JSONChatbot {
 window.JSONChatbot = JSONChatbot;
 
 // Node.js compatibility
-if (typeof module !== 'undefined' && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
   module.exports = JSONChatbot;
 }

@@ -1,5 +1,5 @@
 """
-Security utilities for AgriTech Flask applications
+Security utilities for AgroZen Flask applications
 Provides input validation, sanitization, and security helpers
 """
 

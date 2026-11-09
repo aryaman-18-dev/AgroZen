@@ -142,7 +142,7 @@ if not gemini_api_key or not str(gemini_api_key).strip():
     if not app.config.get('TESTING'):
         error_msg = (
             "CRITICAL STARTUP ERROR: GEMINI_API_KEY is missing or empty. "
-            "The AgriTech backend requires a valid GEMINI_API_KEY to initialize AI services. "
+            "The AgroZen backend requires a valid GEMINI_API_KEY to initialize AI services. "
             "Please configure GEMINI_API_KEY in your .env file or environment variables before starting the server."
         )
         logger.critical(error_msg)

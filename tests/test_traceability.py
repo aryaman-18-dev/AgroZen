@@ -287,7 +287,7 @@ class TestTraceabilityAPI:
         
         token = jwt.encode(
             {'user_id': test_farmer.id, 'role': UserRole.FARMER, 'email': test_farmer.email},
-            os.environ.get('JWT_SECRET', 'agritech_secret_key'),
+            os.environ.get('JWT_SECRET', 'AgroZen_secret_key'),
             algorithm='HS256'
         )
         return {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}

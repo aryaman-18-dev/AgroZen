@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,9 +6,14 @@
     <!-- Prevent theme flash on page load -->
     <script>
       (function () {
-        const saved = localStorage.getItem('agritech-theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+        const saved = localStorage.getItem("AgroZen-theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        document.documentElement.setAttribute(
+          "data-theme",
+          saved || (prefersDark ? "dark" : "light"),
+        );
       })();
     </script>
     <link rel="stylesheet" href="weather.css" />
@@ -46,7 +51,7 @@
       }
     </style>
     <link rel="stylesheet" href="footer.css" />
-</head>
+  </head>
 
   <body>
     <!-- Header from main branch -->
@@ -54,23 +59,28 @@
       <div class="header-content">
         <div class="logo">
           <i class="fas fa-seedling" aria-hidden="true"></i>
-          <h1>AgriTech</h1>
+          <h1>AgroZen</h1>
         </div>
-        <div style="display: flex; gap: 1rem; align-items: center;">
+        <div style="display: flex; gap: 1rem; align-items: center">
           <!-- Animated Sun/Moon Toggle -->
-          <button class="theme-toggle" type="button" id="themeToggle" title="Switch to dark mode"
-              aria-label="Switch to dark mode">
-        <span class="theme-toggle-track">
-          <span class="theme-toggle-icon sun-icon" aria-hidden="true">
-            <i class="fas fa-sun"></i>
-          </span>
-          <span class="theme-toggle-icon moon-icon" aria-hidden="true">
-            <i class="fas fa-moon"></i>
-          </span>
-          <span class="theme-toggle-thumb"></span>
-        </span>
-      </button>
-          
+          <button
+            class="theme-toggle"
+            type="button"
+            id="themeToggle"
+            title="Switch to dark mode"
+            aria-label="Switch to dark mode"
+          >
+            <span class="theme-toggle-track">
+              <span class="theme-toggle-icon sun-icon" aria-hidden="true">
+                <i class="fas fa-sun"></i>
+              </span>
+              <span class="theme-toggle-icon moon-icon" aria-hidden="true">
+                <i class="fas fa-moon"></i>
+              </span>
+              <span class="theme-toggle-thumb"></span>
+            </span>
+          </button>
+
           <a href="index.html" class="nav-back">
             <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Home
           </a>
@@ -119,7 +129,11 @@
         </div>
 
         <div class="right predictions-data">
-          <div class="hourly" role="region" aria-label="Hourly weather forecast">
+          <div
+            class="hourly"
+            role="region"
+            aria-label="Hourly weather forecast"
+          >
             <div>
               <p>Hourly forecast</p>
             </div>
@@ -128,7 +142,11 @@
             </div>
           </div>
 
-          <div class="daywise" role="region" aria-label="10 day weather forecast">
+          <div
+            class="daywise"
+            role="region"
+            aria-label="10 day weather forecast"
+          >
             <div>
               <p>10 days forecast</p>
             </div>
@@ -144,8 +162,8 @@
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="images/logo.png" alt="AgriTech logo" class="footer-logo" />
-          <h3>AgriTech</h3>
+          <img src="images/logo.png" alt="AgroZen logo" class="footer-logo" />
+          <h3>AgroZen</h3>
           <p>Empowering India's Farming Future</p>
           <div class="social-media">
             <a
@@ -187,7 +205,8 @@
           <ul>
             <li><a href="/crop">Crop Recommendation</a></li>
             <li>
-              <a href="Crop Yield Prediction/crop_yield_app/templates/index.html"
+              <a
+                href="Crop Yield Prediction/crop_yield_app/templates/index.html"
                 >Yield Prediction</a
               >
             </li>
@@ -202,13 +221,17 @@
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">© 2025 AgriTech • Made for farmers
+      <div class="footer-bottom">
+        © 2025 AgroZen • Made for farmers
         <div class="footer-section footer-newsletter">
           <h4>Newsletter</h4>
           <p class="newsletter-desc">
             Subscribe to get the latest farming insights, tips, and updates.
           </p>
-          <form class="newsletter-form" onsubmit="return handleNewsletterSubmit(event, this)">
+          <form
+            class="newsletter-form"
+            onsubmit="return handleNewsletterSubmit(event, this);"
+          >
             <div class="newsletter-input-group">
               <input
                 type="email"
@@ -217,18 +240,35 @@
                 required
                 aria-label="Email address for newsletter"
               />
-              <button type="submit" class="newsletter-btn" aria-label="Subscribe to newsletter">
+              <button
+                type="submit"
+                class="newsletter-btn"
+                aria-label="Subscribe to newsletter"
+              >
                 <span>Subscribe</span>
                 <i class="fas fa-paper-plane"></i>
               </button>
             </div>
-            <div class="newsletter-feedback" style="display:none;" role="status" aria-live="polite"></div>
+            <div
+              class="newsletter-feedback"
+              style="display: none"
+              role="status"
+              aria-live="polite"
+            ></div>
             <div class="newsletter-footer-optout">
-              <small>No spam. <a href="javascript:void(0)" onclick="openUnsubscribeModal(event)">Unsubscribe</a> anytime.</small>
+              <small
+                >No spam.
+                <a
+                  href="javascript:void(0)"
+                  onclick="openUnsubscribeModal(event)"
+                  >Unsubscribe</a
+                >
+                anytime.</small
+              >
             </div>
           </form>
         </div>
-</div>
+      </div>
     </footer>
 
     <!-- Floating Chatbot Button -->
@@ -242,34 +282,30 @@
     </a>
 
     <!-- Cursor Trail -->
-    <div
-      class="circle-container"
-      id="cursorTrail"
-      aria-hidden="true"
-    ></div>
+    <div class="circle-container" id="cursorTrail" aria-hidden="true"></div>
 
     <script src="weather.js"></script>
     <script src="theme.js"></script>
     <script>
       (function () {
         function syncDarkClass() {
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          document.body.classList.toggle('dark-theme', isDark);
+          const isDark =
+            document.documentElement.getAttribute("data-theme") === "dark";
+          document.body.classList.toggle("dark-theme", isDark);
         }
         syncDarkClass();
-        window.addEventListener('themeChanged', syncDarkClass);
+        window.addEventListener("themeChanged", syncDarkClass);
       })();
     </script>
 
     <!-- Voice Button Fix Script -->
     <script>
       // Fix voice button positioning after page loads
-      window.addEventListener('load', function () {
+      window.addEventListener("load", function () {
         setTimeout(function () {
-          const voiceBtn = document.querySelector('.voice-btn');
-          const cityInput = document.getElementById('cityInput');
-          const searchContainer =
-            document.querySelector('.search-container');
+          const voiceBtn = document.querySelector(".voice-btn");
+          const cityInput = document.getElementById("cityInput");
+          const searchContainer = document.querySelector(".search-container");
 
           if (voiceBtn && cityInput) {
             // Force button inside the search container
@@ -296,16 +332,15 @@
             `;
 
             // Force input padding
-            cityInput.style.paddingRight = '45px';
+            cityInput.style.paddingRight = "45px";
 
-            console.log('✓ Voice button positioned correctly');
+            console.log("✓ Voice button positioned correctly");
           }
         }, 300);
       });
 
-    
       // --- Cursor Trailing Effect ---
-      const container = document.getElementById('cursorTrail');
+      const container = document.getElementById("cursorTrail");
       const circleCount = 12;
       const circles = [];
 
@@ -314,35 +349,43 @@
 
       // Create circles
       for (let i = 0; i < circleCount; i++) {
-        const circle = document.createElement('div');
-        circle.classList.add('cursor-circle');
+        const circle = document.createElement("div");
+        circle.classList.add("cursor-circle");
         container.appendChild(circle);
         circles.push({ el: circle, x: 0, y: 0 });
       }
 
       // Mouse move
-      document.addEventListener('mousemove', (e) => {
+      document.addEventListener("mousemove", (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
       });
 
       // Click effects
-      document.addEventListener('mousedown', () => {
-        circles.forEach((c) => c.el.classList.add('cursor-clicking'));
+      document.addEventListener("mousedown", () => {
+        circles.forEach((c) => c.el.classList.add("cursor-clicking"));
       });
-      document.addEventListener('mouseup', () => {
-        circles.forEach((c) => c.el.classList.remove('cursor-clicking'));
+      document.addEventListener("mouseup", () => {
+        circles.forEach((c) => c.el.classList.remove("cursor-clicking"));
       });
 
       // Hover effects on interactive elements
-      document.addEventListener('mouseover', (e) => {
-        if (e.target.closest('a, button, .cta-button, .service-card, .shipment-card')) {
-          circles.forEach((c) => c.el.classList.add('cursor-hovering'));
+      document.addEventListener("mouseover", (e) => {
+        if (
+          e.target.closest(
+            "a, button, .cta-button, .service-card, .shipment-card",
+          )
+        ) {
+          circles.forEach((c) => c.el.classList.add("cursor-hovering"));
         }
       });
-      document.addEventListener('mouseout', (e) => {
-        if (e.target.closest('a, button, .cta-button, .service-card, .shipment-card')) {
-          circles.forEach((c) => c.el.classList.remove('cursor-hovering'));
+      document.addEventListener("mouseout", (e) => {
+        if (
+          e.target.closest(
+            "a, button, .cta-button, .service-card, .shipment-card",
+          )
+        ) {
+          circles.forEach((c) => c.el.classList.remove("cursor-hovering"));
         }
       });
 
@@ -355,8 +398,8 @@
           circle.x += (x - circle.x) * 0.25;
           circle.y += (y - circle.y) * 0.25;
 
-          circle.el.style.left = circle.x + 'px';
-          circle.el.style.top = circle.y + 'px';
+          circle.el.style.left = circle.x + "px";
+          circle.el.style.top = circle.y + "px";
 
           x = circle.x;
           y = circle.y;
@@ -367,68 +410,70 @@
       animateCursor();
     </script>
     <!-- ===== Universal Back To Top Button (All Pages) ===== -->
-<style>
-  #globalBackToTop {
-    position: fixed;
-    bottom: 90px; /* prevents overlap with chatbot/floating icons */
-    right: 25px;
-    z-index: 9999;
-    display: none;
-    background: #2ecc71;
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    width: 52px;
-    height: 52px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-    transition: opacity 0.3s ease, transform 0.2s ease;
-  }
-
-  #globalBackToTop:hover {
-    transform: scale(1.12);
-    background: #27ae60;
-  }
-
-  @media (max-width: 768px) {
-    #globalBackToTop {
-      bottom: 100px; /* better spacing on mobile */
-      right: 18px;
-      width: 48px;
-      height: 48px;
-      font-size: 20px;
-    }
-  }
-</style>
-
-<button id="globalBackToTop" title="Back to Top">↑</button>
-
-<script>
-  (function () {
-    const btn = document.getElementById("globalBackToTop");
-
-    // Show button after scrolling down
-    window.addEventListener("scroll", function () {
-      if (window.scrollY > 300) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
+    <style>
+      #globalBackToTop {
+        position: fixed;
+        bottom: 90px; /* prevents overlap with chatbot/floating icons */
+        right: 25px;
+        z-index: 9999;
+        display: none;
+        background: #2ecc71;
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        width: 52px;
+        height: 52px;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        transition:
+          opacity 0.3s ease,
+          transform 0.2s ease;
       }
-    });
 
-    // Smooth scroll to top on click
-    btn.addEventListener("click", function () {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
-  })();
-</script>
-<!-- ===== End Back To Top Button ===== -->
+      #globalBackToTop:hover {
+        transform: scale(1.12);
+        background: #27ae60;
+      }
+
+      @media (max-width: 768px) {
+        #globalBackToTop {
+          bottom: 100px; /* better spacing on mobile */
+          right: 18px;
+          width: 48px;
+          height: 48px;
+          font-size: 20px;
+        }
+      }
+    </style>
+
+    <button id="globalBackToTop" title="Back to Top">↑</button>
+
+    <script>
+      (function () {
+        const btn = document.getElementById("globalBackToTop");
+
+        // Show button after scrolling down
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            btn.style.display = "block";
+          } else {
+            btn.style.display = "none";
+          }
+        });
+
+        // Smooth scroll to top on click
+        btn.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      })();
+    </script>
+    <!-- ===== End Back To Top Button ===== -->
 
     <script src="footer.js"></script>
-</body>
+  </body>
 </html>

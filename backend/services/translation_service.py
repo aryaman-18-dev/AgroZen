@@ -1,5 +1,5 @@
 """
-Google Cloud Translation Service for AgriTech Backend.
+Google Cloud Translation Service for AgroZen Backend.
 Provides high-performance server-side translation of static and dynamic content
 (blogs, crop data, advisory resources, community posts) with intelligent caching
 and multi-tier fallback support (Google Cloud Translation API -> deep-translator -> dictionary).

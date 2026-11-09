@@ -1,4 +1,4 @@
-// auth.js — AgriTech Authentication System
+// auth.js — AgroZen Authentication System
 // Migrated from localStorage to Firebase Auth + Firestore
 // Maintains full backward-compatible API so register.js / login.js need minimal changes
 
@@ -52,9 +52,9 @@ async function getFirebaseInstances() {
   if (_auth && _db) return { auth: _auth, db: _db };
 
   // Use the current host (localhost or 127.0.0.1) to avoid cross-origin CORS failures.
-  const res = await fetch('/api/firebase-config');
-  if (!res.ok) throw new Error('Failed to fetch Firebase config');
-  
+  const res = await fetch("/api/firebase-config");
+  if (!res.ok) throw new Error("Failed to fetch Firebase config");
+
   const config = await res.json();
 
   _app = initializeApp(config);
@@ -75,7 +75,12 @@ class AuthManager {
 
   // ── Register ──────────────────────────────
   async register({ role, fullname, email, password }) {
-    const validation = this._validateRegistrationData({ role, fullname, email, password });
+    const validation = this._validateRegistrationData({
+      role,
+      fullname,
+      email,
+      password,
+    });
     if (!validation.valid) {
       return { success: false, message: validation.message };
     }
@@ -89,7 +94,11 @@ class AuthManager {
       const normalizedFullname = fullname.trim();
       const normalizedRole = role.trim().toLowerCase();
 
-      const cred = await createUserWithEmailAndPassword(auth, normalizedEmail, password);
+      const cred = await createUserWithEmailAndPassword(
+        auth,
+        normalizedEmail,
+        password,
+      );
 
       // Store profile + role in Firestore
       await setDoc(doc(db, "users", cred.user.uid), {
@@ -101,7 +110,12 @@ class AuthManager {
         isBanned: false,
       });
 
-      const userData = { id: cred.user.uid, fullname: normalizedFullname, email: normalizedEmail, role: normalizedRole };
+      const userData = {
+        id: cred.user.uid,
+        fullname: normalizedFullname,
+        email: normalizedEmail,
+        role: normalizedRole,
+      };
       this._setSession(userData);
 
       return {
@@ -125,7 +139,11 @@ class AuthManager {
       const { auth, db } = await getFirebaseInstances();
       const normalizedEmail = email.trim().toLowerCase();
 
-      const cred = await signInWithEmailAndPassword(auth, normalizedEmail, password);
+      const cred = await signInWithEmailAndPassword(
+        auth,
+        normalizedEmail,
+        password,
+      );
 
       // Fetch role and profile from Firestore
       const snap = await getDoc(doc(db, "users", cred.user.uid));
@@ -169,17 +187,23 @@ class AuthManager {
   }
 
   // ── Logout ────────────────────────────────
-  async logout() {
+  async logout({ redirect = true } = {}) {
+    let logoutError = null;
     try {
       const { auth } = await getFirebaseInstances();
       await signOut(auth);
-      sessionStorage.removeItem("agritech_session");
-      this.currentUser = null;
-      window.location.href = "login.html";
-      return { success: true };
     } catch (err) {
-      return { success: false, message: err.message };
+      logoutError = err;
+    } finally {
+      sessionStorage.removeItem("AgroZen_session");
+      this.currentUser = null;
+      this._ready = true;
     }
+
+    if (redirect) window.location.replace("login.html");
+    return logoutError
+      ? { success: false, message: logoutError.message }
+      : { success: true, message: "You have been logged out." };
   }
 
   // ── Check login state ─────────────────────
@@ -191,7 +215,7 @@ class AuthManager {
   getCurrentUser() {
     if (this.currentUser) return this.currentUser;
     try {
-      const s = sessionStorage.getItem("agritech_session");
+      const s = sessionStorage.getItem("AgroZen_session");
       if (s) {
         this.currentUser = JSON.parse(s);
         return this.currentUser;
@@ -231,7 +255,7 @@ class AuthManager {
   // ─────────────────────────────────────────
   _setSession(user) {
     this.currentUser = user;
-    sessionStorage.setItem("agritech_session", JSON.stringify(user));
+    sessionStorage.setItem("AgroZen_session", JSON.stringify(user));
   }
 
   _validateEmail(email) {
@@ -275,7 +299,10 @@ class AuthManager {
     }
 
     if (!/^[a-zA-Z\s.'-]+$/.test(fullname.trim())) {
-      return { valid: false, message: "Full name can only contain letters and spaces" };
+      return {
+        valid: false,
+        message: "Full name can only contain letters and spaces",
+      };
     }
 
     if (!this._validateEmail(email)) {
@@ -291,7 +318,10 @@ class AuthManager {
     }
 
     if (!this._validateEmail(email)) {
-      return { valid: false, message: "Please enter a valid @gmail.com address" };
+      return {
+        valid: false,
+        message: "Please enter a valid @gmail.com address",
+      };
     }
 
     return { valid: true };

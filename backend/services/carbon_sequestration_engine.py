@@ -107,7 +107,7 @@ ECO_REWARDS_CATALOG = [
         "id": "REW-SOLAR-02",
         "title": "Solar Micro-Drip Pump Subsidy Voucher",
         "category": "CLEAN_ENERGY",
-        "sponsor": "PM-KUSUM Clean Energy Initiative & AgriTech Energy Fund",
+        "sponsor": "PM-KUSUM Clean Energy Initiative & AgroZen Energy Fund",
         "credits_required": 80,
         "rupee_value": 12000,
         "icon": "fa-solar-panel",
@@ -336,7 +336,7 @@ class CarbonSequestrationEngine:
             "credits_deducted": reward["credits_required"],
             "rupee_equivalent": reward["rupee_value"],
             "voucher_code": voucher_code,
-            "instructions": f"Present voucher code {voucher_code} at authorized dealer or AgriTech partner store for instant fulfillment.",
+            "instructions": f"Present voucher code {voucher_code} at authorized dealer or AgroZen partner store for instant fulfillment.",
             "timestamp": datetime.utcnow().isoformat()
         }
         return claim_receipt

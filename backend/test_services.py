@@ -259,7 +259,7 @@ def test_celery_task():
 def main():
     """Run all tests"""
     print("\n" + "=" * 60)
-    print("AgriTech PDF & Email Service Testing")
+    print("AgroZen PDF & Email Service Testing")
     print("=" * 60)
     print(f"Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
     

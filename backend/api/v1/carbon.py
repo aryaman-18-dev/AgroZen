@@ -97,7 +97,7 @@ def log_practice():
 @carbon_bp.route('/mint', methods=['POST'])
 def mint_carbon_credits():
     """
-    Mints verified carbon sequestration into tradeable Green Credits on the AgriTech marketplace.
+    Mints verified carbon sequestration into tradeable Green Credits on the AgroZen marketplace.
     """
     data = request.get_json(silent=True) or {}
     credits_to_mint = int(data.get('credits', 50))

@@ -1,9 +1,9 @@
 @echo off
-REM AgriTech Report Engine Startup Script
+REM AgroZen Report Engine Startup Script
 REM This script starts all required services for the PDF Report Generation and Email Delivery Engine
 
 echo ========================================
-echo AgriTech Report Engine Startup
+echo AgroZen Report Engine Startup
 echo ========================================
 echo.
 
@@ -54,7 +54,7 @@ timeout /t 2 /nobreak >nul
 
 REM Start Flask app in a new window
 echo [2/3] Starting Flask application...
-start "Flask App - AgriTech" cmd /k "python app.py"
+start "Flask App - AgroZen" cmd /k "python app.py"
 timeout /t 3 /nobreak >nul
 
 REM Start Celery worker in a new window

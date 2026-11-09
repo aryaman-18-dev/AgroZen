@@ -25,7 +25,7 @@ class EmailService:
         self.smtp_username = os.environ.get('SMTP_USERNAME', '')
         self.smtp_password = os.environ.get('SMTP_PASSWORD', '')
         self.sender_email = os.environ.get('SENDER_EMAIL', self.smtp_username)
-        self.sender_name = os.environ.get('SENDER_NAME', 'AgriTech Loan Services')
+        self.sender_name = os.environ.get('SENDER_NAME', 'AgroZen Loan Services')
         
         # Validate configuration
         if not self.smtp_username or not self.smtp_password:
@@ -56,7 +56,7 @@ class EmailService:
             message = MIMEMultipart()
             message['From'] = formataddr((self.sender_name, self.sender_email))
             message['To'] = recipient_email
-            message['Subject'] = f"Your {loan_type} Eligibility Report - AgriTech"
+            message['Subject'] = f"Your {loan_type} Eligibility Report - AgroZen"
             
             # Email body (HTML)
             html_body = f"""
@@ -114,12 +114,12 @@ class EmailService:
                 <body>
                     <div class="container">
                         <div class="header">
-                            <h1>🌾 AgriTech Loan Services</h1>
+                            <h1>🌾 AgroZen Loan Services</h1>
                         </div>
                         <div class="content">
                             <h2>Dear {recipient_name},</h2>
                             
-                            <p>Thank you for using AgriTech's loan eligibility assessment service.</p>
+                            <p>Thank you for using AgroZen's loan eligibility assessment service.</p>
                             
                             <div class="highlight">
                                 <strong>Your {loan_type} eligibility report is ready!</strong><br>
@@ -147,7 +147,7 @@ class EmailService:
                             Final loan approval is subject to document verification and the lending institution's policies.</em></p>
                             
                             <div class="footer">
-                                <p><strong>AgriTech - Empowering Farmers with Technology</strong></p>
+                                <p><strong>AgroZen - Empowering Farmers with Technology</strong></p>
                                 <p>Report Generated: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</p>
                                 <p>This is an automated email. Please do not reply to this message.</p>
                             </div>

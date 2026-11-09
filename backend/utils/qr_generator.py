@@ -5,7 +5,7 @@ from PIL import Image
 
 class QRGenerator:
     @staticmethod
-    def generate_batch_qr(batch_id, base_url="https://agritech.com/trace/"):
+    def generate_batch_qr(batch_id, base_url="https://AgroZen.com/trace/"):
         """
         Generate a QR code for a supply batch.
         Contains the URL to the public traceability page.

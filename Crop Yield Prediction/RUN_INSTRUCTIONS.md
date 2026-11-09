@@ -1,13 +1,13 @@
-# Run Crop Yield Prediction in AgriTech (Windows / VS Code)
+# Run Crop Yield Prediction in AgroZen (Windows / VS Code)
 
-The main AgriTech Flask app serves the integrated yield page at `http://127.0.0.1:5000/yield/`. The notebook `cropYieldPrediction1.ipynb` trains the model used by that page. Training writes one inference bundle to `crop_yield_app/models/crop_yield_model_bundle.joblib`.
+The main AgroZen Flask app serves the integrated yield page at `http://127.0.0.1:5000/yield/`. The notebook `cropYieldPrediction1.ipynb` trains the model used by that page. Training writes one inference bundle to `crop_yield_app/models/crop_yield_model_bundle.joblib`.
 
 ## 1. Open the project and activate its virtual environment
 
-In VS Code, open the AgriTech repository root. In the integrated PowerShell terminal:
+In VS Code, open the AgroZen repository root. In the integrated PowerShell terminal:
 
 ```powershell
-cd C:\Users\KIIT0001\OneDrive\Desktop\AgriTech
+cd C:\Users\KIIT0001\OneDrive\Desktop\AgroZen
 .\.venv\Scripts\Activate.ps1
 ```
 
@@ -23,7 +23,7 @@ LightGBM, Optuna, and SHAP are optional. LightGBM is automatically skipped if ab
 
 ## 3. Select the notebook kernel
 
-Install the VS Code Python and Jupyter extensions if they are not already installed. Open `Crop Yield Prediction/cropYieldPrediction1.ipynb`. In VS Code, choose the AgriTech `.venv` as the notebook kernel. The notebook is configured to find `Crop Yield Prediction/Datasets/crop_yield.csv` whether VS Code opened the repository root or the notebook folder.
+Install the VS Code Python and Jupyter extensions if they are not already installed. Open `Crop Yield Prediction/cropYieldPrediction1.ipynb`. In VS Code, choose the AgroZen `.venv` as the notebook kernel. The notebook is configured to find `Crop Yield Prediction/Datasets/crop_yield.csv` whether VS Code opened the repository root or the notebook folder.
 
 ## 4. Train and export the model
 
@@ -52,4 +52,3 @@ Open `http://127.0.0.1:5000/yield/`, choose the supported inputs, and submit the
 - If `/yield/` returns 503, the bundle is missing or invalid. Confirm the final notebook cell completed and the joblib file exists in `Crop Yield Prediction/crop_yield_app/models`, then restart Flask.
 - If a crop, season, or state is rejected, choose an item from the page's dropdowns; those lists come from the notebook's fitted encoders.
 - The page restricts year to the training dataset's year range. This model was not trained to extrapolate to future years.
-

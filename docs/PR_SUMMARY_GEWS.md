@@ -11,11 +11,11 @@ This PR implements a complete Geospatial Early Warning System that detects disea
 ## 📦 Changes Overview
 
 ### New Files (4)
+
 1. **backend/api/v1/disease.py** (445 lines)
    - REST API for geo-tagged disease reporting
    - 11 endpoints for incidents, outbreaks, alerts, and risk checks
    - GeoJSON endpoints for mapping
-   
 2. **backend/services/geospatial_service.py** (455 lines)
    - Core geospatial algorithms (Haversine, clustering)
    - PostGIS integration with Python fallback
@@ -31,6 +31,7 @@ This PR implements a complete Geospatial Early Warning System that detects disea
    - API reference, setup guide, troubleshooting
 
 ### Modified Files (6)
+
 1. **backend/models.py**
    - Added geospatial fields to User model (farm location)
    - New models: DiseaseIncident, OutbreakZone, OutbreakAlert
@@ -49,7 +50,7 @@ This PR implements a complete Geospatial Early Warning System that detects disea
    - Added outbreak alert translations (EN, HI, MR)
    - 9 new localized strings
 
-5. **backend/api/v1/__init__.py**
+5. **backend/api/v1/**init**.py**
    - Registered disease_bp blueprint
 
 6. **requirements.txt**
@@ -58,38 +59,46 @@ This PR implements a complete Geospatial Early Warning System that detects disea
 ## ✨ Key Features
 
 ### 1. Geo-Tagged Disease Reporting
+
 ```bash
 POST /api/v1/disease/incidents
 ```
+
 - Farmers report diseases with GPS coordinates
 - Captures disease, crop, severity, symptoms, area
 - Automatic verification workflow
 
 ### 2. Automated Outbreak Detection
+
 - **Hourly Celery task** analyzes last 30 days
 - DBSCAN-like clustering (50km radius, min 3 incidents)
 - AI risk assessment (low → critical)
 - Creates OutbreakZone records automatically
 
 ### 3. Real-Time Emergency Alerts
+
 - **SocketIO push notifications**
 - 3 priority levels based on distance
 - Multi-language support
 - PDF preventative action reports
 
 ### 4. Risk Assessment API
+
 ```bash
 GET /api/v1/disease/my-risk
 ```
+
 - Checks user's farm against active outbreaks
 - Returns nearby outbreak zones with distances
 - Alert history
 
 ### 5. Interactive Mapping
+
 ```bash
 GET /api/v1/disease/incidents/geojson
 GET /api/v1/disease/outbreaks/geojson
 ```
+
 - GeoJSON exports for Leaflet/Mapbox
 - Color-coded risk levels
 - Real-time visualization
@@ -97,6 +106,7 @@ GET /api/v1/disease/outbreaks/geojson
 ## 🏗️ Technical Architecture
 
 ### Database Models
+
 ```
 User (extended)
 ├─ farm_latitude, farm_longitude
@@ -120,6 +130,7 @@ OutbreakAlert
 ```
 
 ### Celery Tasks
+
 1. **detect_disease_outbreaks_task** (hourly)
    - Spatial clustering analysis
    - Create/update outbreak zones
@@ -136,6 +147,7 @@ OutbreakAlert
    - Professional PDF with actions
 
 ### Geospatial Algorithms
+
 - **Distance**: Haversine formula
 - **Clustering**: DBSCAN-like (50km ε, minPts=3)
 - **Risk**: Based on incident count + avg severity
@@ -154,23 +166,27 @@ OutbreakAlert
 ## 🔧 Setup Requirements
 
 ### 1. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 2. Run Migration
+
 ```bash
 python migrations/init_gews_db.py
 python migrations/init_gews_db.py --sample  # Optional test data
 ```
 
 ### 3. Configure Environment
+
 ```bash
 export GEMINI_API_KEY=your_api_key
-export DATABASE_URL=postgresql://user:pass@localhost/agritech  # Optional
+export DATABASE_URL=postgresql://user:pass@localhost/AgroZen  # Optional
 ```
 
 ### 4. Start Services
+
 ```bash
 # Flask app
 python app.py
@@ -183,6 +199,7 @@ celery -A backend.tasks beat --loglevel=info
 ```
 
 ### 5. Enable PostGIS (Optional, PostgreSQL only)
+
 ```sql
 CREATE EXTENSION postgis;
 ```
@@ -190,6 +207,7 @@ CREATE EXTENSION postgis;
 ## 🧪 Testing
 
 ### Manual Testing
+
 ```bash
 # Report incident
 curl -X POST http://localhost:5000/api/v1/disease/incidents \
@@ -214,6 +232,7 @@ curl http://localhost:5000/api/v1/disease/incidents/geojson
 ```
 
 ### Automated Tests
+
 ```bash
 pytest tests/test_geospatial_service.py
 pytest tests/test_disease_api.py
@@ -233,14 +252,17 @@ pytest tests/test_disease_api.py
 ## 📝 Database Changes
 
 ### New Tables
+
 - `disease_incidents` (with spatial index)
 - `outbreak_zones` (with spatial index)
 - `outbreak_alerts`
 
 ### Modified Tables
+
 - `users` (added 4 geospatial columns)
 
 ### Indexes
+
 - GIST index on `disease_incidents.location`
 - GIST index on `users.farm_location`
 - GIST index on `outbreak_zones.center_location`
@@ -250,22 +272,24 @@ pytest tests/test_disease_api.py
 To integrate this feature into the frontend:
 
 1. **Disease Reporting Form**
+
    ```javascript
    // Get user's GPS location
-   navigator.geolocation.getCurrentPosition(pos => {
+   navigator.geolocation.getCurrentPosition((pos) => {
      reportDisease({
        latitude: pos.coords.latitude,
        longitude: pos.coords.longitude,
        disease_name: selectedDisease,
        crop_affected: selectedCrop,
-       severity_level: severity
+       severity_level: severity,
      });
    });
    ```
 
 2. **Real-Time Alerts**
+
    ```javascript
-   socket.on('outbreak_alert', alert => {
+   socket.on("outbreak_alert", (alert) => {
      showNotification(alert);
      updateMap(alert.zone_id);
    });
@@ -274,13 +298,13 @@ To integrate this feature into the frontend:
 3. **Interactive Map**
    ```javascript
    // Using Leaflet.js
-   fetch('/api/v1/disease/outbreaks/geojson')
-     .then(r => r.json())
-     .then(data => {
+   fetch("/api/v1/disease/outbreaks/geojson")
+     .then((r) => r.json())
+     .then((data) => {
        L.geoJSON(data, {
-         style: feature => ({
-           color: getRiskColor(feature.properties.risk_level)
-         })
+         style: (feature) => ({
+           color: getRiskColor(feature.properties.risk_level),
+         }),
        }).addTo(map);
      });
    ```
@@ -335,6 +359,7 @@ To integrate this feature into the frontend:
 ## 📞 Review Notes
 
 **Please focus review on:**
+
 1. Geospatial algorithms accuracy
 2. API endpoint design
 3. Alert prioritization logic
@@ -342,6 +367,7 @@ To integrate this feature into the frontend:
 5. Security of user location data
 
 **Questions for reviewers:**
+
 1. Should we add rate limiting to incident reporting?
 2. Is 50km clustering radius appropriate for all regions?
 3. Should PDF generation be optional or mandatory?
@@ -354,6 +380,7 @@ To integrate this feature into the frontend:
 This PR is **ready for review**. All core functionality is implemented and tested manually. Automated tests and frontend integration will follow in subsequent PRs.
 
 **Merge requirements:**
+
 - [ ] Code review approval (2 reviewers)
 - [ ] QA testing on staging
 - [ ] Documentation review
@@ -361,6 +388,7 @@ This PR is **ready for review**. All core functionality is implemented and teste
 - [ ] Security review
 
 **Deployment steps:**
+
 1. Merge to `main`
 2. Run database migration on production
 3. Deploy backend changes

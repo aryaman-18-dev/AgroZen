@@ -1583,3 +1583,24 @@ body {
     display: none !important;
   }
 }
+.mark-healthy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid #62be69;
+  border-radius: 0.65rem;
+  background: rgba(59, 130, 74, 0.16);
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mark-healthy-btn:hover,
+.mark-healthy-btn:focus-visible {
+  background: rgba(59, 130, 74, 0.3);
+  outline: 2px solid #62be69;
+  outline-offset: 2px;
+}

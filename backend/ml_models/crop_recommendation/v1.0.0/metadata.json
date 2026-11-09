@@ -5,6 +5,6 @@
   "description": "Initial production model - migrated from legacy storage",
   "performance_metrics": {},
   "source": "legacy",
-  "migrated_from": "C:\\Users\\KIIT0001\\OneDrive\\Desktop\\AgriTech\\crop_recommendation\\model\\rf_model.pkl",
+  "migrated_from": "C:\\Users\\KIIT0001\\OneDrive\\Desktop\\AgroZen\\crop_recommendation\\model\\rf_model.pkl",
   "migration_date": "2026-10-24T17:52:45.142383"
 }

@@ -8,7 +8,7 @@ It contains 10 tomato classes. The notebook makes a reproducible 80/20 train/val
 
 ## Train and install the model
 
-1. Open the AgriTech project root in VS Code.
+1. Open the AgroZen project root in VS Code.
 2. Select the project Python environment (`.venv`) as the notebook kernel. Ensure the environment has PyTorch, torchvision, Pillow, numpy, matplotlib, seaborn, pandas, scikit-learn, and colorama installed.
 3. Open `Disease prediction/plant-disease-cnn-1 (1).ipynb` and run all cells. Training may take a while on CPU; a CUDA-enabled PyTorch install can use an NVIDIA GPU if available.
 4. The final cells write `plant_disease_model.pth` and `plant_disease_classes.json` directly into this `Disease prediction` folder.

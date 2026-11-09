@@ -184,7 +184,7 @@ class FarmLifecycleLog(db.Model):
         # Calculate SHA256 block hash
         raw_block = f"{batch_id}|{event_type}|{payload_str}|{previous_hash}|{ts.isoformat()}"
         block_hash = hashlib.sha256(raw_block.encode('utf-8')).hexdigest()
-        digital_sig = f"SIG_ED25519_{hashlib.sha256((block_hash + 'AGRITECH_KEY').encode()).hexdigest()[:24].upper()}"
+        digital_sig = f"SIG_ED25519_{hashlib.sha256((block_hash + 'AgroZen_KEY').encode()).hexdigest()[:24].upper()}"
 
         return cls(
             batch_id=batch_id,

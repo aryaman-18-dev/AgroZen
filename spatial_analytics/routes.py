@@ -27,7 +27,7 @@ def create_field():
         user = User.query.first()
         if not user:
             # Create a dummy user for demo purposes if table is empty
-            user = User(username="DemoUser", email="demo@agritech.com")
+            user = User(username="DemoUser", email="demo@AgroZen.com")
             user.set_password("demo123")
             db.session.add(user)
             db.session.commit()

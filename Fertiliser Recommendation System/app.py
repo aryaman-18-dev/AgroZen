@@ -1,95 +1,55 @@
-
+"""Streamlit UI for the fertilizer recommendation model."""
+from pathlib import Path
+import pandas as pd
 import streamlit as st
-from model import predict_fertilizer
+from src.model import predict_fertilizer, load_error
 
-# Page configuration
-st.set_page_config(
-    page_title="Fertilizer Recommendation System",
-    page_icon="🌿",
-    layout="centered"
-)
+ROOT = Path(__file__).resolve().parent
+DATA_PATH = ROOT / "data" / "fertilizer_dataset.csv"
 
-# Custom CSS styling for improved visuals
-st.markdown("""
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .main-box {
-            background-color: #f9f9f9;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .stButton > button {
-            background-color: #2e8b57;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# App title
+st.set_page_config(page_title="Fertilizer Recommendation System", page_icon="🌿", layout="centered")
 st.title("🌾 Fertilizer Recommendation System")
+st.write("Enter observed conditions to get a preliminary model suggestion.")
+st.info("This prototype uses only 99 training rows. Confirm fertilizer needs with a recent soil test and local agronomy advice.")
 
-st.markdown("Fill in the following information to get the most suitable fertilizer recommendation.")
+if load_error:
+    st.error(load_error)
+    st.code(f'python "{ROOT / "src" / "train.py"}"', language="powershell")
+    st.stop()
 
-# Input section
+try:
+    dataset = pd.read_csv(DATA_PATH)
+    soil_options = sorted(dataset["Soil Type"].dropna().astype(str).unique())
+    crop_options = sorted(dataset["Crop Type"].dropna().astype(str).unique())
+except Exception as exc:
+    st.error(f"Could not load the fertilizer dataset choices: {exc}")
+    st.stop()
+
 with st.form("fertilizer_form"):
-    st.markdown('<div class="main-box">', unsafe_allow_html=True)
+    st.subheader("Environmental conditions")
+    c1, c2, c3 = st.columns(3)
+    temperature = c1.number_input("Temperature (°C)", min_value=0.0, max_value=60.0, value=25.0)
+    humidity = c2.number_input("Humidity (%)", min_value=0.0, max_value=100.0, value=60.0)
+    moisture = c3.number_input("Moisture (%)", min_value=0.0, max_value=100.0, value=50.0)
+    st.subheader("Soil and crop")
+    soil_type = st.selectbox("Soil type", soil_options)
+    crop_type = st.selectbox("Crop type", crop_options)
+    c4, c5, c6 = st.columns(3)
+    nitrogen = c4.number_input("Nitrogen (N)", min_value=0, max_value=140, value=60)
+    potassium = c5.number_input("Potassium (K)", min_value=0, max_value=140, value=50)
+    phosphorous = c6.number_input("Phosphorus (P)", min_value=0, max_value=140, value=40)
+    submitted = st.form_submit_button("Recommend fertilizer")
 
-    # Environmental Inputs
-    st.subheader("📈 Environmental Conditions")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        temparature = st.number_input("Temparature (°C)", min_value=0.0, max_value=60.0, value=25.0)
-    with col2:
-        humidity = st.number_input("Humidity (%)", min_value=0.0, max_value=100.0, value=60.0)
-    with col3:
-        moisture = st.number_input("Moisture (%)", min_value=0.0, max_value=100.0, value=50.0)
-
-    # Soil and Crop Inputs
-    st.subheader("🌱 Soil and Crop Details")
-    soil_type = st.selectbox(
-        "Soil Type", 
-        ["Sandy", "Loamy", "Black", "Red", "Clayey"]
-    )
-    crop_type = st.selectbox(
-        "Crop Type", 
-        ["Wheat", "Cotton", "Maize", "Paddy", "Barley", "Ground Nuts"]
-    )
-
-    # Nutrients
-    st.subheader("🧪 Soil Nutrient Levels")
-    col4, col5, col6 = st.columns(3)
-    with col4:
-        nitrogen = st.number_input("Nitrogen (N)", min_value=0, max_value=140, value=60)
-    with col5:
-        potassium = st.number_input("Potassium (K)", min_value=0, max_value=140, value=50)
-    with col6:
-        phosphorous = st.number_input("Phosphorous (P)", min_value=0, max_value=140, value=40)
-
-    submitted = st.form_submit_button("🔍 Recommend Fertilizer")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# Prediction logic
 if submitted:
     try:
-        recommendation = predict_fertilizer(
-            temparature=temparature,
-            humidity=humidity,
-            moisture=moisture,
-            soil_type=soil_type,
-            crop_type=.crop_type,
-            nitrogen=nitrogen,
-            potassium=potassium,
-            phosphorous=phosphorous
+        result = predict_fertilizer(
+            temperature, humidity, moisture, soil_type, crop_type,
+            nitrogen, potassium, phosphorous,
         )
-
-        st.success(f"✅ **Recommended Fertilizer:** {recommendation}")
-        st.balloons()
-    except Exception as e:
-        st.error(f"❌ An error occurred: {e}")
-        st.warning("Please check your input values and try again.")
+        if result["recommendation"] is None:
+            st.warning(result["message"])
+        else:
+            st.success(f"Preliminary suggestion: {result['recommendation']}")
+            st.caption(f"Raw model score: {result['score']:.1%} (not calibrated). {result['message']}")
+    except Exception as exc:
+        st.error(f"Could not generate a recommendation: {exc}")

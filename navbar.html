@@ -19,7 +19,7 @@
     --navbar-shadow: rgba(15, 23, 42, 0.12);
   }
 
-  .agritech-navbar {
+  .AgroZen-navbar {
     position: fixed;
     top: 0;
     z-index: 1000;
@@ -32,13 +32,13 @@
     box-shadow: 0 10px 28px var(--navbar-shadow);
   }
 
-  .agritech-navbar-spacer {
+  .AgroZen-navbar-spacer {
     height: 76px;
     width: 100%;
     flex: 0 0 auto;
   }
 
-  .agritech-navbar .navbar-content {
+  .AgroZen-navbar .navbar-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,7 +49,7 @@
     flex-wrap: wrap;
   }
 
-  .agritech-navbar .brand {
+  .AgroZen-navbar .brand {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
@@ -58,7 +58,7 @@
     flex-shrink: 0;
   }
 
-  .agritech-navbar .brand img {
+  .AgroZen-navbar .brand img {
     width: 40px;
     height: 40px;
     border-radius: 10px;
@@ -67,13 +67,13 @@
     object-fit: cover;
   }
 
-  .agritech-navbar .brand-name {
+  .AgroZen-navbar .brand-name {
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: 0.2px;
   }
 
-  .agritech-navbar .nav-menu {
+  .AgroZen-navbar .nav-menu {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +83,7 @@
     flex-wrap: wrap;
   }
 
-  .agritech-navbar .nav-link {
+  .AgroZen-navbar .nav-link {
     position: relative;
     color: var(--navbar-text);
     text-decoration: none;
@@ -94,12 +94,12 @@
     transition: color 0.2s ease;
   }
 
-  .agritech-navbar .nav-link:hover,
-  .agritech-navbar .nav-link:focus-visible {
+  .AgroZen-navbar .nav-link:hover,
+  .AgroZen-navbar .nav-link:focus-visible {
     color: var(--navbar-accent);
   }
 
-  .agritech-navbar .nav-link::after {
+  .AgroZen-navbar .nav-link::after {
     content: "";
     position: absolute;
     left: 0;
@@ -110,12 +110,12 @@
     transition: width 0.2s ease;
   }
 
-  .agritech-navbar .nav-link:hover::after,
-  .agritech-navbar .nav-link:focus-visible::after {
+  .AgroZen-navbar .nav-link:hover::after,
+  .AgroZen-navbar .nav-link:focus-visible::after {
     width: 100%;
   }
 
-  .agritech-navbar .nav-actions {
+  .AgroZen-navbar .nav-actions {
     display: flex;
     align-items: center;
     gap: 0.7rem;
@@ -124,7 +124,7 @@
     margin-left: auto;
   }
 
-  .agritech-navbar .nav-user-name {
+  .AgroZen-navbar .nav-user-name {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--navbar-muted);
@@ -133,10 +133,10 @@
     white-space: nowrap;
   }
 
-  .agritech-navbar .nav-logout-btn,
-  .agritech-navbar .nav-fav-link,
-  .agritech-navbar .nav-auth-link,
-  .agritech-navbar .theme-toggle {
+  .AgroZen-navbar .nav-logout-btn,
+  .AgroZen-navbar .nav-fav-link,
+  .AgroZen-navbar .nav-auth-link,
+  .AgroZen-navbar .theme-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -146,16 +146,19 @@
     font-weight: 600;
     padding: 0.55rem 0.85rem;
     white-space: nowrap;
-    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease;
   }
 
-  .agritech-navbar .nav-logout-btn {
+  .AgroZen-navbar .nav-logout-btn {
     background: transparent;
     color: var(--navbar-text);
     border: 1px solid var(--navbar-border);
   }
 
-  .agritech-navbar .theme-toggle {
+  .AgroZen-navbar .theme-toggle {
     position: relative;
     width: 58px;
     height: 30px;
@@ -177,7 +180,7 @@
     box-sizing: border-box;
   }
 
-  .agritech-navbar .theme-toggle-track {
+  .AgroZen-navbar .theme-toggle-track {
     width: 100%;
     height: 100%;
     display: flex;
@@ -188,7 +191,7 @@
     box-sizing: border-box;
   }
 
-  .agritech-navbar .theme-toggle-icon {
+  .AgroZen-navbar .theme-toggle-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -200,17 +203,17 @@
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .agritech-navbar .theme-toggle-icon.sun-icon {
+  .AgroZen-navbar .theme-toggle-icon.sun-icon {
     color: #f59e0b;
     opacity: 1;
   }
 
-  .agritech-navbar .theme-toggle-icon.moon-icon {
+  .AgroZen-navbar .theme-toggle-icon.moon-icon {
     color: #94a3b8;
     opacity: 0.45;
   }
 
-  .agritech-navbar .theme-toggle-thumb {
+  .AgroZen-navbar .theme-toggle-thumb {
     position: absolute;
     top: 2.5px;
     left: 3px;
@@ -219,63 +222,65 @@
     border-radius: 50%;
     background: #ffffff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 0.3s ease;
     z-index: 2;
     pointer-events: none;
   }
 
-  [data-theme="light"] .agritech-navbar .theme-toggle {
+  [data-theme="light"] .AgroZen-navbar .theme-toggle {
     background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
     border-color: #f59e0b;
   }
 
-  [data-theme="light"] .agritech-navbar .theme-toggle .sun-icon {
+  [data-theme="light"] .AgroZen-navbar .theme-toggle .sun-icon {
     color: #d97706;
     opacity: 1;
     transform: scale(1.1);
   }
 
-  [data-theme="light"] .agritech-navbar .theme-toggle .moon-icon {
+  [data-theme="light"] .AgroZen-navbar .theme-toggle .moon-icon {
     color: #94a3b8;
     opacity: 0.35;
     transform: scale(0.8);
   }
 
-  [data-theme="light"] .agritech-navbar .theme-toggle-thumb {
+  [data-theme="light"] .AgroZen-navbar .theme-toggle-thumb {
     transform: translateX(0);
     background: #ffffff;
   }
 
-  [data-theme="dark"] .agritech-navbar .theme-toggle {
+  [data-theme="dark"] .AgroZen-navbar .theme-toggle {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     border-color: #38bdf8;
   }
 
-  [data-theme="dark"] .agritech-navbar .theme-toggle .sun-icon {
+  [data-theme="dark"] .AgroZen-navbar .theme-toggle .sun-icon {
     color: #64748b;
     opacity: 0.35;
     transform: scale(0.8);
   }
 
-  [data-theme="dark"] .agritech-navbar .theme-toggle .moon-icon {
+  [data-theme="dark"] .AgroZen-navbar .theme-toggle .moon-icon {
     color: #38bdf8;
     opacity: 1;
     transform: scale(1.15);
   }
 
-  [data-theme="dark"] .agritech-navbar .theme-toggle-thumb {
+  [data-theme="dark"] .AgroZen-navbar .theme-toggle-thumb {
     transform: translateX(27px);
     background: #1e293b;
     border: 1px solid rgba(56, 189, 248, 0.5);
   }
 
   /* Language Selector Styles */
-  .agritech-navbar .navbar-lang-container {
+  .AgroZen-navbar .navbar-lang-container {
     position: relative;
     display: inline-block;
   }
 
-  .agritech-navbar .navbar-lang-trigger {
+  .AgroZen-navbar .navbar-lang-trigger {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
@@ -290,28 +295,31 @@
     transition: all 0.2s ease;
   }
 
-  .agritech-navbar .navbar-lang-trigger:hover,
-  .agritech-navbar .navbar-lang-container.active .navbar-lang-trigger {
+  .AgroZen-navbar .navbar-lang-trigger:hover,
+  .AgroZen-navbar .navbar-lang-container.active .navbar-lang-trigger {
     border-color: var(--navbar-accent);
     background: rgba(34, 197, 94, 0.08);
     transform: translateY(-1px);
   }
 
-  .agritech-navbar .navbar-lang-trigger i.fa-globe {
+  .AgroZen-navbar .navbar-lang-trigger i.fa-globe {
     color: var(--navbar-accent);
   }
 
-  .agritech-navbar .navbar-lang-trigger i.fa-chevron-down {
+  .AgroZen-navbar .navbar-lang-trigger i.fa-chevron-down {
     font-size: 0.75rem;
     opacity: 0.7;
     transition: transform 0.2s ease;
   }
 
-  .agritech-navbar .navbar-lang-container.active .navbar-lang-trigger i.fa-chevron-down {
+  .AgroZen-navbar
+    .navbar-lang-container.active
+    .navbar-lang-trigger
+    i.fa-chevron-down {
     transform: rotate(180deg);
   }
 
-  .agritech-navbar .navbar-lang-dropdown {
+  .AgroZen-navbar .navbar-lang-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
@@ -331,16 +339,22 @@
   }
 
   @keyframes navFadeIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .agritech-navbar .navbar-lang-container.active .navbar-lang-dropdown,
-  .agritech-navbar .navbar-lang-dropdown.active {
+  .AgroZen-navbar .navbar-lang-container.active .navbar-lang-dropdown,
+  .AgroZen-navbar .navbar-lang-dropdown.active {
     display: flex;
   }
 
-  .agritech-navbar .navbar-lang-option {
+  .AgroZen-navbar .navbar-lang-option {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -350,21 +364,23 @@
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
     border: none;
     background: transparent;
     width: 100%;
     text-align: left;
   }
 
-  .agritech-navbar .navbar-lang-option:hover,
-  .agritech-navbar .navbar-lang-option.active {
+  .AgroZen-navbar .navbar-lang-option:hover,
+  .AgroZen-navbar .navbar-lang-option.active {
     background: var(--navbar-surface);
     color: var(--navbar-accent);
     font-weight: 600;
   }
 
-  .agritech-navbar .nav-fav-link {
+  .AgroZen-navbar .nav-fav-link {
     background: transparent;
     color: var(--navbar-text);
     border: 1px solid var(--navbar-border);
@@ -372,12 +388,12 @@
   }
 
   /* Language Selector Styles */
-  .agritech-navbar .navbar-lang-container {
+  .AgroZen-navbar .navbar-lang-container {
     position: relative;
     display: inline-block;
   }
 
-  .agritech-navbar .navbar-lang-trigger {
+  .AgroZen-navbar .navbar-lang-trigger {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
@@ -392,28 +408,31 @@
     transition: all 0.2s ease;
   }
 
-  .agritech-navbar .navbar-lang-trigger:hover,
-  .agritech-navbar .navbar-lang-container.active .navbar-lang-trigger {
+  .AgroZen-navbar .navbar-lang-trigger:hover,
+  .AgroZen-navbar .navbar-lang-container.active .navbar-lang-trigger {
     border-color: var(--navbar-accent);
     background: rgba(34, 197, 94, 0.08);
     transform: translateY(-1px);
   }
 
-  .agritech-navbar .navbar-lang-trigger i.fa-globe {
+  .AgroZen-navbar .navbar-lang-trigger i.fa-globe {
     color: var(--navbar-accent);
   }
 
-  .agritech-navbar .navbar-lang-trigger i.fa-chevron-down {
+  .AgroZen-navbar .navbar-lang-trigger i.fa-chevron-down {
     font-size: 0.75rem;
     opacity: 0.7;
     transition: transform 0.2s ease;
   }
 
-  .agritech-navbar .navbar-lang-container.active .navbar-lang-trigger i.fa-chevron-down {
+  .AgroZen-navbar
+    .navbar-lang-container.active
+    .navbar-lang-trigger
+    i.fa-chevron-down {
     transform: rotate(180deg);
   }
 
-  .agritech-navbar .navbar-lang-dropdown {
+  .AgroZen-navbar .navbar-lang-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
@@ -433,16 +452,22 @@
   }
 
   @keyframes navFadeIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .agritech-navbar .navbar-lang-container.active .navbar-lang-dropdown,
-  .agritech-navbar .navbar-lang-dropdown.active {
+  .AgroZen-navbar .navbar-lang-container.active .navbar-lang-dropdown,
+  .AgroZen-navbar .navbar-lang-dropdown.active {
     display: flex;
   }
 
-  .agritech-navbar .navbar-lang-option {
+  .AgroZen-navbar .navbar-lang-option {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -452,36 +477,38 @@
     font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
     border: none;
     background: transparent;
     width: 100%;
     text-align: left;
   }
 
-  .agritech-navbar .navbar-lang-option:hover,
-  .agritech-navbar .navbar-lang-option.active {
+  .AgroZen-navbar .navbar-lang-option:hover,
+  .AgroZen-navbar .navbar-lang-option.active {
     background: var(--navbar-surface);
     color: var(--navbar-accent);
     font-weight: 600;
   }
 
-  .agritech-navbar .nav-fav-link i {
+  .AgroZen-navbar .nav-fav-link i {
     color: #ef4444;
     transition: transform 0.2s ease;
   }
 
-  .agritech-navbar .nav-fav-link:hover {
+  .AgroZen-navbar .nav-fav-link:hover {
     border-color: #ef4444;
     background: rgba(239, 68, 68, 0.08);
     transform: translateY(-1px);
   }
 
-  .agritech-navbar .nav-fav-link:hover i {
+  .AgroZen-navbar .nav-fav-link:hover i {
     transform: scale(1.18);
   }
 
-  .agritech-navbar .nav-fav-badge {
+  .AgroZen-navbar .nav-fav-badge {
     background: #ef4444;
     color: #ffffff;
     font-size: 0.75rem;
@@ -496,75 +523,75 @@
     justify-content: center;
   }
 
-  .agritech-navbar .nav-auth-link {
+  .AgroZen-navbar .nav-auth-link {
     text-decoration: none;
     border: 1px solid transparent;
   }
 
-  .agritech-navbar .nav-auth-link.btn-secondary {
+  .AgroZen-navbar .nav-auth-link.btn-secondary {
     color: var(--navbar-text);
     background: var(--navbar-surface);
     border-color: var(--navbar-border);
   }
 
-  .agritech-navbar .nav-auth-link.btn-primary {
+  .AgroZen-navbar .nav-auth-link.btn-primary {
     color: #ffffff;
     background: var(--navbar-accent);
   }
 
-  .agritech-navbar .nav-logout-btn:hover,
-  .agritech-navbar .theme-toggle:hover,
-  .agritech-navbar .nav-auth-link:hover {
+  .AgroZen-navbar .nav-logout-btn:hover,
+  .AgroZen-navbar .theme-toggle:hover,
+  .AgroZen-navbar .nav-auth-link:hover {
     transform: translateY(-1px);
   }
 
-  .agritech-navbar .nav-logout-btn:hover,
-  .agritech-navbar .theme-toggle:hover {
+  .AgroZen-navbar .nav-logout-btn:hover,
+  .AgroZen-navbar .theme-toggle:hover {
     border-color: var(--navbar-accent);
     background: rgba(34, 197, 94, 0.08);
   }
 
-  .agritech-navbar .nav-logout-btn[hidden],
-  .agritech-navbar .nav-user-name[hidden] {
+  .AgroZen-navbar .nav-logout-btn[hidden],
+  .AgroZen-navbar .nav-user-name[hidden] {
     display: none !important;
   }
 
   @media (max-width: 900px) {
-    .agritech-navbar .navbar-content {
+    .AgroZen-navbar .navbar-content {
       justify-content: center;
     }
 
-    .agritech-navbar .nav-menu,
-    .agritech-navbar .nav-actions {
+    .AgroZen-navbar .nav-menu,
+    .AgroZen-navbar .nav-actions {
       flex: 1 1 100%;
       justify-content: center;
     }
 
-    .agritech-navbar .nav-actions {
+    .AgroZen-navbar .nav-actions {
       margin-left: 0;
     }
   }
 
   @media (max-width: 640px) {
-    .agritech-navbar .navbar-content {
+    .AgroZen-navbar .navbar-content {
       padding: 0.85rem 0.9rem;
     }
 
-    .agritech-navbar .nav-menu {
+    .AgroZen-navbar .nav-menu {
       gap: 0.7rem 0.95rem;
     }
 
-    .agritech-navbar .nav-actions {
+    .AgroZen-navbar .nav-actions {
       gap: 0.55rem;
     }
   }
 </style>
 
-<nav class="agritech-navbar" aria-label="Primary navigation">
+<nav class="AgroZen-navbar" aria-label="Primary navigation">
   <div class="navbar-content">
-    <a class="brand" href="index.html" aria-label="AgriTech Home">
-      <img src="images/logo.png" alt="AgriTech logo" />
-      <span class="brand-name">AgriTech</span>
+    <a class="brand" href="index.html" aria-label="AgroZen Home">
+      <img src="images/logo.png" alt="AgroZen logo" />
+      <span class="brand-name">AgroZen</span>
     </a>
 
     <div class="nav-menu">
@@ -583,40 +610,87 @@
         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
         <span>Logout</span>
       </button>
-      <a href="favorites.html" class="nav-fav-link" aria-label="View Favorite Blogs" title="View Favorite Blogs">
+      <a
+        href="favorites.html"
+        class="nav-fav-link"
+        aria-label="View Favorite Blogs"
+        title="View Favorite Blogs"
+      >
         <i class="fas fa-heart" aria-hidden="true"></i>
         <span>Favorites</span>
-        <span class="nav-fav-badge favorite-count" id="navFavoritesBadge" style="display: none;">0</span>
+        <span
+          class="nav-fav-badge favorite-count"
+          id="navFavoritesBadge"
+          style="display: none"
+          >0</span
+        >
       </a>
       <a href="login.html" class="nav-auth-link btn-secondary">Login</a>
       <a href="register.html" class="nav-auth-link btn-primary">Register</a>
       <!-- Language Selector -->
       <div class="navbar-lang-container" id="navbarLangContainer">
-        <button class="navbar-lang-trigger" id="navbarLangTrigger" type="button" aria-label="Select Language" title="Select Language">
+        <button
+          class="navbar-lang-trigger"
+          id="navbarLangTrigger"
+          type="button"
+          aria-label="Select Language"
+          title="Select Language"
+        >
           <i class="fas fa-globe"></i>
           <span class="current-lang-label" id="navbarCurrentLang">English</span>
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="navbar-lang-dropdown" id="navbarLangDropdown">
-          <button class="navbar-lang-option" type="button" data-lang-code="en" onclick="setLanguage('en', 'English')">
+          <button
+            class="navbar-lang-option"
+            type="button"
+            data-lang-code="en"
+            onclick="setLanguage('en', 'English')"
+          >
             <span>🇺🇸</span> <span>English</span>
           </button>
-          <button class="navbar-lang-option" type="button" data-lang-code="hi" onclick="setLanguage('hi', 'हिन्दी')">
+          <button
+            class="navbar-lang-option"
+            type="button"
+            data-lang-code="hi"
+            onclick="setLanguage('hi', 'हिन्दी')"
+          >
             <span>🇮🇳</span> <span>हिन्दी (Hindi)</span>
           </button>
-          <button class="navbar-lang-option" type="button" data-lang-code="kn" onclick="setLanguage('kn', 'ಕನ್ನಡ')">
+          <button
+            class="navbar-lang-option"
+            type="button"
+            data-lang-code="kn"
+            onclick="setLanguage('kn', 'ಕನ್ನಡ')"
+          >
             <span>🇮🇳</span> <span>ಕನ್ನಡ (Kannada)</span>
           </button>
-          <button class="navbar-lang-option" type="button" data-lang-code="te" onclick="setLanguage('te', 'తెలుగు')">
+          <button
+            class="navbar-lang-option"
+            type="button"
+            data-lang-code="te"
+            onclick="setLanguage('te', 'తెలుగు')"
+          >
             <span>🇮🇳</span> <span>తెలుగు (Telugu)</span>
           </button>
-          <button class="navbar-lang-option" type="button" data-lang-code="ta" onclick="setLanguage('ta', 'தமிழ்')">
+          <button
+            class="navbar-lang-option"
+            type="button"
+            data-lang-code="ta"
+            onclick="setLanguage('ta', 'தமிழ்')"
+          >
             <span>🇮🇳</span> <span>தமிழ் (Tamil)</span>
           </button>
         </div>
       </div>
 
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Toggle light and dark theme"
+        title="Toggle theme"
+      >
         <span class="theme-toggle-track">
           <span class="theme-toggle-icon sun-icon" aria-hidden="true">
             <i class="fas fa-sun"></i>
@@ -630,81 +704,97 @@
     </div>
   </div>
 </nav>
-<div class="agritech-navbar-spacer" aria-hidden="true"></div>
+<div class="AgroZen-navbar-spacer" aria-hidden="true"></div>
 
 <script>
   (function initNavbarFavorites() {
     function updateNavFavCount() {
       try {
-        const favs = JSON.parse(localStorage.getItem('agritech_favorite_blogs')) || [];
-        const badge = document.getElementById('navFavoritesBadge');
+        const favs =
+          JSON.parse(localStorage.getItem("AgroZen_favorite_blogs")) || [];
+        const badge = document.getElementById("navFavoritesBadge");
         if (badge) {
           if (favs.length > 0) {
             badge.textContent = favs.length;
-            badge.style.display = 'inline-flex';
+            badge.style.display = "inline-flex";
           } else {
-            badge.style.display = 'none';
+            badge.style.display = "none";
           }
         }
       } catch (e) {}
     }
     updateNavFavCount();
-    document.addEventListener('favoriteToggle', updateNavFavCount);
-    document.addEventListener('DOMContentLoaded', updateNavFavCount);
+    document.addEventListener("favoriteToggle", updateNavFavCount);
+    document.addEventListener("DOMContentLoaded", updateNavFavCount);
   })();
 
   (function initNavbarLanguage() {
     function setupNavbarLang() {
-      const trigger = document.getElementById('navbarLangTrigger');
-      const container = document.getElementById('navbarLangContainer');
-      const label = document.getElementById('navbarCurrentLang');
-      const options = document.querySelectorAll('.navbar-lang-option');
+      const trigger = document.getElementById("navbarLangTrigger");
+      const container = document.getElementById("navbarLangContainer");
+      const label = document.getElementById("navbarCurrentLang");
+      const options = document.querySelectorAll(".navbar-lang-option");
 
-      const names = { 'en': 'English', 'hi': 'हिन्दी', 'kn': 'ಕನ್ನಡ', 'te': 'తెలుగు', 'ta': 'தமிழ்' };
-      const current = localStorage.getItem('agritech-lang') || localStorage.getItem('selectedLang') || 'en';
+      const names = {
+        en: "English",
+        hi: "हिन्दी",
+        kn: "ಕನ್ನಡ",
+        te: "తెలుగు",
+        ta: "தமிழ்",
+      };
+      const current =
+        localStorage.getItem("AgroZen-lang") ||
+        localStorage.getItem("selectedLang") ||
+        "en";
 
       if (label) {
         label.textContent = names[current] || current.toUpperCase();
       }
 
-      options.forEach(opt => {
-        if (opt.getAttribute('data-lang-code') === current) {
-          opt.classList.add('active');
+      options.forEach((opt) => {
+        if (opt.getAttribute("data-lang-code") === current) {
+          opt.classList.add("active");
         } else {
-          opt.classList.remove('active');
+          opt.classList.remove("active");
         }
       });
 
       if (trigger && container) {
-        trigger.addEventListener('click', (e) => {
+        trigger.addEventListener("click", (e) => {
           e.stopPropagation();
-          container.classList.toggle('active');
+          container.classList.toggle("active");
         });
 
-        document.addEventListener('click', () => {
-          container.classList.remove('active');
+        document.addEventListener("click", () => {
+          container.classList.remove("active");
         });
       }
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupNavbarLang);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupNavbarLang);
     } else {
       setupNavbarLang();
     }
 
-    window.addEventListener('languageChanged', (e) => {
+    window.addEventListener("languageChanged", (e) => {
       const lang = e.detail ? e.detail.lang : null;
       if (lang) {
-        const names = { 'en': 'English', 'hi': 'हिन्दी', 'kn': 'ಕನ್ನಡ', 'te': 'తెలుగు', 'ta': 'தமிழ்' };
-        const label = document.getElementById('navbarCurrentLang');
+        const names = {
+          en: "English",
+          hi: "हिन्दी",
+          kn: "ಕನ್ನಡ",
+          te: "తెలుగు",
+          ta: "தமிழ்",
+        };
+        const label = document.getElementById("navbarCurrentLang");
         if (label) label.textContent = names[lang] || lang.toUpperCase();
 
-        document.querySelectorAll('.navbar-lang-option').forEach(opt => {
-          if (opt.getAttribute('data-lang-code') === lang) {
-            opt.classList.add('active');
+        document.querySelectorAll(".navbar-lang-option").forEach((opt) => {
+          if (opt.getAttribute("data-lang-code") === lang) {
+            opt.classList.add("active");
           } else {
-            opt.classList.remove('active');
+            opt.classList.remove("active");
           }
         });
       }

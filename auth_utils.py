@@ -22,7 +22,7 @@ def token_required(f):
             
         try:
             # Note: In production, verify against Firebase or a real DB
-            data = jwt.decode(token, os.environ.get('JWT_SECRET', 'agritech_secret_key'), algorithms=["HS256"])
+            data = jwt.decode(token, os.environ.get('JWT_SECRET', 'AgroZen_secret_key'), algorithms=["HS256"])
             request.user = data
         except jwt.ExpiredSignatureError:
             log_security_event('AUTH_FAILURE', 'Expired token')
@@ -172,5 +172,5 @@ def generate_token(user_id: int, email: str, role: str = 'farmer', expires_hours
         'role': role,
         'exp': datetime.utcnow() + timedelta(hours=expires_hours)
     }
-    token = jwt.encode(payload, os.environ.get('JWT_SECRET', 'agritech_secret_key'), algorithm='HS256')
+    token = jwt.encode(payload, os.environ.get('JWT_SECRET', 'AgroZen_secret_key'), algorithm='HS256')
     return token

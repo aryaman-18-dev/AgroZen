@@ -1,5 +1,5 @@
 /**
- * Type declarations for AgriTechConfig
+ * Type declarations for AgroZenConfig
  */
 
 export interface StorageKeysConfig {
@@ -50,8 +50,8 @@ export interface ModelParametersConfig {
   supportedImageTypes: string[];
 }
 
-export interface AgriTechConfigStatic {
-  readonly env: 'development' | 'staging' | 'production' | 'test';
+export interface AgroZenConfigStatic {
+  readonly env: "development" | "staging" | "production" | "test";
   readonly storageKeys: StorageKeysConfig;
   readonly featureFlags: FeatureFlagsConfig;
   get<T = any>(path?: string, defaultValue?: T): T;
@@ -63,10 +63,10 @@ export interface AgriTechConfigStatic {
 
 declare global {
   interface Window {
-    AgriTechConfig: AgriTechConfigStatic;
-    AGRITECH_API_BASE?: string;
+    AgroZenConfig: AgroZenConfigStatic;
+    AgroZen_API_BASE?: string;
   }
 }
 
-export const AgriTechConfig: AgriTechConfigStatic;
-export default AgriTechConfig;
+export const AgroZenConfig: AgroZenConfigStatic;
+export default AgroZenConfig;

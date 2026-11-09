@@ -72,7 +72,7 @@ class LogisticsOrchestrator:
         cert_number = f"PSC-{uuid.uuid4().hex[:12].upper()}"
         payload = {
             "certificate_number": cert_number,
-            "issuing_authority": "AgriTech Digital Authority",
+            "issuing_authority": "AgroZen Digital Authority",
             "issued_at": datetime.utcnow().isoformat(),
             "valid_until": (datetime.utcnow() + timedelta(days=30)).isoformat(),
             "shipment": {
@@ -88,7 +88,7 @@ class LogisticsOrchestrator:
             "declarations": [
                 "Cargo is free from prohibited pests under ISPM-15",
                 "Treated in accordance with relevant phytosanitary measures",
-                "Digitally signed by AgriTech Autonomous Authority"
+                "Digitally signed by AgroZen Autonomous Authority"
             ]
         }
 

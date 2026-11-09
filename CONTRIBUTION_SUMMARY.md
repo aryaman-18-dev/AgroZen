@@ -1,8 +1,8 @@
 # 🎉 Open Source Contribution - COMPLETE
 
-## Project: AgriTech
+## Project: AgroZen
 
-**Repository:** [omroy07/AgriTech](https://github.com/omroy07/AgriTech)  
+**Repository:** [omroy07/AgroZen](https://github.com/omroy07/AgroZen)  
 **Contributor:** amritanshu2005  
 **Contribution Date:** January 22, 2026  
 **Status:** ✅ **READY FOR MERGE**
@@ -245,7 +245,7 @@ Main:    origin/main (f50f4ce0)
 
 ## Summary
 
-This contribution successfully addresses the text overlap issue by implementing proper z-index layering across the AgriTech application. All changes are tested, documented, and ready for merge.
+This contribution successfully addresses the text overlap issue by implementing proper z-index layering across the AgroZen application. All changes are tested, documented, and ready for merge.
 
 **Status:** 🟢 **READY FOR REVIEW & MERGE**
 
@@ -253,4 +253,4 @@ This contribution successfully addresses the text overlap issue by implementing 
 
 _Generated: January 22, 2026_  
 _Contributor: amritanshu2005_  
-_Repository: omroy07/AgriTech_
+_Repository: omroy07/AgroZen_

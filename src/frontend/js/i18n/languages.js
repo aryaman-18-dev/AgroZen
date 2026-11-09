@@ -6,7 +6,7 @@ const languages = {
 
     hero_title: "Empowering Agriculture Through Technology",
     hero_desc:
-      "AgriTech connects Farmers, Buyers, Equipment Suppliers, and Grocery Sellers to revolutionize India's agricultural ecosystem through smart solutions and seamless collaboration."
+      "AgroZen connects Farmers, Buyers, Equipment Suppliers, and Grocery Sellers to revolutionize India's agricultural ecosystem through smart solutions and seamless collaboration.",
   },
 
   te: {
@@ -16,7 +16,7 @@ const languages = {
 
     hero_title: "సాంకేతికత ద్వారా వ్యవసాయాన్ని బలోపేతం చేయడం",
     hero_desc:
-      "అగ్రిటెక్ రైతులు, కొనుగోలుదారులు, పరికరాల సరఫరాదారులు మరియు కిరాణా విక్రేతలను అనుసంధానించి భారతదేశ వ్యవసాయ వ్యవస్థను ఆధునీకరిస్తుంది."
+      "అగ్రిటెక్ రైతులు, కొనుగోలుదారులు, పరికరాల సరఫరాదారులు మరియు కిరాణా విక్రేతలను అనుసంధానించి భారతదేశ వ్యవసాయ వ్యవస్థను ఆధునీకరిస్తుంది.",
   },
 
   hi: {
@@ -26,7 +26,7 @@ const languages = {
 
     hero_title: "प्रौद्योगिकी के माध्यम से कृषि को सशक्त बनाना",
     hero_desc:
-      "एग्रीटेक किसानों, खरीदारों, उपकरण आपूर्तिकर्ताओं और किराना विक्रेताओं को जोड़ता है।"
+      "एग्रीटेक किसानों, खरीदारों, उपकरण आपूर्तिकर्ताओं और किराना विक्रेताओं को जोड़ता है।",
   },
 
   ta: {
@@ -36,8 +36,8 @@ const languages = {
 
     hero_title: "தொழில்நுட்பத்தின் மூலம் விவசாயத்தை வலுப்படுத்துதல்",
     hero_desc:
-      "அக்ரிடெக் விவசாயிகள், வாங்குபவர்கள், உபகரண வழங்குநர்கள் மற்றும் மளிகை விற்பனையாளர்களை இணைக்கிறது."
-  }
+      "அக்ரிடெக் விவசாயிகள், வாங்குபவர்கள், உபகரண வழங்குநர்கள் மற்றும் மளிகை விற்பனையாளர்களை இணைக்கிறது.",
+  },
 };
 
 export default languages;

@@ -9,7 +9,7 @@ def test_file_upload():
     # 1. Create a dummy file
     test_file_path = "test_image.txt"
     with open(test_file_path, "w") as f:
-        f.write("This is a test file for AgriTech upload service.")
+        f.write("This is a test file for AgroZen upload service.")
     
     try:
         # 2. Upload the file

@@ -1,6 +1,6 @@
-# 🌾 AgriTech: Smart Farming Redefined
+# 🌾 AgroZen: Smart Farming Redefined
 
-**Welcome to AgriTech!**  
+**Welcome to AgroZen!**  
 An AI‑powered web platform designed to empower farmers with data-driven tools for smarter, more sustainable agriculture.
 
 ---
@@ -23,21 +23,21 @@ An AI‑powered web platform designed to empower farmers with data-driven tools 
 
 ## 🧩 Why It Matters
 
-AgriTech bridges the gap between traditional farming and modern insights. With tools like AI-driven recommendations, yield forecasts, and disease protection, farmers can:
+AgroZen bridges the gap between traditional farming and modern insights. With tools like AI-driven recommendations, yield forecasts, and disease protection, farmers can:
 
-- Maximize their harvest with precision choices  
-- Act quickly against crop diseases  
-- Work smarter and sustainably  
+- Maximize their harvest with precision choices
+- Act quickly against crop diseases
+- Work smarter and sustainably
 - Build a community of shared wisdom
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Backend**: Python, Flask  
-- **Machine Learning**: scikit-learn, NumPy, Pandas  
-- **CV**: OpenCV (for disease detection)  
-- **Frontend**: HTML, CSS, JavaScript, Jinja2  
+- **Backend**: Python, Flask
+- **Machine Learning**: scikit-learn, NumPy, Pandas
+- **CV**: OpenCV (for disease detection)
+- **Frontend**: HTML, CSS, JavaScript, Jinja2
 - **Environment**: Virtualenv, requirements.txt for reproducibility
 
 ---
@@ -45,7 +45,7 @@ AgriTech bridges the gap between traditional farming and modern insights. With t
 ## 📂 Project Structure
 
 ```text
-AgriTech/
+AgroZen/
 ├── Crop Recommendation/        # Model training & scripts
 ├── Crop Yield Prediction/      # Forecasting scripts & notebooks
 ├── static/ & templates/        # CSS, JS, HTML
@@ -55,27 +55,37 @@ AgriTech/
 └── images/                     # Disease sample images
 
 ```
+
 ## 🏁 Getting Started
 
-### 🔹 Clone the repo  
+### 🔹 Clone the repo
+
 ```bash
-git clone https://github.com/omroy07/AgriTech.git
-cd AgriTech
+git clone https://github.com/omroy07/AgroZen.git
+cd AgroZen
 ```
+
 ### 🔹 Set up a virtual environment
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
 ```
+
 ### 🔹 Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
+
 ### 🔹 Run the app
+
 ```bash
 flask run
 ```
+
 Then visit http://localhost:5000 to explore features.
+
 ## 📈 Adding a New Feature?
 
 1. **Fork the repo** & create a branch:  
@@ -89,17 +99,16 @@ We'll review your work and help merge it 😊
 
 ---
 
-## 🧪 Tips for Improving AgriTech
-- ✅ **Database Connection** (see [Issue #4](https://github.com/omroy07/AgriTech/issues/5))  
-- ✅ **Polish the front-end design** (see [Issue #4](https://github.com/omroy07/AgriTech/issues/4))  
-- 🤖 **Integrate a chatbot** using a small LLM (see [Issue #3](https://github.com/omroy07/AgriTech/issues/3))  
-- 📊 **Add a detailed yield prediction system** (see [Issue #2](https://github.com/omroy07/AgriTech/issues/2))  
-- 🧠 **Expand crop recommendation logic and UI** (see [Issue #1](https://github.com/omroy07/AgriTech/issues/1))
+## 🧪 Tips for Improving AgroZen
+
+- ✅ **Database Connection** (see [Issue #4](https://github.com/omroy07/AgroZen/issues/5))
+- ✅ **Polish the front-end design** (see [Issue #4](https://github.com/omroy07/AgroZen/issues/4))
+- 🤖 **Integrate a chatbot** using a small LLM (see [Issue #3](https://github.com/omroy07/AgroZen/issues/3))
+- 📊 **Add a detailed yield prediction system** (see [Issue #2](https://github.com/omroy07/AgroZen/issues/2))
+- 🧠 **Expand crop recommendation logic and UI** (see [Issue #1](https://github.com/omroy07/AgroZen/issues/1))
 
 ---
 
 ## 💡 Want to Learn More?
 
 Curious about the inner workings—like how model training, data pipelines, or image analysis tie together? Dive into the notebooks found in the **Crop Recommendation** and **Yield Prediction** folders!
-
-

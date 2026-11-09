@@ -1,6 +1,6 @@
-# 🌱 AgriTech — Smart Farming Solutions
+# 🌱 AgroZen — Smart Farming Solutions
 
-![AgriTech Banner](images/plant.png)
+![AgroZen Banner](images/plant.png)
 
 ---
 
@@ -29,7 +29,7 @@
 
 ---
 
-**AgriTech** is an AI-powered smart agriculture platform designed to assist farmers with crop
+**AgroZen** is an AI-powered smart agriculture platform designed to assist farmers with crop
 recommendations, yield prediction, plant disease detection, and community-driven collaboration—enabling sustainable and data-driven farming practices.
 
 ---
@@ -48,8 +48,8 @@ recommendations, yield prediction, plant disease detection, and community-driven
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/aryaman-18-dev/AgriTech.git
-cd AgriTech
+git clone https://github.com/aryaman-18-dev/AgroZen.git
+cd AgroZen
 ```
 
 ### 2️⃣ Create a Python virtual environment (Windows PowerShell)
@@ -125,14 +125,14 @@ python -m backend.ml_models.migrate_models --migrate-crop
 ## 🖥️ Application Preview
 
 <img src="images/image1.png"
-       alt="AgriTech Dashboard" width="100%" />
+       alt="AgroZen Dashboard" width="100%" />
 <img src="images/image.png"
-       alt="AgriTech Dashboard" width="100%" />
+       alt="AgroZen Dashboard" width="100%" />
 
 <img src="images/image2.png"
-       alt="AgriTech Dashboard" width="100%" />
+       alt="AgroZen Dashboard" width="100%" />
 <img src="images/image3.png"
-       alt="AgriTech Dashboard" width="100%" />
+       alt="AgroZen Dashboard" width="100%" />
 
 ---
 
@@ -162,11 +162,11 @@ python -m backend.ml_models.migrate_models --migrate-crop
 
 ## 🤖 AI Chatbot
 
-AgriTech's AI-powered chatbot provides comprehensive support for farmers:
+AgroZen's AI-powered chatbot provides comprehensive support for farmers:
 
 ### Features
 
-- **Platform Guidance**: Explains how to use all AgriTech features and tools
+- **Platform Guidance**: Explains how to use all AgroZen features and tools
 - **Agriculture Support**: Answers farming questions, crop recommendations, pest control
 - **Decision Making**: Provides region-specific, season-based farming advice
 - **Image Analysis**: Upload plant photos for disease detection and diagnosis
@@ -227,7 +227,7 @@ node server.js
 ## 📂 Project Structure
 
 ```text
-AGRITECH/
+AgroZen/
 ├── app.py                      # 🐍 Flask Backend (Main entry point)
 ├── server.js                   # 🟢 Node.js Chatbot Server
 ├── package.json                # Node.js dependencies
@@ -289,7 +289,7 @@ FIREBASE_MEASUREMENT_ID=your_measurement_id
 
 ## 🔐 Registration Validation Rules
 
-To maintain clean user data and enforce business policies, AgriTech now applies strict
+To maintain clean user data and enforce business policies, AgroZen now applies strict
 validation whenever a new account is created (frontend **and** backend):
 
 - **Full Name / Username:** only alphabetic characters and spaces are allowed. The
@@ -358,4 +358,4 @@ A: Ensure the backend server is running correctly and that the /health route is 
 
 ---
 
-**Made with ❤️ by the AgriTech Community — 2026**
+**Made with ❤️ by the AgroZen Community — 2026**

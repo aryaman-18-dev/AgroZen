@@ -5,23 +5,27 @@
 ### Fixed Files
 
 #### `firebase.js`
+
 - **REMOVED**: Hardcoded Firebase configuration object with exposed API keys
 - **ADDED**: Secure async initialization that fetches config from server
 - **ADDED**: Proper error handling and validation for Firebase initialization
 - **ADDED**: Google authentication setup with secure configuration loading
 
 #### `app.py`
+
 - **ADDED**: `/api/firebase-config` endpoint for secure configuration delivery
 - **ADDED**: Environment variable loading with `python-dotenv`
 - **UPDATED**: Gemini API key to use environment variables instead of hardcoded value
 - **ADDED**: Proper error handling for missing environment variables
 
 #### `requirements.txt`
+
 - **ADDED**: `python-dotenv==1.0.0` for environment variable management
 
 ### New Files
 
 #### `firestore.rules`
+
 - **CREATED**: Restrictive Firebase security rules requiring authentication
 - **FEATURES**:
   - All read/write operations require authentication
@@ -29,6 +33,7 @@
   - Public read access with authenticated write access
 
 #### `test_security.py`
+
 - **CREATED**: Comprehensive security test suite
 - **FEATURES**:
   - Environment variable validation
@@ -37,6 +42,7 @@
   - Gitignore configuration testing
 
 #### `SECURITY_SETUP.md`
+
 - **CREATED**: Detailed security setup guide
 - **FEATURES**:
   - Step-by-step configuration instructions
@@ -45,6 +51,7 @@
   - Best practices documentation
 
 #### `PULL_REQUEST_TEMPLATE.md`
+
 - **CREATED**: Pull request description template
 - **FEATURES**:
   - Comprehensive fix summary
@@ -55,20 +62,22 @@
 ## 🔍 Security Improvements
 
 ### Before (Vulnerable)
+
 ```javascript
 // firebase.js - EXPOSED CREDENTIALS
 const firebaseConfig = {
   apiKey: "AIzaSyB...", // VISIBLE IN BROWSER
-  projectId: "agritech-12345", // VISIBLE IN BROWSER
+  projectId: "AgroZen-12345", // VISIBLE IN BROWSER
   // ... other sensitive data
 };
 ```
 
 ### After (Secure)
+
 ```javascript
 // firebase.js - NO CREDENTIALS
 async function initializeFirebase() {
-  const response = await fetch('/api/firebase-config');
+  const response = await fetch("/api/firebase-config");
   firebaseConfig = await response.json();
   // Credentials loaded securely from server
 }
@@ -84,15 +93,15 @@ async function initializeFirebase() {
 
 ## 📊 Files Summary
 
-| File | Status | Changes |
-|------|--------|---------|
-| `firebase.js` | Modified | Removed hardcoded credentials, added secure initialization |
-| `app.py` | Modified | Added secure config endpoint, environment variable support |
-| `requirements.txt` | Modified | Added python-dotenv dependency |
-| `firestore.rules` | New | Firebase security rules |
-| `test_security.py` | New | Security test suite |
-| `SECURITY_SETUP.md` | New | Setup documentation |
-| `PULL_REQUEST_TEMPLATE.md` | New | PR description template |
+| File                       | Status   | Changes                                                    |
+| -------------------------- | -------- | ---------------------------------------------------------- |
+| `firebase.js`              | Modified | Removed hardcoded credentials, added secure initialization |
+| `app.py`                   | Modified | Added secure config endpoint, environment variable support |
+| `requirements.txt`         | Modified | Added python-dotenv dependency                             |
+| `firestore.rules`          | New      | Firebase security rules                                    |
+| `test_security.py`         | New      | Security test suite                                        |
+| `SECURITY_SETUP.md`        | New      | Setup documentation                                        |
+| `PULL_REQUEST_TEMPLATE.md` | New      | PR description template                                    |
 
 ## 🚨 Critical Actions Required
 

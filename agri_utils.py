@@ -1,6 +1,6 @@
 """
 Agricultural Data Utilities
-Comprehensive utility functions for the AgriTech platform
+Comprehensive utility functions for the AgroZen platform
 Provides crop data, calculations, and helper functions
 """
 

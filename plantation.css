@@ -205,7 +205,7 @@ body {
 
 /* Subtle background pattern */
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -318,7 +318,6 @@ body {
   }
 }
 
-
 /* ==========================
    CONTENT WRAPPER (SIDEBAR + MAIN)
 ========================== */
@@ -347,11 +346,11 @@ body {
   overflow-y: auto;
 }
 
-.sidebar-content>* {
+.sidebar-content > * {
   margin-bottom: 2rem;
 }
 
-.sidebar-content>*:last-child {
+.sidebar-content > *:last-child {
   margin-bottom: 0;
 }
 
@@ -551,7 +550,7 @@ body {
 }
 
 .tab-btn.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -1rem;
   left: 50%;
@@ -644,7 +643,7 @@ body {
 }
 
 .info-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -1076,7 +1075,6 @@ a:focus,
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -1100,7 +1098,6 @@ a:focus,
 
 /* Print Styles */
 @media print {
-
   .sidebar,
   #scrollTopBtn,
   #chatbotBtn,
@@ -1144,7 +1141,6 @@ a:focus,
    ANIMATIONS
 ========================== */
 @keyframes pulse {
-
   0%,
   100% {
     opacity: 1;
@@ -1222,9 +1218,9 @@ a:focus,
 .cursor-hovering {
   transform: translate(-50%, -50%) scale(1.8);
   background-color: #22c55e;
-  /* AgriTech green */
+  /* AgroZen green */
   box-shadow: 0 0 20px #22c55e;
-}/* ==========================
+} /* ==========================
    THEME VARIABLES
 ========================== */
 
@@ -1245,7 +1241,7 @@ a:focus,
 
   --card-bg: #ffffff;
 
-  --shadow: 0 4px 15px rgba(0,0,0,0.08);
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 /* Dark Theme */
@@ -1265,7 +1261,7 @@ a:focus,
 
   --card-bg: #1f2937;
 
-  --shadow: 0 4px 20px rgba(0,0,0,0.5);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* ==========================
@@ -1276,7 +1272,9 @@ body {
   font-family: "Poppins", sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 /* ==========================
@@ -1366,9 +1364,17 @@ footer {
 
 /* Icons */
 
-.sun-icon { display: none; }
+.sun-icon {
+  display: none;
+}
 
-[data-theme="dark"] .sun-icon { display: inline; }
-[data-theme="dark"] .moon-icon { display: none; }
+[data-theme="dark"] .sun-icon {
+  display: inline;
+}
+[data-theme="dark"] .moon-icon {
+  display: none;
+}
 
-:not([data-theme="dark"]) .moon-icon { display: inline; }
+:not([data-theme="dark"]) .moon-icon {
+  display: inline;
+}

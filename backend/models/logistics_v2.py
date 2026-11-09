@@ -101,7 +101,7 @@ class PhytoSanitaryCertificate(db.Model):
 
     # Certificate metadata
     certificate_number = db.Column(db.String(64), unique=True, nullable=False)
-    issuing_authority = db.Column(db.String(150), default='AgriTech Digital Authority')
+    issuing_authority = db.Column(db.String(150), default='AgroZen Digital Authority')
     origin_country = db.Column(db.String(80), nullable=False)
     destination_country = db.Column(db.String(80), nullable=False)
     commodity = db.Column(db.String(100))

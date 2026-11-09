@@ -68,7 +68,7 @@ class Config:
 class DevelopmentConfig(Config):
     """Development Configuration"""
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = _settings.database.dev_url or 'sqlite:///agritech_dev.db'
+    SQLALCHEMY_DATABASE_URI = _settings.database.dev_url or 'sqlite:///AgroZen_dev.db'
     SQLALCHEMY_ECHO = False
 
 
@@ -107,6 +107,6 @@ def validate_required_config(app):
         if not gemini_key or not str(gemini_key).strip():
             raise ValueError(
                 "CRITICAL STARTUP ERROR: GEMINI_API_KEY is missing or empty. "
-                "The AgriTech backend requires a valid GEMINI_API_KEY to initialize AI services. "
+                "The AgroZen backend requires a valid GEMINI_API_KEY to initialize AI services. "
                 "Please configure GEMINI_API_KEY in your .env file or environment variables before starting the server."
             )

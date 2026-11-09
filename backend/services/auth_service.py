@@ -34,7 +34,7 @@ class AuthService:
         verify_url = f"http://localhost:5000/api/v1/auth/verify-email/{token}"
         
         msg = Message(
-            "Verify Your AgriTech Account",
+            "Verify Your AgroZen Account",
             recipients=[user.email],
             body=f"Hello {user.username},\n\nPlease verify your email by clicking the link: {verify_url}\n\nThis link expires in 24 hours."
         )
@@ -53,7 +53,7 @@ class AuthService:
         reset_url = f"{frontend_base}/reset-password/{token}"
         
         msg = Message(
-            "AgriTech Password Reset",
+            "AgroZen Password Reset",
             recipients=[user.email],
             body=f"Hello,\n\nYou requested a password reset. Click the link to set a new password: {reset_url}\n\nThis link expires in 1 hour. If you didn't request this, ignore this email."
         )

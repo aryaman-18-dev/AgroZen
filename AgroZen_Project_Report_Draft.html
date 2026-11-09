@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AgroZen Project Report</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 25mm;
+      }
+      body {
+        font:
+          12pt "Times New Roman",
+          serif;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1,
+      h2,
+      h3 {
+        text-align: center;
+      }
+      h1 {
+        font-size: 20pt;
+      }
+      h2 {
+        font-size: 16pt;
+      }
+      h3 {
+        text-align: left;
+        font-size: 13pt;
+      }
+      .cover {
+        height: 245mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        text-align: center;
+        page-break-after: always;
+      }
+      .page {
+        page-break-after: always;
+      }
+      svg {
+        display: block;
+        margin: 20px auto;
+        max-width: 100%;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td,
+      th {
+        border: 1px solid;
+        padding: 6px;
+      }
+      small {
+        color: #444;
+      }
+      .placeholder {
+        background: #fff2cc;
+      }
+      @media print {
+        .page {
+          page-break-after: always;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="cover">
+      <div>
+        <h1>A PROJECT REPORT</h1>
+        <p>on</p>
+        <h2>“AgroZen: SMART FARMING SOLUTIONS”</h2>
+        <p>Submitted to<br /><b>KIIT Deemed to be University</b></p>
+        <p>
+          In Partial Fulfilment of the Requirement for the Award of<br /><b
+            >BACHELOR’S DEGREE IN COMPUTER SCIENCE &amp; ENGINEERING /
+            INFORMATION TECHNOLOGY</b
+          >
+        </p>
+      </div>
+      <div>
+        <b>BY</b>
+        <p class="placeholder">
+          ARYAMAN SANSKRITYAYAN<br />ANKIT MUKHERJEE<br />ANSHIKA NATH<br />DEV
+          KUMAR<br />23051090<br />23051084<br />2305765<br />2305292
+        </p>
+        <p>
+          UNDER THE GUIDANCE OF<br /><b class="placeholder"
+            >MS. CHANDANI KUMARI</b
+          >
+        </p>
+      </div>
+      <div>
+        <b
+          >SCHOOL OF COMPUTER SCIENCE AND ENGINEERING<br />KALINGA INSTITUTE OF
+          INDUSTRIAL TECHNOLOGY<br />BHUBANESWAR, ODISHA - 751024</b
+        >
+        <p class="placeholder">NOVEMBER 2026</p>
+      </div>
+    </section>
+    <section class="page">
+      <h2>CERTIFICATE</h2>
+      <p>
+        This is to certify that the project entitled “AgroZen: Smart Farming
+        Solutions” submitted by
+        <span class="placeholder"
+          >ARYAMAN SANSKRITYAYAN (23051090), ANKIT MUKHERJEE (23051084), ANSHIKA
+          NATH (2305765), and DEV KUMAR (2305292)</span
+        >
+        is a record of bonafide work carried out in partial fulfilment of the
+        requirement for the award of the Bachelor’s degree in Computer Science
+        &amp; Engineering at KIIT Deemed to be University, Bhubaneswar. This
+        work was carried out during
+        <span class="placeholder">2026–2027</span> under our guidance.
+      </p>
+      <p>Date: __________</p>
+      <p style="text-align: right">(MS. CHANDANI KUMARI)<br />Project Guide</p>
+      <h2>Acknowledgements</h2>
+      <p>
+        We express our gratitude to our project guide and the School of Computer
+        Science and Engineering, KIIT Deemed to be University, for their
+        guidance and support. We also acknowledge the open-source tools and
+        datasets used in developing this project.
+      </p>
+    </section>
+    <section class="page">
+      <h2>ABSTRACT</h2>
+      <p>
+        AgroZen is a web based smart agriculture platform intended to bring
+        digital decision support and farmer services together. Its features
+        include crop and fertilizer recommendations, crop yield prediction,
+        plant disease detection, weather and farm information, and community and
+        marketplace functions. The system uses a Flask application with browser
+        based HTML, CSS and JavaScript interfaces, with machine learning
+        components for selected agricultural predictions.
+      </p>
+      <p>
+        This report documents the motivation, requirements, architecture,
+        implementation approach, verification plan, and future scope of the
+        platform. Predictive results depend on the underlying datasets,
+        configured services, and model validation; this report does not claim
+        performance figures absent measured test results.
+      </p>
+      <p>
+        <b>Keywords:</b> Smart agriculture, crop recommendation, disease
+        detection, yield prediction, machine learning, Flask, farmer services.
+      </p>
+      <h2>CONTENTS</h2>
+      <ol>
+        <li>Introduction</li>
+        <li>Basic Concepts / Literature Review</li>
+        <li>Problem Statement / Requirement Specifications</li>
+        <li>Implementation</li>
+        <li>Standards Adopted</li>
+        <li>Conclusion and Future Scope</li>
+        <li>References</li>
+        <li>Individual Contribution</li>
+        <li>Plagiarism Report</li>
+      </ol>
+    </section>
+    <section class="page">
+      <h1>Chapter 1 — Introduction</h1>
+      <p>
+        Agricultural decisions depend on interacting factors such as soil,
+        weather, crop health, input availability, and market access. Farmers
+        often need to consult separate sources for these tasks. AgroZen brings
+        several digital tools into a single web platform, aiming to make
+        relevant information easier to access.
+      </p>
+      <p>
+        The project addresses fragmented access to crop advice, plant disease
+        information, yield estimates, and farmer services. It provides
+        interfaces for crop and fertilizer recommendations, disease detection,
+        yield prediction, weather and farm dashboards, and community features.
+        The platform is intended to support decisions; advice should be
+        interpreted with local agronomic knowledge.
+      </p>
+      <p>
+        Existing digital solutions may focus on one function, require
+        specialized access, or present information without a unified workflow.
+        AgroZen’s project objective is to integrate multiple farmer-facing
+        functions and provide a common application entry point. Chapter 2
+        introduces underlying concepts; Chapter 3 specifies requirements and
+        design; Chapter 4 describes implementation and verification; Chapter 5
+        records standards; Chapter 6 concludes and identifies future work.
+      </p>
+      <h3>Figure 1.1: AgroZen high-level system flow</h3>
+      <svg width="700" height="170" viewBox="0 0 700 170">
+        <g fill="#e7f2e5" stroke="#357a38" stroke-width="2">
+          <rect x="10" y="50" width="130" height="65" rx="8" />
+          <rect x="190" y="50" width="130" height="65" rx="8" />
+          <rect x="370" y="50" width="130" height="65" rx="8" />
+          <rect x="550" y="50" width="140" height="65" rx="8" />
+        </g>
+        <g font-family="Arial" font-size="14" text-anchor="middle">
+          <text x="75" y="78">Farmer inputs</text>
+          <text x="75" y="98">&amp; requests</text>
+          <text x="255" y="78">Web interface</text>
+          <text x="255" y="98">HTML/CSS/JS</text>
+          <text x="435" y="78">Flask services</text>
+          <text x="435" y="98">and ML models</text>
+          <text x="620" y="78">Advice, results</text>
+          <text x="620" y="98">and services</text>
+        </g>
+        <g stroke="#555" stroke-width="2" marker-end="url(#a)">
+          <path d="M140 82h45M320 82h45M500 82h45" />
+        </g>
+        <defs>
+          <marker
+            id="a"
+            markerWidth="10"
+            markerHeight="8"
+            refX="8"
+            refY="4"
+            orient="auto"
+          >
+            <path d="M0 0L10 4 0 8" fill="#555" />
+          </marker>
+        </defs>
+      </svg>
+    </section>
+    <section class="page">
+      <h1>Chapter 2 — Basic Concepts / Literature Review</h1>
+      <h3>2.1 Precision agriculture</h3>
+      <p>
+        Precision agriculture uses observations and data to tailor farm
+        decisions. Soil conditions, crop stage, weather, and field history can
+        inform recommendations. Such recommendations require local validation
+        and should communicate uncertainty.
+      </p>
+      <h3>2.2 Machine learning in agriculture</h3>
+      <p>
+        Classification models map input features to categories, while regression
+        models estimate continuous values. A crop recommendation model may use
+        soil and climate variables. Yield prediction is a regression task. Model
+        quality must be assessed on held-out data with suitable metrics and
+        representative samples.
+      </p>
+      <h3>2.3 Image based plant disease detection</h3>
+      <p>
+        Image classifiers learn visual patterns associated with plant
+        conditions. Image quality, lighting, camera, crop variety, and class
+        balance affect predictions. A result should be treated as a screening
+        aid and reviewed with expert advice.
+      </p>
+      <h3>2.4 Web application architecture</h3>
+      <p>
+        AgroZen uses browser interfaces and a Python Flask backend. The backend
+        coordinates routes and application logic; model and service integrations
+        may be configured separately. HTML, CSS, and JavaScript provide
+        interactive pages. Optional integrations depend on credentials and
+        deployment configuration.
+      </p>
+      <h3>2.5 Related work summary</h3>
+      <p>
+        Research and deployed tools in agricultural informatics cover crop
+        recommendation, remote sensing, plant disease classification, and yield
+        forecasting. The project combines these problem areas with farmer
+        community and service modules. A formal comparative literature review
+        should be augmented with institution-approved references relevant to the
+        chosen models and datasets.
+      </p>
+    </section>
+    <section class="page">
+      <h1>Chapter 3 — Problem Statement / Requirement Specifications</h1>
+      <p>
+        <b>Problem statement.</b> Farmers face fragmented access to digital crop
+        guidance and related services. The project develops an integrated web
+        platform to provide selected agricultural recommendations, predictions,
+        disease screening, and farmer resources from a common interface.
+      </p>
+      <h3>3.1 Project planning</h3>
+      <ol>
+        <li>
+          Identify user workflows and prioritize crop guidance and disease
+          screening.
+        </li>
+        <li>Review available datasets, models, and service dependencies.</li>
+        <li>Design interfaces, backend routes, and data handling.</li>
+        <li>
+          Implement feature modules and connect applicable models/services.
+        </li>
+        <li>
+          Verify functional paths, usability, and error handling; document
+          results.
+        </li>
+      </ol>
+      <h3>3.2 Project analysis (SRS)</h3>
+      <p>
+        <b>Users:</b> farmers and platform visitors; administrators where
+        enabled.
+      </p>
+      <p>
+        <b>Functional requirements:</b> present agricultural information; accept
+        relevant inputs; return supported recommendations/predictions; accept
+        plant images for disease screening; provide community and farmer service
+        pages; support account and session flows where configured.
+      </p>
+      <p>
+        <b>Nonfunctional requirements:</b> clear accessible interface; input
+        validation; responsive design; protect credentials; provide
+        understandable failure messages; maintain modularity.
+      </p>
+      <h3>3.3 System design</h3>
+      <h3>3.3.1 Design constraints</h3>
+      <p>
+        Web access and server availability are required. Prediction quality
+        depends on model and dataset validity. Firebase, Gemini, email, and
+        external data integrations require valid configuration. Hardware and
+        hosting specifications should be recorded from the actual deployment.
+      </p>
+      <h3>3.3.2 System architecture / block diagram</h3>
+      <svg width="680" height="300" viewBox="0 0 680 300">
+        <g fill="#eef5fb" stroke="#35658a" stroke-width="2">
+          <rect x="220" y="10" width="240" height="45" rx="8" />
+          <rect x="220" y="85" width="240" height="45" rx="8" />
+          <rect x="30" y="180" width="180" height="55" rx="8" />
+          <rect x="250" y="180" width="180" height="55" rx="8" />
+          <rect x="470" y="180" width="180" height="55" rx="8" />
+          <rect x="220" y="255" width="240" height="40" rx="8" />
+        </g>
+        <g font-family="Arial" font-size="14" text-anchor="middle">
+          <text x="340" y="38">Browser UI: HTML, CSS, JavaScript</text>
+          <text x="340" y="113">Flask routes and application logic</text>
+          <text x="120" y="203">ML modules</text>
+          <text x="120" y="222">crop / yield / disease</text>
+          <text x="340" y="203">Data and persistence</text>
+          <text x="340" y="222">configured storage</text>
+          <text x="560" y="203">External services</text>
+          <text x="560" y="222">weather / auth / AI*</text>
+          <text x="340" y="281">Responses, dashboards and user actions</text>
+        </g>
+        <g stroke="#555" stroke-width="2" marker-end="url(#b)">
+          <path
+            d="M340 55v25M340 130v35M120 235v20h100M340 235v20M560 235v20h-100"
+          />
+        </g>
+        <defs>
+          <marker
+            id="b"
+            markerWidth="10"
+            markerHeight="8"
+            refX="8"
+            refY="4"
+            orient="auto"
+          >
+            <path d="M0 0L10 4 0 8" fill="#555" />
+          </marker>
+        </defs>
+      </svg>
+      <p>
+        <small>*External integrations are conditional on configuration.</small>
+      </p>
+    </section>
+    <section class="page">
+      <h1>Chapter 4 — Implementation</h1>
+      <h3>4.1 Methodology</h3>
+      <p>
+        The application is organized around farmer-facing feature pages and
+        backend services. Browser forms collect user input, client scripts
+        manage interactions, and Flask routes handle application requests. Where
+        enabled, machine learning components process crop and soil features,
+        estimate yield, or classify plant images. Results are presented with
+        relevant context. Optional service integrations are activated through
+        environment configuration.
+      </p>
+      <h3>4.2 Testing / Verification Plan</h3>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Test case</th>
+          <th>Condition</th>
+          <th>System behavior</th>
+          <th>Expected result</th>
+        </tr>
+        <tr>
+          <td>T01</td>
+          <td>Crop advice</td>
+          <td>Valid supported input</td>
+          <td>Validate and process request</td>
+          <td>Recommendation or clear model response</td>
+        </tr>
+        <tr>
+          <td>T02</td>
+          <td>Invalid input</td>
+          <td>Missing/out-of-range field</td>
+          <td>Reject or prompt correction</td>
+          <td>Useful validation message</td>
+        </tr>
+        <tr>
+          <td>T03</td>
+          <td>Disease image</td>
+          <td>Valid supported image</td>
+          <td>Process image if model configured</td>
+          <td>Classification or explicit unavailable notice</td>
+        </tr>
+        <tr>
+          <td>T04</td>
+          <td>Service unavailable</td>
+          <td>Integration unconfigured</td>
+          <td>Handle missing dependency</td>
+          <td>Graceful error without secret exposure</td>
+        </tr>
+        <tr>
+          <td>T05</td>
+          <td>Responsive interface</td>
+          <td>Mobile viewport</td>
+          <td>Render key navigation and forms</td>
+          <td>Usable layout without clipping</td>
+        </tr>
+      </table>
+      <p>
+        Execution status and measured outcomes should be filled from actual test
+        runs; this report does not invent pass rates.
+      </p>
+      <h3>4.3 Result analysis / screenshots</h3>
+      <p>
+        Insert verified screenshots of the home/dashboard, crop recommendation,
+        disease detection, yield prediction, and any other demonstrated modules.
+        Add model metrics only when supported by recorded evaluation results and
+        identify the dataset and test split.
+      </p>
+      <h3>4.4 Quality assurance</h3>
+      <p>
+        Quality assurance includes input validation, error handling, review of
+        feature workflows, security hygiene for configuration, and documented
+        model evaluation. A supervisor or institutional QA certificate can be
+        inserted if issued.
+      </p>
+      <h3>Figure 4.1: Request processing flow</h3>
+      <p>
+        Input → validation → route selection → configured model/service → result
+        formatting → user display.
+      </p>
+    </section>
+    <section class="page">
+      <h1>Chapter 5 — Standards Adopted</h1>
+      <h3>5.1 Design standards</h3>
+      <p>
+        Use consistent page structure, readable labels, responsive layout,
+        modular architecture, and clearly labeled system diagrams. UML
+        conventions can be used for formal use-case and sequence diagrams if
+        required by the department.
+      </p>
+      <h3>5.2 Coding standards</h3>
+      <p>
+        Use meaningful names, consistent indentation, focused functions, input
+        validation, modular files, and comments for non-obvious behavior. Keep
+        secrets outside source code and handle failures explicitly.
+      </p>
+      <h3>5.3 Testing standards</h3>
+      <p>
+        Use repeatable test cases with defined preconditions, actions, and
+        expected outcomes. Record environment, test data, observed results, and
+        defects. Apply risk-based functional and integration verification. Cite
+        any formal IEEE/ISO standard only if actually followed.
+      </p>
+      <h3>5.4 Cost analysis</h3>
+      <p>
+        Development uses open-source software and existing project assets.
+        Actual hosting, domain, model training hardware, APIs, and maintenance
+        costs depend on deployment. Add a cost table with verified estimates
+        before submission.
+      </p>
+    </section>
+    <section class="page">
+      <h1>Chapter 6 — Conclusion and Future Scope</h1>
+      <h3>6.1 Conclusion</h3>
+      <p>
+        AgroZen brings agricultural decision support and farmer services into a
+        unified web platform. The project combines crop and fertilizer advice,
+        yield estimation, disease screening, and related information modules.
+        Its practical usefulness depends on the validation of models, the
+        quality of agricultural data, and the availability of configured
+        integrations. Field evaluation with farmers and domain experts is
+        required before making claims about impact.
+      </p>
+      <h3>6.2 Future scope</h3>
+      <ul>
+        <li>
+          Conduct field trials with regional crops, languages, and farmer
+          feedback.
+        </li>
+        <li>
+          Document and improve model performance using representative datasets.
+        </li>
+        <li>
+          Add explainability, confidence indicators, and expert escalation.
+        </li>
+        <li>Improve offline and low bandwidth support.</li>
+        <li>Connect reliable local weather, soil, and market data services.</li>
+        <li>Conduct accessibility, privacy, and security reviews.</li>
+      </ul>
+      <h2>References</h2>
+      <ol>
+        <li>
+          AgroZen project repository, README and implementation files, accessed
+          2026.
+        </li>
+        <li>
+          Project datasets and model documentation — complete citations to be
+          added by authors.
+        </li>
+        <li>
+          Relevant peer reviewed literature on crop recommendation, yield
+          prediction, and plant disease classification — add selected papers
+          used in implementation.
+        </li>
+      </ol>
+      <h2>Individual Contribution</h2>
+      <p class="placeholder">
+        [Add one section per member: name, roll number, abstract (80 words max),
+        implementation contribution, report chapters, presentation/demo role,
+        and signed supervisor/student fields.]
+      </p>
+      <h2>Plagiarism Report</h2>
+      <p>
+        Attach the institutional Turnitin report. The template states that this
+        is mandatory and the similarity score must be below 25%; obtain and
+        attach the official report before submission.
+      </p>
+    </section>
+  </body>
+</html>

@@ -41,9 +41,9 @@ class MetricsCollector:
         
         # Add uptime
         uptime = time.time() - self.start_time
-        lines.append(f'# HELP agritech_uptime_seconds Application uptime in seconds')
-        lines.append(f'# TYPE agritech_uptime_seconds gauge')
-        lines.append(f'agritech_uptime_seconds {uptime:.2f}')
+        lines.append(f'# HELP AgroZen_uptime_seconds Application uptime in seconds')
+        lines.append(f'# TYPE AgroZen_uptime_seconds gauge')
+        lines.append(f'AgroZen_uptime_seconds {uptime:.2f}')
         lines.append('')
         
         # Counters
@@ -77,12 +77,12 @@ def track_request_metrics(f):
         start = time.time()
         try:
             result = f(*args, **kwargs)
-            metrics.increment('agritech_requests_total', labels={'status': 'success'})
+            metrics.increment('AgroZen_requests_total', labels={'status': 'success'})
             return result
         except Exception as e:
-            metrics.increment('agritech_requests_total', labels={'status': 'error'})
+            metrics.increment('AgroZen_requests_total', labels={'status': 'error'})
             raise
         finally:
             duration = time.time() - start
-            metrics.observe('agritech_request_duration_seconds', duration)
+            metrics.observe('AgroZen_request_duration_seconds', duration)
     return decorated

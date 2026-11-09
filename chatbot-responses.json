@@ -2,15 +2,15 @@
   "responses": [
     {
       "query": "hello",
-      "response": "Hi! 🌱 Welcome to AgriTech Assistant! I'm here to help with your farming questions."
+      "response": "Hi! 🌱 Welcome to AgroZen Assistant! I'm here to help with your farming questions."
     },
     {
       "query": "hi",
-      "response": "Hello there! 👋 I'm your AgriBot assistant. Ask me about crops, weather, soil, or AgriTech features."
+      "response": "Hello there! 👋 I'm your AgriBot assistant. Ask me about crops, weather, soil, or AgroZen features."
     },
     {
       "query": "who is your developer",
-      "response": "I was created by AgriTech, with contributions from the community."
+      "response": "I was created by AgroZen, with contributions from the community."
     },
     {
       "query": "good morning",
@@ -26,7 +26,7 @@
     },
     {
       "query": "what can you do",
-      "response": "I can help with crop recommendations, weather impact, pest control, soil health, irrigation, and AgriTech platform guidance."
+      "response": "I can help with crop recommendations, weather impact, pest control, soil health, irrigation, and AgroZen platform guidance."
     },
     {
       "query": "crop recommendation",
@@ -90,15 +90,15 @@
     },
     {
       "query": "what can I do on this platform",
-      "response": "AgriTech supports crop recommendations, disease detection, weather, shopkeeper listings, marketplace, finance, crop planning, labour alerts, and more."
+      "response": "AgroZen supports crop recommendations, disease detection, weather, shopkeeper listings, marketplace, finance, crop planning, labour alerts, and more."
     },
     {
       "query": "platform features",
-      "response": "AgriTech includes Crop Recommendation, Disease Detection, Weather, Farmer Connection, Shopkeeper Listings, AI ChatBot, Marketplace, Financial Support, and Crop Calendar."
+      "response": "AgroZen includes Crop Recommendation, Disease Detection, Weather, Farmer Connection, Shopkeeper Listings, AI ChatBot, Marketplace, Financial Support, and Crop Calendar."
     },
     {
       "query": "how does chatbot work",
-      "response": "AgriBot can answer agriculture questions, explain AgriTech features, and use the AI backend when available."
+      "response": "AgriBot can answer agriculture questions, explain AgroZen features, and use the AI backend when available."
     },
     {
       "query": "how to find shopkeepers",

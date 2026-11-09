@@ -1,12 +1,12 @@
 /**
- * AgriTech - Footer Newsletter & Subscription Handler
+ * AgroZen - Footer Newsletter & Subscription Handler
  */
 (function () {
-  'use strict';
+  "use strict";
   // If root footer.js already executed, return
   if (window.handleNewsletterSubmit) return;
 
-  const STORAGE_KEY = 'agritech_newsletter_subscribers';
+  const STORAGE_KEY = "AgroZen_newsletter_subscribers";
 
   function getSubscribers() {
     try {
@@ -20,7 +20,7 @@
   function saveSubscribers(list) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-    } catch (e) { }
+    } catch (e) {}
   }
 
   function isValidEmail(email) {
@@ -29,24 +29,26 @@
   }
 
   function showFeedback(form, message, type) {
-    let feedbackEl = form.querySelector('.newsletter-feedback') || form.querySelector('.newsletter-message');
+    let feedbackEl =
+      form.querySelector(".newsletter-feedback") ||
+      form.querySelector(".newsletter-message");
     if (!feedbackEl) {
-      feedbackEl = document.createElement('div');
-      feedbackEl.className = 'newsletter-feedback';
+      feedbackEl = document.createElement("div");
+      feedbackEl.className = "newsletter-feedback";
       form.appendChild(feedbackEl);
     }
 
     feedbackEl.className = `newsletter-feedback newsletter-${type}`;
-    let icon = 'fas fa-info-circle';
-    if (type === 'success') icon = 'fas fa-check-circle';
-    if (type === 'error') icon = 'fas fa-exclamation-circle';
+    let icon = "fas fa-info-circle";
+    if (type === "success") icon = "fas fa-check-circle";
+    if (type === "error") icon = "fas fa-exclamation-circle";
 
     feedbackEl.innerHTML = `<i class="${icon}"></i> <span>${message}</span>`;
-    feedbackEl.style.display = 'flex';
+    feedbackEl.style.display = "flex";
 
     setTimeout(() => {
-      if (feedbackEl && type !== 'success') {
-        feedbackEl.style.display = 'none';
+      if (feedbackEl && type !== "success") {
+        feedbackEl.style.display = "none";
       }
     }, 6000);
   }
@@ -60,39 +62,52 @@
     const form = formElement || (event ? event.target : null);
     if (!form) return false;
 
-    const emailInput = form.querySelector('input[type="email"]') || form.querySelector('.newsletter-input');
-    const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('.newsletter-btn');
+    const emailInput =
+      form.querySelector('input[type="email"]') ||
+      form.querySelector(".newsletter-input");
+    const submitBtn =
+      form.querySelector('button[type="submit"]') ||
+      form.querySelector(".newsletter-btn");
 
     if (!emailInput) return false;
 
     const email = emailInput.value.trim().toLowerCase();
 
     if (!email || !isValidEmail(email)) {
-      showFeedback(form, 'Please enter a valid email address.', 'error');
+      showFeedback(form, "Please enter a valid email address.", "error");
       emailInput.focus();
       return false;
     }
 
-    const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Subscribe';
+    const originalBtnHTML = submitBtn ? submitBtn.innerHTML : "Subscribe";
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+      submitBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
     }
 
     setTimeout(() => {
       const subscribers = getSubscribers();
-      const existing = subscribers.find(s => s.email === email);
+      const existing = subscribers.find((s) => s.email === email);
 
       if (existing) {
-        showFeedback(form, 'You are already subscribed to our newsletter! 🌱', 'info');
+        showFeedback(
+          form,
+          "You are already subscribed to our newsletter! 🌱",
+          "info",
+        );
       } else {
         subscribers.push({
           email: email,
-          subscribedAt: new Date().toISOString()
+          subscribedAt: new Date().toISOString(),
         });
         saveSubscribers(subscribers);
-        showFeedback(form, 'Thank you for subscribing! Welcome to AgriTech.', 'success');
-        emailInput.value = '';
+        showFeedback(
+          form,
+          "Thank you for subscribing! Welcome to AgroZen.",
+          "success",
+        );
+        emailInput.value = "";
       }
 
       if (submitBtn) {
@@ -105,31 +120,31 @@
   }
 
   function ensureUnsubscribeModal() {
-    let modal = document.getElementById('agritechUnsubscribeModal');
+    let modal = document.getElementById("AgroZenUnsubscribeModal");
     if (!modal) {
-      modal = document.createElement('div');
-      modal.id = 'agritechUnsubscribeModal';
-      modal.className = 'agritech-modal';
-      modal.setAttribute('role', 'dialog');
-      modal.setAttribute('aria-modal', 'true');
-      modal.setAttribute('aria-labelledby', 'unsubModalTitle');
+      modal = document.createElement("div");
+      modal.id = "AgroZenUnsubscribeModal";
+      modal.className = "AgroZen-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-labelledby", "unsubModalTitle");
       modal.innerHTML = `
-        <div class="agritech-modal-backdrop" onclick="window.closeUnsubscribeModal()"></div>
-        <div class="agritech-modal-dialog">
-          <div class="agritech-modal-header">
+        <div class="AgroZen-modal-backdrop" onclick="window.closeUnsubscribeModal()"></div>
+        <div class="AgroZen-modal-dialog">
+          <div class="AgroZen-modal-header">
             <h3 id="unsubModalTitle"><i class="fas fa-envelope-open-text"></i> Newsletter Preferences</h3>
-            <button type="button" class="agritech-modal-close" onclick="window.closeUnsubscribeModal()" aria-label="Close dialog">&times;</button>
+            <button type="button" class="AgroZen-modal-close" onclick="window.closeUnsubscribeModal()" aria-label="Close dialog">&times;</button>
           </div>
-          <div class="agritech-modal-body">
-            <p>Enter your email address below to unsubscribe from AgriTech newsletter and product updates.</p>
+          <div class="AgroZen-modal-body">
+            <p>Enter your email address below to unsubscribe from AgroZen newsletter and product updates.</p>
             <form id="unsubForm" onsubmit="return window.handleNewsletterUnsubscribeSubmit(event, this)">
               <div class="newsletter-input-group modal-input-group">
                 <input type="email" id="unsubEmailInput" class="newsletter-input" placeholder="Enter your registered email..." required aria-label="Unsubscribe email address">
               </div>
               <div id="unsubFeedback" class="newsletter-feedback" style="display:none;" role="status"></div>
-              <div class="agritech-modal-actions">
-                <button type="button" class="agritech-btn-secondary" onclick="window.closeUnsubscribeModal()">Cancel</button>
-                <button type="submit" class="agritech-btn-danger" id="unsubSubmitBtn">
+              <div class="AgroZen-modal-actions">
+                <button type="button" class="AgroZen-btn-secondary" onclick="window.closeUnsubscribeModal()">Cancel</button>
+                <button type="submit" class="AgroZen-btn-danger" id="unsubSubmitBtn">
                   <i class="fas fa-user-minus"></i> Unsubscribe
                 </button>
               </div>
@@ -139,8 +154,8 @@
       `;
       document.body.appendChild(modal);
 
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("active")) {
           window.closeUnsubscribeModal();
         }
       });
@@ -151,20 +166,20 @@
   function openUnsubscribeModal(e) {
     if (e && e.preventDefault) e.preventDefault();
     const modal = ensureUnsubscribeModal();
-    modal.classList.add('active');
-    const input = document.getElementById('unsubEmailInput');
-    const feedback = document.getElementById('unsubFeedback');
-    if (feedback) feedback.style.display = 'none';
+    modal.classList.add("active");
+    const input = document.getElementById("unsubEmailInput");
+    const feedback = document.getElementById("unsubFeedback");
+    if (feedback) feedback.style.display = "none";
     if (input) {
-      input.value = '';
+      input.value = "";
       setTimeout(() => input.focus(), 100);
     }
   }
 
   function closeUnsubscribeModal() {
-    const modal = document.getElementById('agritechUnsubscribeModal');
+    const modal = document.getElementById("AgroZenUnsubscribeModal");
     if (modal) {
-      modal.classList.remove('active');
+      modal.classList.remove("active");
     }
   }
 
@@ -173,17 +188,18 @@
       event.preventDefault();
       event.stopPropagation();
     }
-    const input = document.getElementById('unsubEmailInput');
-    const feedback = document.getElementById('unsubFeedback');
-    const btn = document.getElementById('unsubSubmitBtn');
+    const input = document.getElementById("unsubEmailInput");
+    const feedback = document.getElementById("unsubFeedback");
+    const btn = document.getElementById("unsubSubmitBtn");
 
     if (!input || !feedback) return false;
     const email = input.value.trim().toLowerCase();
 
     if (!email || !isValidEmail(email)) {
-      feedback.className = 'newsletter-feedback newsletter-error';
-      feedback.innerHTML = '<i class="fas fa-exclamation-circle"></i> <span>Please enter a valid email address.</span>';
-      feedback.style.display = 'flex';
+      feedback.className = "newsletter-feedback newsletter-error";
+      feedback.innerHTML =
+        '<i class="fas fa-exclamation-circle"></i> <span>Please enter a valid email address.</span>';
+      feedback.style.display = "flex";
       return false;
     }
 
@@ -194,22 +210,24 @@
 
     setTimeout(() => {
       const subscribers = getSubscribers();
-      const index = subscribers.findIndex(s => s.email === email);
+      const index = subscribers.findIndex((s) => s.email === email);
 
       if (index !== -1) {
         subscribers.splice(index, 1);
         saveSubscribers(subscribers);
-        feedback.className = 'newsletter-feedback newsletter-success';
-        feedback.innerHTML = '<i class="fas fa-check-circle"></i> <span>You have been unsubscribed successfully.</span>';
-        feedback.style.display = 'flex';
-        input.value = '';
+        feedback.className = "newsletter-feedback newsletter-success";
+        feedback.innerHTML =
+          '<i class="fas fa-check-circle"></i> <span>You have been unsubscribed successfully.</span>';
+        feedback.style.display = "flex";
+        input.value = "";
         setTimeout(() => {
           closeUnsubscribeModal();
         }, 2200);
       } else {
-        feedback.className = 'newsletter-feedback newsletter-info';
-        feedback.innerHTML = '<i class="fas fa-info-circle"></i> <span>This email was not found in our active subscriber list.</span>';
-        feedback.style.display = 'flex';
+        feedback.className = "newsletter-feedback newsletter-info";
+        feedback.innerHTML =
+          '<i class="fas fa-info-circle"></i> <span>This email was not found in our active subscriber list.</span>';
+        feedback.style.display = "flex";
       }
 
       if (btn) {
@@ -223,15 +241,17 @@
 
   function initNewsletter() {
     const year = new Date().getFullYear();
-    document.querySelectorAll('#current-year, .current-year').forEach(el => {
+    document.querySelectorAll("#current-year, .current-year").forEach((el) => {
       el.textContent = year;
     });
 
-    const forms = document.querySelectorAll('.newsletter-form, [data-newsletter-form]');
-    forms.forEach(form => {
+    const forms = document.querySelectorAll(
+      ".newsletter-form, [data-newsletter-form]",
+    );
+    forms.forEach((form) => {
       if (!form.dataset.initialized) {
-        form.dataset.initialized = 'true';
-        form.addEventListener('submit', function (e) {
+        form.dataset.initialized = "true";
+        form.addEventListener("submit", function (e) {
           handleNewsletterSubmit(e, form);
         });
       }
@@ -248,8 +268,8 @@
     openUnsubscribeModal(e);
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initNewsletter);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNewsletter);
   } else {
     initNewsletter();
   }

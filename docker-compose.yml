@@ -1,10 +1,10 @@
-version: '3.8'
+version: "3.8"
 
 services:
   # Redis for Celery broker and result backend
   redis:
     image: redis:7-alpine
-    container_name: agritech-redis
+    container_name: AgroZen-redis
     ports:
       - "6379:6379"
     volumes:
@@ -14,7 +14,7 @@ services:
   # MailHog for testing emails
   mailhog:
     image: mailhog/mailhog
-    container_name: agritech-mailhog
+    container_name: AgroZen-mailhog
     ports:
       - "1025:1025" # SMTP server
       - "8025:8025" # Web UI
@@ -23,7 +23,7 @@ services:
   # Flask Backend
   backend:
     build: .
-    container_name: agritech-backend
+    container_name: AgroZen-backend
     ports:
       - "5000:5000"
     environment:
@@ -46,7 +46,7 @@ services:
   # Celery Worker
   celery_worker:
     build: .
-    container_name: agritech-celery-worker
+    container_name: AgroZen-celery-worker
     command: celery -A backend.celery_app worker --loglevel=info
     environment:
       - REDIS_URL=redis://redis:6379/0
