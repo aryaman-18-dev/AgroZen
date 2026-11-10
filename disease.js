@@ -300,19 +300,38 @@ analyzeBtn.addEventListener("click", async () => {
     const margin = runnerUp
       ? confidence - Number(runnerUp.confidence || 0)
       : confidence;
-    // Softmax scores are not calibrated probabilities. Use a conservative UI
-    // gate so moderate/ambiguous scores are not presented as diagnoses.
-    const uncertain = confidence < 70 || margin < 15;
+    const predictsHealthy = /___healthy$/i.test(diseaseKey);
+    // Healthy is the riskier mistake: a diseased leaf could be left untreated.
+    // Require a stronger raw-score and separation before displaying a healthy
+    // match. These are conservative UI cutoffs, not calibrated probabilities.
+    const uncertain = predictsHealthy
+      ? confidence < 97 || margin < 30
+      : confidence < 70 || margin < 15;
     const candidateInfo = getDiseaseInfo(diseaseKey);
     const diseaseInfo = uncertain
       ? {
-          name: "Uncertain result — no diagnosis",
+          name: predictsHealthy
+            ? "Uncertain result — health not confirmed"
+            : "Uncertain result — no diagnosis",
           severity: "unknown",
-          description: `The model’s closest match was ${candidateInfo.name} (${confidence.toFixed(1)}% raw model score), but this score is not calibrated and is not enough to identify a disease reliably. Take a close, well-lit photo of one leaf showing both healthy and affected areas, then try again.`,
+          description: predictsHealthy
+            ? `The model’s closest match was ${candidateInfo.name} (${confidence.toFixed(1)}% raw model score), but this score is not calibrated and cannot confirm that the leaf is healthy. If you can see spots, yellowing, curling, or other symptoms, do not dismiss them. Take a close, well-lit photo of one leaf and ask a local agricultural expert if symptoms persist.`
+            : `The model’s closest match was ${candidateInfo.name} (${confidence.toFixed(1)}% raw model score), but this score is not calibrated and is not enough to identify a disease reliably. Take a close, well-lit photo of one leaf showing both healthy and affected areas, then try again.`,
           treatment:
-            "Do not apply pesticides or fungicides based on this result. Compare visible symptoms with a local agricultural expert or extension service.",
+            predictsHealthy
+              ? "Do not treat the leaf as confirmed healthy based only on this model. Do not apply pesticides or fungicides from this result; get visible symptoms checked by a local agricultural expert or extension service."
+              : "Do not apply pesticides or fungicides based on this result. Compare visible symptoms with a local agricultural expert or extension service.",
         }
-      : candidateInfo;
+      : predictsHealthy
+        ? {
+            ...candidateInfo,
+            name: `${candidateInfo.name} (model match)`,
+            description:
+              "The classifier matched this photo to its healthy-leaf class. This is not a guarantee: if you can see spots, yellowing, curling, or other symptoms, treat the result as unconfirmed and ask a local agricultural expert to check the leaf.",
+            treatment:
+              "Do not use this result alone to rule out disease. Continue monitoring, and get visible or worsening symptoms checked by a local agricultural expert before deciding on treatment.",
+          }
+        : candidateInfo;
     const result = {
       disease: diseaseKey,
       confidence,

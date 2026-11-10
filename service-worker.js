@@ -1,4 +1,4 @@
-const CACHE_NAME = "AgroZen-cache-v1";
+const CACHE_NAME = "AgroZen-cache-v2";
 const OFFLINE_URL = "/offline.html";
 
 const ASSETS_TO_CACHE = ["/", "/index.html", "/offline.html", "/styles.css"];
